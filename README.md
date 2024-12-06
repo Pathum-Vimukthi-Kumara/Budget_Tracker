@@ -1,2 +1,2 @@
-# Task_Management_System
+# Budget_Tracker
 GUI Project
