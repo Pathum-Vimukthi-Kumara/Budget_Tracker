@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Login.css'; 
+import './Login.css';  
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -11,29 +11,34 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+   
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
-      
-      const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      try {
+        const response = await fetch('http://localhost:3006/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
 
-      const data = await response.json();
-      if (data.message === 'Login successful') {
-       
-        localStorage.setItem('token', data.token);
-        setMessage('Login successful!');
-      
-        navigate('/profile');
-      } else {
-        setErrors({ general: data.message });
+        const data = await response.json();
+
+        if (data.message === 'Login successful') {
+          localStorage.setItem('token', data.token); 
+          setMessage('Login successful!');
+          navigate('/profile'); 
+        } else {
+          setErrors({ general: data.message });
+        }
+      } catch (err) {
+        console.error('Error during login:', err);
+        setErrors({ general: 'Something went wrong. Please try again later.' });
       }
     } else {
-      setErrors(validationErrors);
+      setErrors(validationErrors); 
     }
   };
 
@@ -48,7 +53,6 @@ const Login = () => {
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-       
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
@@ -61,7 +65,6 @@ const Login = () => {
           {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
 
-     
         <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
@@ -76,7 +79,6 @@ const Login = () => {
 
         {errors.general && <p className="error-message">{errors.general}</p>}
 
-       
         <button type="submit">Login</button>
       </form>
 

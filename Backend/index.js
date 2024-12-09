@@ -1,24 +1,23 @@
 const express = require('express');
-// This is where 'app' is defined
-
 const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const helmet = require('helmet');
 require('dotenv').config();
 
 // Create Express app
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(helmet()); // Add security headers
 
 // Create MySQL connection
 const db = mysql.createConnection({
-  host: 'localhost',   // Update if needed
-  user: 'root',        // MySQL user
-  password:'', // MySQL password
-  database:'test', // Database name
-  
+  host:'localhost',
+  user:'root',
+  password:'',
+  database:'test',
 });
 
 // Connect to MySQL database
@@ -82,7 +81,7 @@ app.post('/login', (req, res) => {
     }
 
     const user = results[0];
-    
+
     // Compare password with hashed password in DB
     if (!bcrypt.compareSync(password, user.password)) {
       return res.status(400).json({ message: 'Invalid password' });
@@ -109,19 +108,65 @@ const authenticateJWT = (req, res, next) => {
   });
 };
 
-// Example protected route: Get user profile (requires valid JWT token)
+
 app.get('/profile', authenticateJWT, (req, res) => {
   res.json({ message: 'Profile info', user: req.user });
 });
 
 
-const PORT = process.env.PORT || 3000;
+app.get('/api/expenses', authenticateJWT, (req, res) => {
+ 
+  db.query('SELECT * FROM expenses WHERE user_id = ?', [req.user.id], (err, results) => {
+    if (err) {
+      console.error('Error fetching expenses:', err);
+      return res.status(500).json({ message: 'Error retrieving expenses' });
+    }
+    res.json({ expenses: results });
+  });
+});
+
+app.post('/api/expenses', authenticateJWT, (req, res) => {
+  const { name, amount, category, date } = req.body;
+  if (!name || !amount || !category || !date) {
+    return res.status(400).json({ message: 'Please fill in all fields!' });
+  }
+
+  const query = 'INSERT INTO expenses (user_id, name, amount, category, date) VALUES (?, ?, ?, ?, ?)';
+  db.query(query, [req.user.id, name, amount, category, date], (err, results) => {
+    if (err) {
+      console.error('Error adding expense:', err);
+      return res.status(500).json({ message: 'Error adding expense' });
+    }
+    res.status(201).json({ message: 'Expense added successfully!', expenseId: results.insertId });
+  });
+});
+
+app.put('/api/budget', authenticateJWT, (req, res) => {
+  const { newBudget } = req.body;
+  if (newBudget === undefined || newBudget < 0) {
+    return res.status(400).json({ message: 'Please provide a valid budget!' });
+  }
+
+  const query = 'UPDATE users SET budget = ? WHERE id = ?';
+  db.query(query, [newBudget, req.user.id], (err, results) => {
+    if (err) {
+      console.error('Error updating budget:', err);
+      return res.status(500).json({ message: 'Error updating budget' });
+    }
+    res.status(200).json({ message: 'Budget updated successfully!', newBudget });
+  });
+});
+
+const PORT = process.env.PORT || 3006;
+
+
+
 
 const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// Handle errors explicitly
+
 server.on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
     console.error(`Port ${PORT} is already in use. Please choose a different port.`);

@@ -1,38 +1,135 @@
 /* Dashboard.css */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
+
+/* Global styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Container for the dashboard */
+.dashboard {
+  padding: 20px;
+}
+
+/* Sidebar styling */
+.sidebar {
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.budget-info {
+  margin-top: 20px;
+}
+
+.budget-info h2 {
+  font-size: 1.2rem;
+  color: #bbb;
+}
+
+.budget-info p {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  margin-top: 30px;
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+button:focus {
+  outline: none;
+}
+
+button.variant-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+button.variant-danger:hover {
+  background-color: #c82333;
+}
+
+/* Main content styling */
+.col-lg-9 {
+  margin-left: 270px; /* Give space for sidebar */
+  padding: 20px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-header {
+  font-size: 1.3rem;
+  background-color: #f8f9fa;
+  color: #343a40;
+  font-weight: bold;
+}
+
+.card-body {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.transaction-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.transaction-list li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #343a40;
+}
+
+/* Chart styling */
+.chart-container {
+  width: 100%;
+  height: 300px;
+}
+
+/* Pie chart specific styling */
+.pie-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Small screen adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 15px;
   }
-  
-  .card {
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+  .col-lg-9 {
+    margin-left: 0;
   }
-  
-  .card-header {
-    background-color: #f8f9fa;
-    font-weight: bold;
-  }
-  
-  .card-body {
-    padding: 20px;
-  }
-  
-  h3 {
-    color: #333;
-  }
-  
-  h5 {
-    color: #555;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+}
