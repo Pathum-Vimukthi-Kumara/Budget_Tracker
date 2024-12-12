@@ -109,55 +109,79 @@ const authenticateJWT = (req, res, next) => {
 };
 
 
-app.get('/profile', authenticateJWT, (req, res) => {
-  res.json({ message: 'Profile info', user: req.user });
-});
-
-
-app.get('/api/expenses', authenticateJWT, (req, res) => {
- 
-  db.query('SELECT * FROM expenses WHERE user_id = ?', [req.user.id], (err, results) => {
+// 1. Get Budget
+app.get("/api/budget", authenticateJWT, (req, res) => {
+  const query = "SELECT amount FROM transactions_and_budget WHERE type = 'budget' ORDER BY id DESC LIMIT 1";
+  db.query(query, (err, results) => {
     if (err) {
-      console.error('Error fetching expenses:', err);
-      return res.status(500).json({ message: 'Error retrieving expenses' });
+      console.error("Error fetching budget:", err);
+      return res.status(500).json({ message: "Error retrieving budget" });
     }
-    res.json({ expenses: results });
+    res.json({ budget: results[0]?.amount || 0 });
   });
 });
 
-app.post('/api/expenses', authenticateJWT, (req, res) => {
-  const { name, amount, category, date } = req.body;
-  if (!name || !amount || !category || !date) {
-    return res.status(400).json({ message: 'Please fill in all fields!' });
+// 2. Update Budget
+app.put("/api/budget", authenticateJWT, (req, res) => {
+  const { budget } = req.body;
+  if (budget === undefined || budget < 0) {
+    return res.status(400).json({ message: "Please provide a valid budget!" });
   }
 
-  const query = 'INSERT INTO expenses (user_id, name, amount, category, date) VALUES (?, ?, ?, ?, ?)';
-  db.query(query, [req.user.id, name, amount, category, date], (err, results) => {
+  const query = "INSERT INTO transactions_and_budget (type, user_id, amount) VALUES ('budget', ?, ?)";
+  db.query(query, [req.user.id, budget], (err) => {
     if (err) {
-      console.error('Error adding expense:', err);
-      return res.status(500).json({ message: 'Error adding expense' });
+      console.error("Error updating budget:", err);
+      return res.status(500).json({ message: "Error updating budget" });
     }
-    res.status(201).json({ message: 'Expense added successfully!', expenseId: results.insertId });
+    res.status(200).json({ message: "Budget updated successfully!", budget });
   });
 });
 
-app.put('/api/budget', authenticateJWT, (req, res) => {
-  const { newBudget } = req.body;
-  if (newBudget === undefined || newBudget < 0) {
-    return res.status(400).json({ message: 'Please provide a valid budget!' });
+// 3. Get Transactions
+app.get("/api/transactions", authenticateJWT, (req, res) => {
+  const query = "SELECT id, date, category, amount FROM transactions_and_budget WHERE type = 'transaction' AND user_id = ?";
+  db.query(query, [req.user.id], (err, results) => {
+    if (err) {
+      console.error("Error fetching transactions:", err);
+      return res.status(500).json({ message: "Error retrieving transactions" });
+    }
+    res.json(results);
+  });
+});
+
+// 4. Add Transaction
+app.post("/api/transactions", authenticateJWT, (req, res) => {
+  const { date, category, amount } = req.body;
+  if (!date || !category || !amount) {
+    return res.status(400).json({ message: "Please fill in all fields!" });
   }
 
-  const query = 'UPDATE users SET budget = ? WHERE id = ?';
-  db.query(query, [newBudget, req.user.id], (err, results) => {
+  const query = "INSERT INTO transactions_and_budget (type, user_id, date, category, amount) VALUES ('transaction', ?, ?, ?, ?)";
+  db.query(query, [req.user.id, date, category, amount], (err, results) => {
     if (err) {
-      console.error('Error updating budget:', err);
-      return res.status(500).json({ message: 'Error updating budget' });
+      console.error("Error adding transaction:", err);
+      return res.status(500).json({ message: "Error adding transaction" });
     }
-    res.status(200).json({ message: 'Budget updated successfully!', newBudget });
+    res.status(201).json({ message: "Transaction added successfully!", transactionId: results.insertId });
   });
 });
 
-const PORT = process.env.PORT || 3006;
+// 5. Delete Transaction
+app.delete("/api/transactions/:id", authenticateJWT, (req, res) => {
+  const { id } = req.params;
+  const query = "DELETE FROM transactions_and_budget WHERE id = ? AND user_id = ?";
+  db.query(query, [id, req.user.id], (err) => {
+    if (err) {
+      console.error("Error deleting transaction:", err);
+      return res.status(500).json({ message: "Error deleting transaction" });
+    }
+    res.status(200).json({ message: "Transaction deleted successfully!" });
+  });
+});
+
+
+const PORT = process.env.PORT || 3011;
 
 
 

@@ -16,7 +16,7 @@ const Login = () => {
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await fetch('http://localhost:3006/login', {
+        const response = await fetch('http://localhost:3011/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

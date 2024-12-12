@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-// Create a connection to MySQL (without specifying the database yet)
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',  // Default MySQL username in XAMPP
@@ -31,7 +31,7 @@ connection.connect((err) => {
       }
       console.log('Switched to "test" database.');
 
-      // Step 3: Create the "users" table if it doesn't already exist
+     
       const createUsersTable = `
         CREATE TABLE IF NOT EXISTS users (
           id INT AUTO_INCREMENT PRIMARY KEY,
@@ -48,7 +48,7 @@ connection.connect((err) => {
         }
         console.log('Users table created or already exists.');
 
-        // Close the connection
+       
         connection.end();
       });
     });

@@ -14,7 +14,7 @@ const SignUp = () => {
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await fetch('http://localhost:3006/register', {
+        const response = await fetch('http://localhost:3011/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const SignUp = () => {
 
        
         if (data.message === 'User registered successfully!') {
-          navigate('/login');  
+          navigate('/');  
         } else {
           setErrors({ general: data.message });
         }
@@ -98,7 +98,7 @@ const SignUp = () => {
       </form>
 
       <div className="login-link">
-        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Already have an account? <a href="/">Login</a></p>
       </div>
     </div>
   );
