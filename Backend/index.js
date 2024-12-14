@@ -1,71 +1,99 @@
-const express = require('express');
-const mysql = require('mysql2');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const helmet = require('helmet');
-require('dotenv').config();
+const express = require("express");
+const mysql = require("mysql2");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const helmet = require("helmet");
+const Joi = require("joi"); // Validation library
+require("dotenv").config();
 
 // Create Express app
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(helmet()); // Add security headers
+app.use(helmet());
 
 // Create MySQL connection
 const db = mysql.createConnection({
-  host:'localhost',
-  user:'root',
-  password:'',
-  database:'test',
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "test",
 });
 
 // Connect to MySQL database
 db.connect((err) => {
   if (err) {
-    console.error('Could not connect to the database:', err);
+    console.error("Could not connect to the database:", err);
     return;
   }
-  console.log('Connected to the MySQL database.');
+  console.log("Connected to the MySQL database.");
 });
 
 // JWT Secret Key
-const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 
-// Register Route (Sign Up)
-app.post('/register', async (req, res) => {
+const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
+
+// Middleware to authenticate JWT
+
+
+
+
+// **Validation Schemas**
+const userSchema = Joi.object({
+  name: Joi.string().min(3).max(50).required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).required(),
+});
+
+const loginSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required(),
+});
+
+const budgetSchema = Joi.object({
+  budget: Joi.number().positive().required(),
+});
+
+const transactionSchema = Joi.object({
+  date: Joi.date().required(),
+  category: Joi.string().min(2).max(50).required(),
+  amount: Joi.number().positive().required(),
+});
+
+// **Routes**
+
+// Register Route
+app.post("/register", async (req, res) => {
+  const { error } = userSchema.validate(req.body);
+  if (error) return res.status(400).json({ message: error.details[0].message });
+
   const { name, email, password } = req.body;
 
-  // Validate input fields
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: 'All fields (name, email, password) are required.' });
-  }
-
-  // Check if the email already exists
-  db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
+  db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
+    if (err) {
+      console.error("Error checking user existence:", err);
+      return res.status(500).json({ message: "Internal server error." });
+    }
     if (results.length > 0) {
-      return res.status(400).json({ message: 'Email is already in use.' });
+      return res.status(400).json({ message: "Email is already in use." });
     }
 
-    // Hash password before saving to DB
     const hashedPassword = bcrypt.hashSync(password, 8);
-
-    // Insert new user into the database
     db.query(
-      'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+      "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
       [name, email, hashedPassword],
-      (err, results) => {
+      (err) => {
         if (err) {
-          console.error('Error inserting user:', err);
-          return res.status(500).json({ message: 'Error registering user' });
+          console.error("Error inserting user:", err);
+          return res.status(500).json({ message: "Error registering user." });
         }
-        return res.status(201).json({ message: 'User registered successfully!' });
+        res.status(201).json({ message: "User registered successfully!" });
       }
     );
   });
 });
 
-// Login Route
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
@@ -109,92 +137,130 @@ const authenticateJWT = (req, res, next) => {
 };
 
 
-// 1. Get Budget
-app.get("/api/budget", authenticateJWT, (req, res) => {
-  const query = "SELECT amount FROM transactions_and_budget WHERE type = 'budget' ORDER BY id DESC LIMIT 1";
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error("Error fetching budget:", err);
-      return res.status(500).json({ message: "Error retrieving budget" });
-    }
-    res.json({ budget: results[0]?.amount || 0 });
-  });
-});
-
-// 2. Update Budget
+// Update Budget
+// Update Budget
 app.put("/api/budget", authenticateJWT, (req, res) => {
+  const { error } = budgetSchema.validate(req.body); // Validate incoming data
+  if (error) return res.status(400).json({ message: error.details[0].message });
+
   const { budget } = req.body;
-  if (budget === undefined || budget < 0) {
-    return res.status(400).json({ message: "Please provide a valid budget!" });
-  }
+  const userId = req.user.id;
 
-  const query = "INSERT INTO transactions_and_budget (type, user_id, amount) VALUES ('budget', ?, ?)";
-  db.query(query, [req.user.id, budget], (err) => {
-    if (err) {
-      console.error("Error updating budget:", err);
-      return res.status(500).json({ message: "Error updating budget" });
+  // Use transactions to ensure data consistency
+  db.beginTransaction((transactionErr) => {
+    if (transactionErr) {
+      console.error("Error starting transaction:", transactionErr);
+      return res.status(500).json({ error: "Internal server error." });
     }
-    res.status(200).json({ message: "Budget updated successfully!", budget });
+
+    // Insert or update budget
+    db.query(
+      "INSERT INTO budget (user_id, budget_amount) VALUES (?, ?) ON DUPLICATE KEY UPDATE budget_amount = budget_amount + ?, updated_at = NOW()",
+      [userId, budget, budget],
+      (err) => {
+        if (err) {
+          console.error("Error updating budget:", err);
+          db.rollback(); // Rollback in case of error
+          return res.status(500).json({ error: "Internal server error." });
+        }
+
+        db.commit((commitErr) => {
+          if (commitErr) {
+            console.error("Error committing transaction:", commitErr);
+            return res.status(500).json({ error: "Internal server error." });
+          }
+          res.json({ message: "Budget updated successfully." });
+        });
+      }
+    );
   });
 });
 
-// 3. Get Transactions
+// Get Transactions
 app.get("/api/transactions", authenticateJWT, (req, res) => {
-  const query = "SELECT id, date, category, amount FROM transactions_and_budget WHERE type = 'transaction' AND user_id = ?";
-  db.query(query, [req.user.id], (err, results) => {
-    if (err) {
-      console.error("Error fetching transactions:", err);
-      return res.status(500).json({ message: "Error retrieving transactions" });
+  const userId = req.user.id;
+  db.query(
+    "SELECT * FROM transactions WHERE user_id = ? ORDER BY date DESC",
+    [userId],
+    (err, results) => {
+      if (err) {
+        console.error("Error fetching transactions:", err);
+        return res.status(500).json({ error: "Internal server error." });
+      }
+      res.json(results);
     }
-    res.json(results);
-  });
+  );
 });
 
-// 4. Add Transaction
+
+// Add Transaction
 app.post("/api/transactions", authenticateJWT, (req, res) => {
-  const { date, category, amount } = req.body;
-  if (!date || !category || !amount) {
-    return res.status(400).json({ message: "Please fill in all fields!" });
-  }
+  const { error } = transactionSchema.validate(req.body); // Validate request body
+  if (error) return res.status(400).json({ message: error.details[0].message });
 
-  const query = "INSERT INTO transactions_and_budget (type, user_id, date, category, amount) VALUES ('transaction', ?, ?, ?, ?)";
-  db.query(query, [req.user.id, date, category, amount], (err, results) => {
+  const { date, category, amount } = req.body;
+  const userId = req.user.id;
+
+  // Use transactions for data integrity
+  db.beginTransaction((err) => {
     if (err) {
-      console.error("Error adding transaction:", err);
-      return res.status(500).json({ message: "Error adding transaction" });
+      console.error("Transaction start failed:", err);
+      return res.status(500).json({ error: "Internal server error." });
     }
-    res.status(201).json({ message: "Transaction added successfully!", transactionId: results.insertId });
-  });
+  
+    db.query(
+      "INSERT INTO transactions (user_id, date, category, amount) VALUES (?, ?, ?, ?)",
+      [userId, date, category, amount],
+      (err, results) => {
+        if (err) {
+          console.error("Error adding transaction:", err);
+          db.rollback(); // Rollback on failure
+          return res.status(500).json({ error: "Internal server error." });
+        }
+  
+        db.commit((commitErr) => {
+          if (commitErr) {
+            console.error("Error committing transaction:", commitErr);
+            return res.status(500).json({ error: "Internal server error." });
+          }
+          res.status(201).json({
+            id: results.insertId,
+            date,
+            category,
+            amount,
+          });
+        });
+      }
+    );
+  });  
 });
 
-// 5. Delete Transaction
+// Delete Transaction
 app.delete("/api/transactions/:id", authenticateJWT, (req, res) => {
   const { id } = req.params;
-  const query = "DELETE FROM transactions_and_budget WHERE id = ? AND user_id = ?";
-  db.query(query, [id, req.user.id], (err) => {
-    if (err) {
-      console.error("Error deleting transaction:", err);
-      return res.status(500).json({ message: "Error deleting transaction" });
+  const userId = req.user.id;
+
+  db.query(
+    "DELETE FROM transactions WHERE id = ? AND user_id = ?",
+    [id, userId],
+    (err, results) => {
+      if (err) {
+        console.error("Error deleting transaction:", err);
+        return res.status(500).json({ error: "Internal server error." });
+      }
+
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Transaction not found or not authorized." });
+      }
+
+      res.json({ message: "Transaction deleted successfully." });
     }
-    res.status(200).json({ message: "Transaction deleted successfully!" });
-  });
+  );
 });
 
 
+// Start Server
 const PORT = process.env.PORT || 3011;
-
-
-
-
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});
-
-
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`Port ${PORT} is already in use. Please choose a different port.`);
-  } else {
-    console.error('Server error:', err);
-  }
 });

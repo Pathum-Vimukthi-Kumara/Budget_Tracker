@@ -1,0 +1,55 @@
+.chart-container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .chart-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+  
+  /* Bar Chart and Pie Chart spacing */
+  .recharts-wrapper {
+    margin: 0 auto;
+  }
+  
+  /* Tooltip Customization */
+  .recharts-tooltip-wrapper {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Placeholder for Empty Data */
+  .chart-container div {
+    font-size: 18px;
+    color: #999;
+    margin-top: 50px;
+  }
+  
+  /* Responsive Design for Smaller Screens */
+  @media (max-width: 768px) {
+    .chart-container {
+      padding: 15px;
+    }
+  
+    .chart-container h2 {
+      font-size: 20px;
+    }
+  
+    .recharts-wrapper {
+      width: 100% !important;
+      height: 250px !important;
+    }
+  }
+  

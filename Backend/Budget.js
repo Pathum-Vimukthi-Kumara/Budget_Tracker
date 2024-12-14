@@ -1,89 +1,68 @@
-const express = require("express");
-const mysql = require("mysql2");
-const cors = require("cors");
-const jwt = require("jsonwebtoken");
+const mysql = require('mysql2');
 
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-// MySQL connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "test",
+// Create MySQL connection
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root', // Your MySQL username
+  password: '', // Your MySQL password
+  database: 'Test', // Ensure this database exists
 });
 
-db.connect((err) => {
+// Connect to the database
+connection.connect((err) => {
   if (err) {
-    console.error("Database connection error:", err);
-  } else {
-    console.log("Connected to MySQL database.");
+    console.error('Error connecting to the database:', err);
+    return;
   }
-});
+  console.log('Connected to the MySQL database.');
 
-// JWT secret key
-const JWT_SECRET = "your-secret-key";
+  // Function to create tables
+  const createTable = (query, tableName) => {
+    connection.query(query, (err) => {
+      if (err) {
+        console.error(`Error creating ${tableName} table:`, err);
+        return;
+      }
+      console.log(`${tableName} table created or already exists.`);
+    });
+  };
 
-// Middleware for JWT authentication
-const authenticateJWT = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  if (!token) return res.status(401).json({ message: "Access denied, token missing." });
+  // Create the "budget" table
+  createTable(
+    `
+    CREATE TABLE IF NOT EXISTS budget (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      budget_amount DECIMAL(10, 2) NOT NULL DEFAULT 0,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    `,
+    "budget"
+  );
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ message: "Invalid or expired token." });
-    req.user = user;
-    next();
+  // Create the "transactions" table
+  createTable(
+    `
+    CREATE TABLE IF NOT EXISTS transactions (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      date DATE NOT NULL,
+      category VARCHAR(255) NOT NULL,
+      amount DECIMAL(10, 2) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    `,
+    "transactions"
+  );
+
+  // Close the connection
+  connection.end((err) => {
+    if (err) {
+      console.error('Error closing connection:', err);
+    } else {
+      console.log('Connection closed.');
+    }
   });
-};
-
-// API routes
-app.get("/api/budget", authenticateJWT, (req, res) => {
-  const query = "SELECT amount FROM transactions_and_budget WHERE type = 'budget' ORDER BY id DESC LIMIT 1";
-  db.query(query, (err, results) => {
-    if (err) return res.status(500).json({ message: "Error retrieving budget" });
-    res.json({ budget: results[0]?.amount || 0 });
-  });
-});
-
-app.put("/api/budget", authenticateJWT, (req, res) => {
-  const { budget } = req.body;
-  const query = "INSERT INTO transactions_and_budget (type, user_id, amount) VALUES ('budget', ?, ?)";
-  db.query(query, [req.user.id, budget], (err) => {
-    if (err) return res.status(500).json({ message: "Error updating budget" });
-    res.status(200).json({ message: "Budget updated successfully", budget });
-  });
-});
-
-app.get("/api/transactions", authenticateJWT, (req, res) => {
-  const query = "SELECT * FROM transactions_and_budget WHERE type = 'transaction' AND user_id = ?";
-  db.query(query, [req.user.id], (err, results) => {
-    if (err) return res.status(500).json({ message: "Error retrieving transactions" });
-    res.json(results);
-  });
-});
-
-app.post("/api/transactions", authenticateJWT, (req, res) => {
-  const { date, category, amount } = req.body;
-  const query =
-    "INSERT INTO transactions_and_budget (type, user_id, date, category, amount) VALUES ('transaction', ?, ?, ?, ?)";
-  db.query(query, [req.user.id, date, category, amount], (err, results) => {
-    if (err) return res.status(500).json({ message: "Error adding transaction" });
-    res.status(201).json({ id: results.insertId, date, category, amount });
-  });
-});
-
-app.delete("/api/transactions/:id", authenticateJWT, (req, res) => {
-  const { id } = req.params;
-  const query = "DELETE FROM transactions_and_budget WHERE id = ? AND user_id = ?";
-  db.query(query, [id, req.user.id], (err) => {
-    if (err) return res.status(500).json({ message: "Error deleting transaction" });
-    res.status(200).json({ message: "Transaction deleted successfully" });
-  });
-});
-
-const PORT = 3010;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
 });

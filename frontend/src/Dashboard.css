@@ -1,183 +1,20 @@
-/* General container styles */
-.dashboard-container {
-  display: flex;
-  height: 100vh;
-  background-color: #f8f9fa;
-}
-
-/* Sidebar styles */
-.sidebar {
-  width: 25%;
-  background-color: #343a40;
-  color: white;
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   padding: 20px;
 }
 
-.summary h1 {
-  text-align: center;
-  font-size: 1.8rem;
-}
-
-.card {
-  margin: 20px 0;
+.transaction,
+.chart-section,
+.budget-card,
+.expenses {
+  border: 1px solid #ddd;
   padding: 15px;
   border-radius: 8px;
-  text-align: center;
+  background-color: #f9f9f9;
 }
 
-.card.expenses {
-  background-color: #dc3545;
-  color: white;
-}
-
-.card.budget {
-  background-color: #007bff;
-  color: white;
-}
-
-.progress-bar {
-  height: 10px;
-  background: #e9ecef;
-  border-radius: 5px;
-  margin: 10px 0;
-  overflow: hidden;
-}
-
-.progress {
-  height: 100%;
-  background: #ffc107;
-}
-
-/* Main content styles */
-.main-content {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.chart-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.transactions {
-  margin-top: 20px;
-}
-
-.transactions h2 {
-  margin-bottom: 15px;
-}
-
-.transactions ul {
-  list-style: none;
-  padding: 0;
-}
-
-.transaction-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background: #f8f9fa;
-  border: 1px solid #e0e0e0;
+h2 {
   margin-bottom: 10px;
-  border-radius: 5px;
-}
-
-.transaction-item:hover {
-  background: #e9ecef;
-}
-
-.delete-button {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.delete-button:hover {
-  background-color: #a71d2a;
-}
-
-/* Add Transaction Button */
-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #0056b3;
-}
-
-/* Modal styles for adding a transaction */
-.modal-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.modal h3 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.modal form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.modal input,
-.modal select {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.modal .modal-buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.modal button {
-  width: 48%;
-  padding: 10px;
-}
-
-.modal .cancel-button {
-  background-color: #dc3545;
-}
-
-.modal .cancel-button:hover {
-  background-color: #a71d2a;
 }
