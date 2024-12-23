@@ -1,22 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Pie } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ChartSection = ({ transactions }) => {
   const income = transactions
     .filter((t) => t.type === "income")
-    .reduce((acc, t) => acc + t.amount, 0);
-
+    .reduce((sum, t) => sum + t.amount, 0);
   const expenses = transactions
     .filter((t) => t.type === "expense")
-    .reduce((acc, t) => acc + t.amount, 0);
+    .reduce((sum, t) => sum + t.amount, 0);
 
   const data = {
     labels: ["Income", "Expenses"],
@@ -27,14 +20,6 @@ const ChartSection = ({ transactions }) => {
       },
     ],
   };
-
-  useEffect(() => {
-    // Cleanup previous charts when the component unmounts or updates
-    return () => {
-      const charts = Object.values(ChartJS.instances || {});
-      charts.forEach((chart) => chart.destroy());
-    };
-  }, [transactions]);
 
   return (
     <div className="chart-section">

@@ -18,7 +18,7 @@ const Dashboard = () => {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const transactionsData = await axios.get("http://localhost:3011/api/transactions", {
+      const transactionsData = await axios.get("http://localhost:3011/transactions", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const budgetData = await axios.get("http://localhost:3011/api/budget", {
@@ -34,7 +34,7 @@ const Dashboard = () => {
   const addTransaction = async (transaction) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post("http://localhost:3011/api/transactions", transaction, {
+      const response = await axios.post("http://localhost:3011/transactions", transaction, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Transaction added:", response.data); // Log the response

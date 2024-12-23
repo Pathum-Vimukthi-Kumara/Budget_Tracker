@@ -53,8 +53,9 @@ const loginSchema = Joi.object({
 
 const budgetSchema = Joi.object({
   budget: Joi.number().positive().required(),
+  income: Joi.number().positive().optional(), // Example: You can add more fields as needed
+  expenses: Joi.number().positive().optional(),
 });
-
 const transactionSchema = Joi.object({
   date: Joi.date().required(),
   category: Joi.string().min(2).max(50).required(),
@@ -126,16 +127,21 @@ app.post('/login', (req, res) => {
 
 // Protect routes using JWT middleware (for example, to view user profile)
 const authenticateJWT = (req, res, next) => {
-  const token = req.header('Authorization');
-  if (!token) return res.status(403).json({ message: 'Access denied, token missing.' });
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ message: 'Invalid or expired token' });
-    req.user = user;
+  if (!token) {
+    return res.status(401).json({ message: "Access denied, token missing." });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: "Invalid token." });
+    }
+    req.user = user; // Attach user information to the request object
     next();
   });
 };
-
 
 // Update Budget
 // Update Budget
@@ -176,86 +182,53 @@ app.put("/api/budget", authenticateJWT, (req, res) => {
   });
 });
 
-// Get Transactions
-app.get("/api/transactions", authenticateJWT, (req, res) => {
+// Fetch Transactions
+app.get("/transactions", authenticateJWT, (req, res) => {
   const userId = req.user.id;
-  db.query(
-    "SELECT * FROM transactions WHERE user_id = ? ORDER BY date DESC",
-    [userId],
-    (err, results) => {
-      if (err) {
-        console.error("Error fetching transactions:", err);
-        return res.status(500).json({ error: "Internal server error." });
-      }
-      res.json(results);
+  db.query("SELECT * FROM transactions WHERE user_id = ? ORDER BY date DESC", [userId], (err, results) => {
+    if (err) {
+      console.error("Error fetching transactions:", err);
+      return res.status(500).json({ error: "Internal server error" });
     }
-  );
+    res.json(results);
+  });
 });
 
-
-// Add Transaction
-app.post("/api/transactions", authenticateJWT, (req, res) => {
-  const { error } = transactionSchema.validate(req.body); // Validate request body
-  if (error) return res.status(400).json({ message: error.details[0].message });
-
-  const { date, category, amount } = req.body;
+// Add a Transaction
+app.post("/transactions", authenticateJWT, (req, res) => {
+  const { title, amount, type } = req.body;
   const userId = req.user.id;
 
-  // Use transactions for data integrity
-  db.beginTransaction((err) => {
+  if (!title || !amount || !type) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
+
+  const query = "INSERT INTO transactions (user_id, title, amount, type) VALUES (?, ?, ?, ?)";
+  db.query(query, [userId, title, amount, type], (err, results) => {
     if (err) {
-      console.error("Transaction start failed:", err);
-      return res.status(500).json({ error: "Internal server error." });
+      console.error("Error adding transaction:", err);
+      return res.status(500).json({ error: "Internal server error" });
     }
-  
-    db.query(
-      "INSERT INTO transactions (user_id, date, category, amount) VALUES (?, ?, ?, ?)",
-      [userId, date, category, amount],
-      (err, results) => {
-        if (err) {
-          console.error("Error adding transaction:", err);
-          db.rollback(); // Rollback on failure
-          return res.status(500).json({ error: "Internal server error." });
-        }
-  
-        db.commit((commitErr) => {
-          if (commitErr) {
-            console.error("Error committing transaction:", commitErr);
-            return res.status(500).json({ error: "Internal server error." });
-          }
-          res.status(201).json({
-            id: results.insertId,
-            date,
-            category,
-            amount,
-          });
-        });
-      }
-    );
-  });  
+    res.status(201).json({ id: results.insertId, title, amount, type });
+  });
 });
 
 // Delete Transaction
-app.delete("/api/transactions/:id", authenticateJWT, (req, res) => {
+app.delete("/transactions/:id", authenticateJWT, (req, res) => {
   const { id } = req.params;
   const userId = req.user.id;
 
-  db.query(
-    "DELETE FROM transactions WHERE id = ? AND user_id = ?",
-    [id, userId],
-    (err, results) => {
-      if (err) {
-        console.error("Error deleting transaction:", err);
-        return res.status(500).json({ error: "Internal server error." });
-      }
-
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ error: "Transaction not found or not authorized." });
-      }
-
-      res.json({ message: "Transaction deleted successfully." });
+  const query = "DELETE FROM transactions WHERE id = ? AND user_id = ?";
+  db.query(query, [id, userId], (err, results) => {
+    if (err) {
+      console.error("Error deleting transaction:", err);
+      return res.status(500).json({ error: "Internal server error" });
     }
-  );
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ message: "Transaction not found" });
+    }
+    res.json({ message: "Transaction deleted successfully" });
+  });
 });
 
 

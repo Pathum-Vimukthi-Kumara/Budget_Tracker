@@ -1,60 +1,22 @@
-.transaction {
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
-    background: #f9f9f9;
-    margin-top: 20px;
-  }
-  
-  .transaction-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .transaction-form input,
-  .transaction-form select,
-  .transaction-form button {
-    padding: 10px;
-    font-size: 14px;
-  }
-  
-  .transaction-form button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .transaction-form button:hover {
-    background-color: #45a049;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-  }
-  
-  .transaction-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .transaction-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .transaction-item.income .transaction-amount {
-    color: green;
-  }
-  
-  .transaction-item.expense .transaction-amount {
-    color: red;
-  }
-  
+.transactions {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+}
+.transaction-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+.transaction-item.income {
+  color: green;
+}
+.transaction-item.expense {
+  color: red;
+}
