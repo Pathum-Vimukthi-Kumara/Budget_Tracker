@@ -1,9 +1,50 @@
+/* General chart section styling */
 .chart-section {
-  margin: 20px 0;
   text-align: center;
+  margin: 2rem;
+  margin-top: 70px;
+  
 }
 
-.chart-section h2 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
+/* Chart container for desktop and mobile */
+.chart-container {
+  display: flex;
+  flex-wrap: wrap; /* Wrap charts when the screen size is small */
+  gap: 2rem;
+  justify-content: center;
+  color:white;
+}
+
+/* Styling for each chart */
+.pie_chart,
+.bar_chart {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  padding: 1rem;
+  background: #0c0404;
+  color:white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Updated shadow for better visibility */
+}
+
+h3 {
+  margin-top: 1rem;
+  color: rgb(248, 244, 244);
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .chart-container {
+    flex-direction: column; /* Stack charts vertically */
+    align-items: center; /* Center align stacked charts */
+    color:white;
+  }
+
+  .pie_chart,
+  .bar_chart {
+    max-width: 90%; /* Ensure charts are responsive on smaller screens */
+    width: 100%; /* Stretch charts to fit container */
+    margin-bottom: 1rem; /* Add spacing between stacked charts */
+  }
 }

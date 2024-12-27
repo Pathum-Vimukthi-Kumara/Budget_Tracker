@@ -162,15 +162,15 @@ const Transactions = () => {
       <div className="summary">
         <div className="summary-box income">
           <h3>Total Income</h3>
-          <p>${totalIncome.toFixed(2)}</p>
+          <p>Rs.{totalIncome.toFixed(2)}</p>
         </div>
         <div className="summary-box expense">
           <h3>Total Expense</h3>
-          <p>${totalExpense.toFixed(2)}</p>
+          <p>Rs.{totalExpense.toFixed(2)}</p>
         </div>
         <div className="summary-box balance">
           <h3>Balance</h3>
-          <p>${balance.toFixed(2)}</p>
+          <p>Rs.{balance.toFixed(2)}</p>
         </div>
       </div>
 
@@ -251,7 +251,7 @@ const Transactions = () => {
             <div className="transaction-details">
               <span className="transaction-title">{t.title}</span>
               <span className="transaction-date">{t.date}</span>
-              <span className="transaction-amount">${t.amount}</span>
+              <span className="transaction-amount">Rs.{t.amount}</span>
             </div>
             <div className="transaction-actions">
               <button onClick={() => deleteTransaction(t.id)}>

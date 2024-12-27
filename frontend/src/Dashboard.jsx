@@ -49,8 +49,20 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <Transaction transactions={transactions} addTransaction={addTransaction} deleteTransaction={deleteTransaction} />
-      <ChartSection transactions={transactions} />
+      <div className="content-row">
+        {/* Chart Section */}
+        <div className="section">
+
+
+        <Transaction transactions={transactions} addTransaction={addTransaction} deleteTransaction={deleteTransaction} />
+        </div>
+
+        {/* Transaction Section */}
+        <div className="section">
+        <ChartSection transactions={transactions} />
+         
+        </div>
+      </div>
     </div>
   );
 };

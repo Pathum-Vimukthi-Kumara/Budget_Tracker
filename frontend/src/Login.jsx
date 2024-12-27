@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Login.css';  
+import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -7,12 +7,11 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
       try {
@@ -27,9 +26,9 @@ const Login = () => {
         const data = await response.json();
 
         if (data.message === 'Login successful') {
-          localStorage.setItem('token', data.token); 
+          localStorage.setItem('token', data.token);
           setMessage('Login successful!');
-          navigate('/profile'); 
+          navigate('/profile');
         } else {
           setErrors({ general: data.message });
         }
@@ -38,7 +37,7 @@ const Login = () => {
         setErrors({ general: 'Something went wrong. Please try again later.' });
       }
     } else {
-      setErrors(validationErrors); 
+      setErrors(validationErrors);
     }
   };
 
@@ -61,6 +60,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={errors.email ? 'error' : ''}
+           
           />
           {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
@@ -73,6 +73,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className={errors.password ? 'error' : ''}
+            
           />
           {errors.password && <p className="error-message">{errors.password}</p>}
         </div>

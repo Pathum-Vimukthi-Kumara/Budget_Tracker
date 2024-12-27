@@ -1,0 +1,142 @@
+/* General Page Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+ /* Add your image path here */
+
+  background-color: black;
+  background-size: cover; /* Make the background image cover the entire screen */
+  background-blend-mode: overlay; /* Adds transparency effect */
+  color: #09de09;
+  backdrop-filter: blur(5px); /* Blur effect for the background */
+  -webkit-backdrop-filter: blur(5px); /* Blur effect for Safari */
+  border-radius: 8px; /* Smooth rounded corners */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dark Overlay for Better Readability */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+}
+
+/* Onboard Container */
+.onboard-container {
+  z-index: 1; /* Ensure content is above the overlay */
+  text-align: center;
+  padding: 2rem; /* Add spacing inside the container */
+  background: rgba(8, 6, 6, 0.854); /* Semi-transparent background for the container */
+  padding: 200px ;
+  max-width: 800px; /* Limit the width of the container */
+  width: 90%; /* Make it responsive */
+  color: white; /* Text color */
+   /* Add shadow for a floating effect */
+  position: relative;
+  
+}
+
+/* Heading Style */
+.onboard-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #4caf50; /* Vibrant green for the heading */
+}
+
+/* Paragraph Style */
+.onboard-container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #ddd; /* Softer text color */
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Button Styles */
+button {
+  flex: 1;
+  padding: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Sign Up Button */
+.signup-button {
+  background-color: #229c0c; /* Bright green */
+  color: #fff;
+}
+
+.signup-button:hover {
+  background-color: #037a11; /* Darker green on hover */
+}
+
+/* Login Button */
+.login-button {
+  background-color: #199603; /* Bright blue */
+  color: #fff;
+}
+
+.login-button:hover {
+  background-color: #037a11; /* Darker blue on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .onboard-container {
+    max-width: 90%; /* Adjust for tablets */
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .onboard-container {
+    max-width: 95%; /* Adjust for smaller screens */
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}

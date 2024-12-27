@@ -1,0 +1,163 @@
+/* Transactions Table */
+.transactions-table {
+  padding: 2rem;
+  
+}
+
+.transactions-table h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #61e865; /* Green color for the title */
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background: #1b0404;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Enable horizontal scrolling for small screens */
+}
+
+/* ... other CSS remains unchanged ... */
+
+
+thead {
+  background: #099f1a;
+  color: #fff;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: center; /* Center-align content for all screens */
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background: #015b2e;
+}
+
+.type-income {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.type-expense {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.no-transactions {
+  text-align: center;
+  padding: 2rem;
+  font-style: italic;
+  color: #888;
+}
+
+.error {
+  text-align: center;
+  color: #f44336;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Add a Scrollable Wrapper */
+.table-wrapper {
+  overflow-x: auto; /* Allow horizontal scrolling */
+  overflow-y: auto; /* Allow vertical scrolling */
+  max-height: 400px; /* Optional: Set a maximum height */
+  border-radius: 8px; /* Ensure corners match the table */
+  margin: 0 auto;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  /* Make table scrollable within its wrapper */
+  .table-wrapper {
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+
+  table {
+    display: block;
+    white-space: nowrap; /* Prevent table rows from wrapping */
+    border: none;
+  }
+
+  th,
+  td {
+    padding: 0.8rem; /* Reduce padding for smaller screens */
+    font-size: 0.9rem; /* Adjust font size for better readability */
+  }
+
+  /* Stacking for very small screens */
+  tr {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align to the left for readability */
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    display: none; /* Hide table headers */
+  }
+
+  td {
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+
+  td::before {
+    content: attr(data-label); /* Use data-label for accessible headers */
+    font-weight: bold;
+    color: #fff;
+    background-color: #4caf50;
+    display: inline-block;
+    text-align: left; /* Align label text */
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+  }
+
+  .no-transactions {
+    text-align: center;
+    padding: 1.5rem;
+    color: #888;
+    font-size: 0.9rem;
+  }
+
+  .error {
+    text-align: center;
+    color: #f44336;
+    margin-top: 1rem;
+  }
+  #id-th{
+    background-color: #4caf50;
+  }
+}
+
+/* Responsive Design for Very Small Devices */
+@media (max-width: 480px) {
+  td {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem; /* Further reduce font size */
+  }
+
+  td::before {
+    font-size: 0.75rem; /* Smaller labels */
+    padding: 0.1rem 0.3rem;
+  }
+
+  .no-transactions {
+    font-size: 0.85rem;
+  }
+  #id-th{
+    background-color: #4caf50;
+  }
+}

@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie, Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from "chart.js";
+import "./ChartSection.css";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const ChartSection = () => {
   const [transactions, setTransactions] = useState([]);
-  const [chartData, setChartData] = useState({
+  const [overallChartData, setOverallChartData] = useState({
     labels: ["Income", "Expenses"],
     datasets: [
       {
@@ -15,6 +24,26 @@ const ChartSection = () => {
       },
     ],
   });
+  const [dailyExpenseChartData, setDailyExpenseChartData] = useState({
+    labels: [], // Daily dates
+    datasets: [
+      {
+        label: "Daily Expenses",
+        data: [], // Initial data
+        backgroundColor: "#22c703",
+      },
+    ],
+  });
+  const [dailyIncomeChartData, setDailyIncomeChartData] = useState({
+    labels: [], // Daily dates
+    datasets: [
+      {
+        label: "Daily Income",
+        data: [], // Initial data
+        backgroundColor: "#22c703",
+      },
+    ],
+  })
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -40,6 +69,7 @@ const ChartSection = () => {
   }, []);
 
   useEffect(() => {
+    // Calculate overall income and expenses
     const income = transactions
       .filter((t) => t.type === "income")
       .reduce((sum, t) => sum + parseFloat(t.amount), 0);
@@ -47,13 +77,61 @@ const ChartSection = () => {
       .filter((t) => t.type === "expense")
       .reduce((sum, t) => sum + parseFloat(t.amount), 0);
 
-    // Update chart data
-    setChartData({
+    // Update pie chart data
+    setOverallChartData({
       labels: ["Income", "Expenses"],
       datasets: [
         {
           data: [income, expenses],
-          backgroundColor: ["#4caf50", "#f44336"],
+          backgroundColor: ["#22c703", "#f44336"],
+        },
+      ],
+    });
+
+    // Calculate daily expenses
+    const dailyExpenses = transactions
+      .filter((t) => t.type === "expense")
+      .reduce((acc, t) => {
+        const date = new Date(t.date).toLocaleDateString(); // Format the date
+        acc[date] = (acc[date] || 0) + parseFloat(t.amount);
+        return acc;
+      }, {});
+
+    // Prepare data for daily expense bar chart
+    const dailyExpenseLabels = Object.keys(dailyExpenses).sort();
+    const dailyExpenseData = dailyExpenseLabels.map((date) => dailyExpenses[date]);
+
+    setDailyExpenseChartData({
+      labels: dailyExpenseLabels,
+      datasets: [
+        {
+          label: "Daily Expenses",
+          data: dailyExpenseData,
+          backgroundColor: "#f44336",
+        },
+      ],
+    });
+
+    // Calculate daily income
+    const dailyIncome = transactions
+      .filter((t) => t.type === "income")
+      .reduce((acc, t) => {
+        const date = new Date(t.date).toLocaleDateString(); // Format the date
+        acc[date] = (acc[date] || 0) + parseFloat(t.amount);
+        return acc;
+      }, {});
+
+    // Prepare data for daily income bar chart
+    const dailyIncomeLabels = Object.keys(dailyIncome).sort();
+    const dailyIncomeData = dailyIncomeLabels.map((date) => dailyIncome[date]);
+
+    setDailyIncomeChartData({
+      labels: dailyIncomeLabels,
+      datasets: [
+        {
+          label: "Daily Income",
+          data: dailyIncomeData,
+          backgroundColor: "#22c703",
         },
       ],
     });
@@ -61,8 +139,72 @@ const ChartSection = () => {
 
   return (
     <div className="chart-section">
-      <h2>Budget Breakdown</h2>
-      <Pie data={chartData} />
+      <h2>Budget Analysis</h2>
+
+      <div className="chart-container">
+        <div className="pie_chart">
+          <h3>Overall Budget Breakdown</h3>
+          <Pie data={overallChartData} />
+        </div>
+
+        <div className="bar_chart">
+          <h3>Daily Expenses</h3>
+          <Bar
+            data={dailyExpenseChartData}
+            options={{
+              responsive: true,
+              plugins: { legend: { display: true } },
+              scales: {
+                x: {
+                  ticks: {
+                    color: "white", // Set X-axis label color
+                  },
+                  grid: {
+                    color: "rgba(255, 255, 255, 0.2)", // Set X-axis grid line color
+                  },
+                },
+                y: {
+                  ticks: {
+                    color: "white", // Set Y-axis label color
+                  },
+                  grid: {
+                    color: "rgba(255, 255, 255, 0.2)", // Set Y-axis grid line color
+                  },
+                },
+              },
+            }}
+          />
+        </div>
+
+        <div className="bar_chart">
+          <h3>Daily Income</h3>
+          <Bar
+            data={dailyIncomeChartData}
+            options={{
+              responsive: true,
+              plugins: { legend: { display: true } },
+              scales: {
+                x: {
+                  ticks: {
+                    color: "white", // Set X-axis label color
+                  },
+                  grid: {
+                    color: "rgba(255, 255, 255, 0.2)", // Set X-axis grid line color
+                  },
+                },
+                y: {
+                  ticks: {
+                    color: "white", // Set Y-axis label color
+                  },
+                  grid: {
+                    color: "rgba(255, 255, 255, 0.2)", // Set Y-axis grid line color
+                  },
+                },
+              },
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
