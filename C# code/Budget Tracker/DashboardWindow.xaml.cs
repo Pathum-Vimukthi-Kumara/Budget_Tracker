@@ -1,86 +1,160 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq; // Added for LINQ methods
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using Microsoft.Data.Sqlite;
 
 namespace Budget_Tracker
 {
     public partial class DashboardWindow : Window
     {
-        // ObservableCollection to bind to the UI
-        public ObservableCollection<Transaction> Transactions { get; set; }
-
         public DashboardWindow()
         {
             InitializeComponent();
-            Transactions = new ObservableCollection<Transaction>();
-            LoadTransactions(); // Load initial transactions
-            DataContext = this; // Set data context for data binding
+        }
+    
+
+        private void DashboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Dashboard button clicked!", "Dashboard", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        // Load initial transactions (Simulated - replace with database logic)
+        private void TransactionButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Transaction button clicked!", "Transaction", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void SettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("LogOut button clicked!", "LogOut", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void AddTransaction_Click(object sender, RoutedEventArgs e)
+        {
+            string title = TitleTextBox.Text;
+            string amountText = AmountTextBox.Text;
+            DateTime? selectedDate = TransactionDatePicker.SelectedDate;
+            string type = (TypeComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(amountText) || !selectedDate.HasValue || string.IsNullOrWhiteSpace(type))
+            {
+                MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!decimal.TryParse(amountText, out decimal amount))
+            {
+                MessageBox.Show("Please enter a valid amount.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                InsertTransaction(title, amount, selectedDate.Value, type);
+                MessageBox.Show("Transaction added successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                ClearTransactionForm();
+                LoadTransactions();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding transaction: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void InsertTransaction(string title, decimal amount, DateTime date, string type)
+        {
+            string connectionString = "Data Source=C:\\Users\\hp\\Documents\\Budget Tracker\\Budget_Tracker\\C# code\\Budget Tracker\\Transaction.db;";
+
+            string query = @"
+                INSERT INTO Transactions (Title, Amount, Date, Type) 
+                VALUES (@Title, @Amount, @Date, @Type);";
+
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqliteCommand command = new SqliteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Title", title);
+                    command.Parameters.AddWithValue("@Amount", amount);
+                    command.Parameters.AddWithValue("@Date", date.ToString("yyyy-MM-dd"));
+                    command.Parameters.AddWithValue("@Type", type);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         private void LoadTransactions()
         {
-            Transactions.Add(new Transaction { Id = 1, Date = "2024-10-19", Category = "Food - Breakfast", Type = "Expense", Amount = 200 });
-            Transactions.Add(new Transaction { Id = 2, Date = "2024-10-19", Category = "Entertainment - Movie", Type = "Expense", Amount = 200 });
-        }
+            // Method to load transactions from the database
+            string connectionString = "Data Source=C:\\Users\\hp\\Documents\\Budget Tracker\\Budget_Tracker\\C# code\\Budget Tracker\\Transaction.db;";
+            string query = "SELECT Title, Amount, Date, Type FROM Transactions";
 
-        // Add a new transaction
-        public void AddTransaction(string date, string category, string type, decimal amount)
-        {
-            var newTransaction = new Transaction
+            try
             {
-                Id = Transactions.Count + 1, // Generate a new ID
-                Date = date,
-                Category = category,
-                Type = type,
-                Amount = amount
-            };
+                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                {
+                    connection.Open();
 
-            Transactions.Add(newTransaction);
+                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        TransactionsList.Items.Clear(); // Assuming TransactionsList is your ItemsControl name
 
-            // Save to database logic here (if applicable)
-        }
+                        while (reader.Read())
+                        {
+                            string title = reader.GetString(0);
+                            decimal amount = reader.GetDecimal(1);
+                            DateTime date = DateTime.Parse(reader.GetString(2));
+                            string type = reader.GetString(3);
 
-        // Update an existing transaction
-        public void UpdateTransaction(int id, string category, decimal amount)
-        {
-            var transaction = Transactions.FirstOrDefault(t => t.Id == id);
-            if (transaction != null)
+                            // Add to your ItemsControl (e.g., TransactionsList)
+                            TransactionsList.Items.Add(new
+                            {
+                                Title = title,
+                                Amount = amount,
+                                Date = date.ToString("yyyy-MM-dd"),
+                                Type = type
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
             {
-                transaction.Category = category;
-                transaction.Amount = amount;
-
-                // Update in database logic here (if applicable)
+                MessageBox.Show($"Error loading transactions: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        // Remove a transaction
-        public void RemoveTransaction(int id)
+        private void ClearTransactionForm()
         {
-            var transaction = Transactions.FirstOrDefault(t => t.Id == id);
-            if (transaction != null)
-            {
-                Transactions.Remove(transaction);
+            TitleTextBox.Text = string.Empty;
+            AmountTextBox.Text = string.Empty;
+            TransactionDatePicker.SelectedDate = null;
+            TypeComboBox.SelectedItem = null;
+        }
 
-                // Remove from database logic here (if applicable)
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && (string)textBox.Tag == "Placeholder")
+            {
+                textBox.Text = "";
+                textBox.Foreground = Brushes.White; // Set to normal text color
+                textBox.Tag = null; // Clear the placeholder tag
             }
         }
 
-        // Event handler for text changes in DateTextBox (if needed)
-        private void DateTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            // Handle logic for DateTextBox text changes (if applicable)
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = "Enter " + textBox.Name.Replace("TextBox", ""); // Placeholder text
+                textBox.Foreground = Brushes.Gray; // Placeholder color
+                textBox.Tag = "Placeholder"; // Mark as placeholder
+            }
         }
-    }
-
-    // Transaction class for data binding
-    public class Transaction
-    {
-        public int Id { get; set; } // Unique identifier for each transaction
-        public string Date { get; set; } // Date of the transaction
-        public string Category { get; set; } // Category (e.g., Food, Entertainment)
-        public string Type { get; set; } // Type (e.g., Income, Expense)
-        public decimal Amount { get; set; } // Transaction amount
     }
 }

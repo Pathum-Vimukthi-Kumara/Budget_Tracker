@@ -9,7 +9,9 @@ body {
   height: 100vh;
   display: flex;
   overflow: hidden;
+  background-repeat: no-repeat;
   position: relative;
+  background-color: white;
 }
 
 /* Background Grid */
@@ -18,6 +20,7 @@ body::before {
   position: absolute;
   top: 0;
   left: 0;
+  background-color: black;
   width: 100%;
   height: 100%;
   z-index: -1;
@@ -42,7 +45,7 @@ body::before {
   background-color: rgba(0, 0, 0, 0.85);
   
   border-radius: 10px;
-  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.5);
+  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.3);
 }
 
 h2 {
@@ -102,9 +105,13 @@ input.error {
 /* Button Styling */
 button {
   width: 100%;
-  padding: 12px;
-  background-color: #0f0;
-  color: #000;
+  max-width:200x;
+  position: relative;
+  left:3px;
+  padding: 13px;
+  align-items: center;
+  background-color: #068101;
+  color: white;
   border: none;
   border-radius: 25px;
   font-size: 1rem;

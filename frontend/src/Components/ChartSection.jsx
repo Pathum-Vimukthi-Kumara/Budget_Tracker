@@ -83,7 +83,7 @@ const ChartSection = () => {
       datasets: [
         {
           data: [income, expenses],
-          backgroundColor: ["#22c703", "#f44336"],
+          backgroundColor: ["#068101", "#9b0000"],
         },
       ],
     });
@@ -107,7 +107,7 @@ const ChartSection = () => {
         {
           label: "Daily Expenses",
           data: dailyExpenseData,
-          backgroundColor: "#f44336",
+          backgroundColor: "#9b0000",
         },
       ],
     });
@@ -131,7 +131,7 @@ const ChartSection = () => {
         {
           label: "Daily Income",
           data: dailyIncomeData,
-          backgroundColor: "#22c703",
+          backgroundColor: "#068101",
         },
       ],
     });

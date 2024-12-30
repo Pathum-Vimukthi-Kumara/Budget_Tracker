@@ -7,9 +7,11 @@ const Onboard = () => {
 
   return (
     <div className="onboard-container">
+      
+      <img src={`${process.env.PUBLIC_URL}/onboard.png`} alt="logo" className="budget" />
       <h1>Welcome to Your Budget Tracker!</h1>
-      <p>Welcome to your Budget Tracker! This personal finance companion is designed to simplify how you manage your money. Whether you're saving for a special occasion, paying off debt, or just looking to understand your spending habits better, our tool is here to help. Let’s take this journey to financial wellness together!</p>
-      <p>Please sign up or log in to continue</p>
+      <p>Welcome to your Budget Tracker! This personal finance companion is designed to simplify how you manage your money.</p>
+      <p className="demo">Please sign up or log in to continue</p>
       <div className="button-container">
         <button onClick={() => navigate('/signup')} className="signup-button">
           Sign Up

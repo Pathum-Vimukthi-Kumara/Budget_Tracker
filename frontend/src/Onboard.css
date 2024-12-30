@@ -4,13 +4,12 @@ body {
   padding: 0;
   font-family: 'Poppins', Arial, sans-serif;
  /* Add your image path here */
-
-  background-color: black;
+ background-repeat: no-repeat;
   background-size: cover; /* Make the background image cover the entire screen */
   background-blend-mode: overlay; /* Adds transparency effect */
-  color: #09de09;
-  backdrop-filter: blur(5px); /* Blur effect for the background */
-  -webkit-backdrop-filter: blur(5px); /* Blur effect for Safari */
+  color: White;
+  background-color: white;
+ 
   border-radius: 8px; /* Smooth rounded corners */
   display: flex;
   justify-content: center;
@@ -20,43 +19,63 @@ body {
   position: relative;
 }
 
+
 /* Dark Overlay for Better Readability */
 body::before {
   content: '';
+  background-color: black;
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-
-  z-index: 1;
+ 
+}
+.demo{
+  color:#09de09;
+}
+.onboard-container {
+  /* Glassmorphism effect */
+ 
+  border-radius: 16px; /* Smooth rounded corners */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Deeper shadow for a floating effect */
+  position: relative;
+  text-align: center; /* Center text inside */
+  padding: 2rem; /* Spacing inside */
+  max-width: 800px; /* Limit the width */
+  width: 90%; /* Make it responsive */
+  margin: auto; /* Center horizontally */
+  color: white; /* Text color for readability */
+  overflow: hidden; /* Prevent image overflow */
 }
 
-/* Onboard Container */
-.onboard-container {
-  z-index: 1; /* Ensure content is above the overlay */
-  text-align: center;
-  padding: 2rem; /* Add spacing inside the container */
-  background: rgba(8, 6, 6, 0.854); /* Semi-transparent background for the container */
-  padding: 200px ;
-  max-width: 800px; /* Limit the width of the container */
-  width: 90%; /* Make it responsive */
-  color: white; /* Text color */
-   /* Add shadow for a floating effect */
-  position: relative;
+/* Add the blurred background image inside the container */
+.onboard-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Image visible only in the container */
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
   
+  z-index: -1; /* Push behind the content */
 }
 
 /* Heading Style */
 .onboard-container h1 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: #4caf50; /* Vibrant green for the heading */
+  color: #008080; /* Vibrant green for the heading */
 }
 
 /* Paragraph Style */
 .onboard-container p {
-  font-size: 1.2rem;
+  font-size: 1 rem;
   margin-bottom: 2rem;
   color: #ddd; /* Softer text color */
 }
@@ -67,22 +86,34 @@ body::before {
   justify-content: space-between;
   gap: 1rem;
 }
+/* photo */
+.budget{
+  width: 300px;
+  height:200px;
+}
 
 /* Button Styles */
 button {
   flex: 1;
   padding: 12px;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  box-shadow: 0 5px 15px rgba(116, 230, 138, 0.2);
   transition: all 0.3s ease;
+  
+}
+.button:hover {
+  transform: translateY(-2px);
+  background-color: #013d08;
+  box-shadow: 0 8px 20px rgba(116, 230, 138, 0.4);
 }
 
 /* Sign Up Button */
 .signup-button {
-  background-color: #229c0c; /* Bright green */
+  background-color: #068101; /* Bright green */
   color: #fff;
 }
 
@@ -105,6 +136,7 @@ button {
   .onboard-container {
     max-width: 90%; /* Adjust for tablets */
     padding: 1.5rem;
+    max-width: 400px;
   }
 
   h1 {
@@ -118,6 +150,10 @@ button {
   button {
     font-size: 0.9rem;
     padding: 10px;
+  }
+  .budget{
+    width: 150px;
+    height:100px;
   }
 }
 

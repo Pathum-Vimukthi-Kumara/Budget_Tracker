@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import MessageBox from "./MessageBox";
-import "./Header.css";
+import "./Header.css"; // Update/replace with your own sidebar CSS
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [message, setMessage] = useState(""); // State for message box
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State for login status
+  const [message, setMessage] = useState(""); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,62 +19,135 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const handleNavigation = (path) => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      setMessage("You must be logged in to access this page."); // Show message box
-      navigate("/login"); // Redirect to login page if not authenticated
-      return;
-    }
-
-    setMenuOpen(false); // Close the dropdown menu
-    navigate(path); // Navigate to the requested path
-  };
-
   const handleLogout = () => {
     // Clear token and redirect to login
     localStorage.removeItem("token");
-    setMessage("You have been logged out."); // Show message box
-    setIsLoggedIn(false); // Update login status
-    setMenuOpen(false); // Close the dropdown menu
+    setMessage("You have been logged out.");
+    setIsLoggedIn(false);
+    setMenuOpen(false);
     navigate("/login");
   };
 
   return (
     <>
-      <header className="header">
-        <div className="logo">
-          {/* Hamburger Menu for Mobile */}
-          <button className="menu-button" onClick={toggleMenu}>
-            ☰
-          </button>
-          <h1 id="logo">Budget Tracker</h1>
-        </div>
+      {/* Header Bar with Logo + Hamburger (optional) */}
+      <header className="header-bar">
+      <div className="header-left">
+    {/* Put the menu button first */}
+    <button className="hamburger" onClick={toggleMenu}>
+      ☰
+    </button>
 
-        {/* Dropdown Navigation Menu */}
-        <nav className={`nav ${menuOpen ? "open" : ""}`}>
-          <ul className="btn">
+    <img
+      src={`${process.env.PUBLIC_URL}/onboard.png`}
+      alt="logo"
+      className="logo-image"
+    />
+    <h1 className="app-title">Budget Tracker</h1>
+  </div>
+      </header>
+
+      {/* Sidebar / Drawer */}
+      <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
+        <nav className="sidebar-nav">
+          <ul>
             <li>
-              <button onClick={() => handleNavigation("/profile")}>Dashboard</button>
+              <Link to="/overview" onClick={() => setMenuOpen(false)}>
+                Overview
+              </Link>
             </li>
             <li>
-              <button onClick={() => handleNavigation("/transactions")}>Transactions</button>
+              <Link to="/transactions" onClick={() => setMenuOpen(false)}>
+                Transactions
+              </Link>
             </li>
             <li>
-              <button onClick={() => handleNavigation("#settings")}>Settings</button>
+              <Link to="/scheduled-transactions" onClick={() => setMenuOpen(false)}>
+                Scheduled Transactions
+              </Link>
             </li>
-            {/* Show Logout Button Only If Logged In */}
+            <li>
+              <Link to="/accounts" onClick={() => setMenuOpen(false)}>
+                Accounts
+              </Link>
+            </li>
+            <li>
+              <Link to="/credit-cards" onClick={() => setMenuOpen(false)}>
+                Credit Cards
+              </Link>
+            </li>
+            <li>
+              <Link to="/budgets" onClick={() => setMenuOpen(false)}>
+                Budgets
+              </Link>
+            </li>
+            <li>
+              <Link to="/debts" onClick={() => setMenuOpen(false)}>
+                Debts
+              </Link>
+            </li>
+            <li>
+              <Link to="/charts" onClick={() => setMenuOpen(false)}>
+                Charts
+              </Link>
+            </li>
+            <li>
+              <Link to="/categories" onClick={() => setMenuOpen(false)}>
+                Categories
+              </Link>
+            </li>
+            <li>
+              <Link to="/time" onClick={() => setMenuOpen(false)}>
+                Time
+              </Link>
+            </li>
+            <li>
+              <Link to="/time-future" onClick={() => setMenuOpen(false)}>
+                Time (Future)
+              </Link>
+            </li>
+            <li>
+              <Link to="/forecasts" onClick={() => setMenuOpen(false)}>
+                Forecasts
+              </Link>
+            </li>
+            <li>
+              <Link to="/calendar" onClick={() => setMenuOpen(false)}>
+                Calendar
+              </Link>
+            </li>
+            <li>
+              <Link to="/import-export" onClick={() => setMenuOpen(false)}>
+                Import/Export
+              </Link>
+            </li>
+            <li>
+              <Link to="/preferences" onClick={() => setMenuOpen(false)}>
+                Preferences
+              </Link>
+            </li>
+            {/* Only show the logout link if logged in */}
             {isLoggedIn && (
               <li>
-                <button onClick={handleLogout} className="logout-button">
+                <Link
+                  to="/login"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLogout();
+                  }}
+                >
                   Logout
-                </button>
+                </Link>
               </li>
             )}
           </ul>
         </nav>
-      </header>
+      </aside>
+
+      {/* Optional main content area, if needed */}
+      <main className="main-content">
+        {/* Your main page content goes here */}
+      </main>
 
       {/* Message Box */}
       <MessageBox message={message} onClose={() => setMessage("")} />

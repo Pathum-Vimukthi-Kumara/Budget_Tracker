@@ -51,6 +51,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "AF.DataAccessor": {
+              "target": "Package",
+              "version": "[2.0.2, )"
+            },
             "LiveCharts": {
               "target": "Package",
               "version": "[0.9.7, )"
@@ -58,6 +62,34 @@
             "LiveCharts.Wpf": {
               "target": "Package",
               "version": "[0.9.7, )"
+            },
+            "Microsoft.Data.Sqlite.Core": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "SQLitePCLRaw.bundle_e_sqlite3": {
+              "target": "Package",
+              "version": "[2.1.10, )"
+            },
+            "SQLitePCLRaw.core": {
+              "target": "Package",
+              "version": "[2.1.10, )"
+            },
+            "SQLitePCLRaw.lib.e_sqlite3": {
+              "target": "Package",
+              "version": "[2.1.10, )"
+            },
+            "SQLitePCLRaw.provider.e_sqlite3.netstandard11": {
+              "target": "Package",
+              "version": "[1.1.14, )"
+            },
+            "linq2db.SqlServer.MS": {
+              "target": "Package",
+              "version": "[5.4.1, )"
             }
           },
           "imports": [

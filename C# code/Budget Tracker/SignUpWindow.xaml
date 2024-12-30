@@ -4,32 +4,73 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Sign Up" Height="500" Width="400">
-    <Grid Margin="0,0,10,0">
-        <!-- Title -->
-        <TextBlock Text="Sign Up" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+        Title="Sign Up" Height="600" Width="800" Background="Green">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="543*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="219*"/>
+            <ColumnDefinition Width="581*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Header Section -->
+        <Border Background="#4CAF50" Height="40" VerticalAlignment="Center" CornerRadius="5" Grid.ColumnSpan="2" Grid.Row="1">
+            <Grid>
+                <!-- Define Columns -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <!-- For Title -->
+                    <ColumnDefinition Width="Auto" />
+                    <!-- For Buttons -->
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <!-- For Buttons -->
+                </Grid.ColumnDefinitions>
 
-        <!-- Username -->
-        <TextBlock Text="Username:" Margin="50,80,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16"/>
-        <TextBox Name="UsernameTextBox" Width="250" Height="30" Margin="50,110,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <!-- Header Title -->
+                <TextBlock Text="Budget Tracker" FontSize="24" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Margin="10,0,0,0"/>
 
-        <!-- Email -->
-        <TextBlock Text="Email:" Margin="50,150,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16"/>
-        <TextBox Name="EmailTextBox" Width="250" Height="30" Margin="50,180,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <!-- Dashboard Button -->
+                <Button Content="Dashboard" Background="#4CAF50" Foreground="White" FontSize="16" Click="LoginButton_Click" Grid.Column="1" Margin="0,0,10,0" HorizontalAlignment="Right"/>
 
-        <!-- Password -->
-        <TextBlock Text="Password:" Margin="50,220,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16"/>
-        <PasswordBox Name="PasswordBox" Width="250" Height="30" Margin="50,250,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <!-- Transaction Button -->
+                <Button Content="Transaction" Background="#4CAF50" Foreground="White" FontSize="16" Click="LoginButton_Click" Grid.Column="2" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+                <Button Content="Setting" Background="#4CAF50" Foreground="White" FontSize="16" Click="LoginButton_Click" Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
 
-        <!-- Confirm Password -->
-        <TextBlock Text="Confirm Password:" Margin="50,290,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16"/>
-        <PasswordBox Name="ConfirmPasswordBox" Width="250" Height="30" Margin="50,320,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Border BorderBrush="White" BorderThickness="1" CornerRadius="10" Padding="20" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="35,22,0,0" Grid.Row="2">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250"  >
+                <!-- Title -->
+                <TextBlock Text="Sign Up" Foreground="Green" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
-        <!-- Sign Up Button -->
-        <Button Content="Sign Up" Width="120" Height="40" Margin="50,380,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#4caf50" Foreground="White" FontSize="16" Click="SignUpButton_Click"/>
+                <!-- Username -->
+                <TextBlock Text="Username:" Foreground="Green" FontSize="16" Margin="0,10,0,0"/>
+                <TextBox Name="UsernameTextBox"  Width="300" Height="30" Margin="0,10,0,0"/>
 
-        <!-- Message Text -->
-        <TextBlock Name="MessageTextBlock" FontSize="14" Foreground="Red" Margin="50,430,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <!-- Email -->
+                <TextBlock Text="Email:" Foreground="Green" FontSize="16" Margin="0,10,0,0"/>
+                <TextBox Name="EmailTextBox" Width="300" Height="30" Margin="0,10,0,0"/>
+
+                <!-- Password -->
+                <TextBlock Text="Password:" Foreground="Green" FontSize="16" Margin="0,10,0,0"/>
+                <PasswordBox Name="PasswordBox" Width="300" Height="30" Margin="0,10,0,0"/>
+
+                <!-- Confirm Password -->
+                <TextBlock Text="Confirm Password:" Foreground="Green" FontSize="16" Margin="0,10,0,0"/>
+                <PasswordBox Name="ConfirmPasswordBox" Width="300" Height="30" Margin="0,10,0,0"/>
+
+                <!-- Sign Up Button -->
+                <Button Content="Sign Up" Width="120" Height="40" Background="#4caf50" Foreground="White" FontSize="16" 
+        Margin="0,20,0,0" HorizontalAlignment="Center" Click="SignUpButton_Click"/>
+
+
+                <!-- Message Text -->
+                <TextBlock Name="MessageTextBlock" FontSize="14" Foreground="Red" TextAlignment="Center" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
-

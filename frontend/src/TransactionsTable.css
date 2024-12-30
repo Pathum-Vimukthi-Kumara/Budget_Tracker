@@ -7,7 +7,7 @@
 .transactions-table h2 {
   text-align: center;
   margin-bottom: 2rem;
-  color: #61e865; /* Green color for the title */
+  color: green; /* Green color for the title */
 }
 
 /* Table Styling */
@@ -25,7 +25,7 @@ table {
 
 
 thead {
-  background: #099f1a;
+  background: #068101;
   color: #fff;
 }
 
@@ -46,7 +46,7 @@ tr:hover {
 }
 
 .type-expense {
-  color: #f44336;
+  color: #9b0000;
   font-weight: bold;
 }
 
@@ -54,7 +54,7 @@ tr:hover {
   text-align: center;
   padding: 2rem;
   font-style: italic;
-  color: #888;
+  color: #9b0000;
 }
 
 .error {

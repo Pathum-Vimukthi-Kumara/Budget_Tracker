@@ -203,6 +203,7 @@ const Transactions = () => {
             value={editFormData.date}
             onChange={(e) => setEditFormData({ ...editFormData, date: e.target.value })}
           />
+          <div className="transaction-type">
           <select
             value={editFormData.type}
             onChange={(e) => setEditFormData({ ...editFormData, type: e.target.value })}
@@ -210,6 +211,7 @@ const Transactions = () => {
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
+          </div>
           <button type="submit">Update Transaction</button>
           <button onClick={() => setEditFormData(null)}>Cancel</button>
         </form>

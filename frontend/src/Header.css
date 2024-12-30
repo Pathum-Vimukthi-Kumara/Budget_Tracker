@@ -1,126 +1,119 @@
-/* General Header Styling */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color:black;
-    color: white;
-    position: fixed;
-    left:-50px;
-    top: 0;
-    width: 100%;
-    height: 20px;
-    z-index: 1000;
-    box-shadow: 0 15px 30px rgba(250, 251, 250, 0.5);
-  }
-  .button{
-    background-color: black;
-    color:white;
-  }
-  
-  .logo h1 {
-    font-size: 1.5rem;
-    margin: 0;
-    position: relative;
-    left:50px;
-  }
-  .nav ul li {
-    font-size: 0.875rem; /* Smaller font size (14px) */
-  }
-  /* Hamburger Menu Button */
-  .menu-button {
-    display: none; /* Hidden by default for larger screens */
-    background: none;
-    border: none;
-    font-size: 1 rem;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .menu-button:focus {
-    outline: none;
-  }
-  
-  /* Navigation Menu */
-  .nav {
-    display: flex;
-    align-items: center;
-  
-  }
-  
-  .nav ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .nav ul li {
-    margin: 0 1rem;
-  }
-  
-  .nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    transition: color 0.3s;
-  }
-  
-  .nav ul li a:hover {
-    color: #090a09;
-  }
+/* ===== Header Bar ===== */
+.header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Keep header on top */
+  display: flex;
+  align-items: center;
+  background-color: #fff; /* Adjust to your theme */
+  border-bottom: 1px solid #ccc;
+  height: 60px;
+  padding: 0 1rem;
 
-  
-  /* Responsive Design for Mobile */
-  @media (max-width: 768px) {
-    /* Show Hamburger Menu Button */
-    .menu-button {
-      display: block;
-    }
-  
-    /* Dropdown Menu Styles */
-    .nav {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: -300px; /* Hide above the viewport */
-      left: 0;
-      width: 100%;
+  /* 
+     DO NOT use justify-content: space-between; 
+     or the hamburger will jump to the far right. 
+     Instead, let items sit together on the left:
+  */
+  justify-content: flex-start; 
+}
 
-      background-color: #333;
-      overflow: hidden;
-      transition: top 0.5s ease; /* Smooth dropdown transition */
-      z-index: 999;
-    }
-  
-    .nav.open {
-      top: 60px; /* Slide down from the header */
- 
-    }
-  
-    .nav ul {
-      flex-direction: column;
-      padding: 1rem 0;
-      margin: 0;
-    }
-  
-    .nav ul li {
-      margin: 0.5rem 0;
-      text-align: center;
-    }
-  
-    .nav ul li a {
-      font-size: 1.2rem;
-    }
-    .logo h1 {
-      font-size: 1rem;
-      margin: 0;
-      position: relative;
-      left:100px;
-      top:-25px;
-      float: left;
-      align-items: center;
-    }
-  }
-  
+.header-left {
+  display: flex;
+  align-items: center;
+  /* Use gap if you want consistent spacing between items */
+  gap: 0.5rem;
+}
+
+/* Hamburger button smaller & black, 
+   positioned before the logo in the HTML */
+.hamburger {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem; /* Smaller size */
+  color: #000;       /* Black color */
+  cursor: pointer;
+  /* margin-right: 0.5rem; -- optional if you need more spacing after the button */
+}
+
+.logo-image {
+  max-width: 40px;
+  /* margin-right: 0.5rem; -- optional if you need spacing before the title */
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+
+  /* If you want some left margin, use valid CSS: */
+  /* margin-left: 50px; */
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  position: fixed;
+  top: 60px; /* Below the fixed header */
+  left: 0;
+  width: 240px; /* Adjust as needed */
+  height: calc(100vh - 60px);
+  background-color: #fafafa;
+  border-right: 1px solid #ccc;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%); /* Hidden by default */
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-nav {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.sidebar-nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  border-bottom: 1px solid #eee; /* Optional divider */
+}
+
+.sidebar-nav li a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.sidebar-nav li a:hover {
+  background-color: #ddd;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+  margin-left: 240px; /* If you want space for the sidebar */
+  margin-top: 60px;   /* Space for the fixed header */
+  padding: 1rem;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+/* ===== Message Box (optional) ===== */
+.message-box {
+  position: fixed;
+  top: 80px;
+  right: 1rem;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 0.75rem 1rem;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

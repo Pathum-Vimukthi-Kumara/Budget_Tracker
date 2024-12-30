@@ -1,0 +1,151 @@
+/* Basic container styling to center the calendar and give a white background */
+.calendar-container {
+  background-color: #fff;          /* White background inside the container */
+  max-width: 600px;               /* Calendar width */
+  margin: 2rem auto;              /* Center on page, with top/bottom margin */
+  padding: 1rem;                  /* Inner padding so it’s not flush to the edges */
+  border: 1px solid #ddd;         /* Subtle border */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);  /* Slight shadow for depth */
+  font-family: Arial, sans-serif; 
+}
+
+/* Navigation bar (Month + Prev/Next) */
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem; /* a little space under */
+}
+
+.calendar-nav button {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  margin: 0 0.5rem;
+  transition: color 0.2s;
+}
+
+.calendar-nav button:hover {
+  color: #000;
+}
+
+.calendar-nav h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+/* Grid for the header (days of the week) and the body (dates) */
+.calendar-header,
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columns for Sun-Sat */
+  gap: 0;
+}
+
+/* Days of the week row */
+.calendar-header div {
+  font-weight: bold;
+  text-align: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ccc;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* The body is also 7 columns, but we fix the rows to 6
+   so that it always occupies the same vertical space. */
+.calendar-body {
+  grid-template-rows: repeat(6, 1fr);  /* 6 equally sized rows */
+}
+
+/* Each cell */
+.calendar-cell {
+  border: 1px solid #eee;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 70px; /* just to ensure there's some space, but each row is uniform */
+}
+
+.blank {
+  background-color: #f7f7f7;
+}
+
+.date-cell {
+  background-color: #fff;
+}
+
+.day-number {
+  font-size: 1rem;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.dots {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 4px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red {
+  background-color: red;
+}
+
+.dot-green {
+  background-color: green;
+}
+
+.income-amount,
+.expense-amount {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Slight hover highlight if you want */
+.date-cell:hover {
+  background-color: #f0f8ff;
+}
+
+/* ===================== */
+/*    Responsive Rules   */
+/* ===================== */
+@media (max-width: 600px) {
+  /* Make the container take almost full width, remove some shadow/margins */
+  .calendar-container {
+    max-width: 95%;
+    margin: 1rem auto;
+    padding: 0.5rem;
+    box-shadow: none;
+  }
+
+  /* Adjust padding in cells and reduce min-height for smaller screens */
+  .calendar-cell {
+    padding: 10px;
+    min-height: 50px;
+  }
+
+  /* Slightly smaller text in the nav */
+  .calendar-nav h2 {
+    font-size: 1rem;
+  }
+
+  /* Optionally reduce the day-number text size a bit */
+  .day-number {
+    font-size: 0.9rem;
+  }
+}

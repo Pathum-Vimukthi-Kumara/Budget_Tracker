@@ -1,23 +1,74 @@
 ﻿<Window x:Class="Budget_Tracker.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Login" Height="300" Width="400">
-    <Grid>
-        <!-- Title -->
-        <TextBlock Text="Login" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+        Title="Login" Height="600" Width="800">
+    <Grid Background="Black">
+        <!-- Header Section -->
+        <Border Background="#4CAF50" Height="40" VerticalAlignment="Top" CornerRadius="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <!-- For Title -->
+                    <ColumnDefinition Width="Auto" />
+                    <!-- For Buttons -->
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-        <!-- Email -->
-        <TextBlock Text="Email:" Margin="50,80,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16"/>
-        <TextBox Name="EmailTextBox" Width="250" Height="30" Margin="50,110,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <!-- Header Title -->
+                <TextBlock Text="Budget Tracker" FontSize="24" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Margin="10,0,0,0"/>
 
-        <!-- Password -->
-        <TextBlock Text="Password:" Margin="50,150,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16"/>
-        <PasswordBox Name="PasswordBox" Width="250" Height="30" Margin="50,180,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <!-- Buttons -->
+                <Button Content="Dashboard" Background="#4CAF50" Foreground="White" FontSize="16" Click="LoginButton_Click" Grid.Column="1" Margin="10,0,10,0" HorizontalAlignment="Right"/>
+                <Button Content="Transaction" Background="#4CAF50" Foreground="White" FontSize="16" Click="LoginButton_Click" Grid.Column="2" Margin="10,0,10,0" HorizontalAlignment="Right"/>
+                <Button Content="Setting" Background="#4CAF50" Foreground="White" FontSize="16" Click="LoginButton_Click" Grid.Column="3" Margin="10,0,10,0" HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
 
-        <!-- Login Button -->
-        <Button Content="Login" Width="120" Height="40" Margin="50,220,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#4caf50" Foreground="White" FontSize="16" Click="LoginButton_Click"/>
+        <!-- Login Form -->
+        <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center" Height="352" Width="294">
+            <Border.Effect>
+                <DropShadowEffect Color="Green" BlurRadius="10" ShadowDepth="5" Direction="320" Opacity="0.5"/>
+            </Border.Effect>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="305">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Title -->
+                    <RowDefinition Height="20"/>
+                    <!-- Spacer -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Email Label -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Email Input -->
+                    <RowDefinition Height="20"/>
+                    <!-- Spacer -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Password Label -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Password Input -->
+                    <RowDefinition Height="20"/>
+                    <!-- Spacer -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Login Button -->
+                </Grid.RowDefinitions>
 
-        <!-- Message Text -->
-        <TextBlock Name="MessageTextBlock" FontSize="14" Foreground="Red" Margin="50,270,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <!-- Title -->
+                <TextBlock Text="Login" Foreground="White" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,10" Grid.Row="0"/>
+
+                <!-- Email -->
+                <TextBlock Text="Email:" Foreground="White" FontSize="16" HorizontalAlignment="Left" Grid.Row="2" Margin="0,5,0,5"/>
+                <TextBox Name="EmailTextBox" Width="200" Height="30" HorizontalAlignment="Center" Grid.Row="2" Margin="0,31,0,10" Grid.RowSpan="2"/>
+
+                <!-- Password -->
+                <TextBlock Text="Password:" Foreground="White" FontSize="16" HorizontalAlignment="Left" Grid.Row="4" Margin="0,10,0,56"/>
+                <PasswordBox Name="PasswordBox" Width="200" Height="30" HorizontalAlignment="Center" Grid.Row="4" Margin="0,36,0,25" Grid.RowSpan="3"/>
+
+                <!-- Login Button -->
+                <Button Content="Login" Width="120" Height="40" HorizontalAlignment="Center" Grid.Row="4" Background="#4caf50" Foreground="White" FontSize="16" Margin="0,71,0,29" Click="LoginButton_Click" Grid.RowSpan="5"/>
+
+                <!-- Message Text -->
+                <TextBlock Name="MessageTextBlock" FontSize="14" Foreground="Red" HorizontalAlignment="Center" Grid.Row="9" Margin="0,10,0,0"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

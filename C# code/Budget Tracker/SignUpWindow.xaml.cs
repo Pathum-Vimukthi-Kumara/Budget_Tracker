@@ -1,10 +1,11 @@
-﻿using System.Windows;
+﻿using Microsoft.Data.Sqlite;
+using System;
+using System.Data.SqlClient;
+using SQLitePCL;
+using System.Windows;
 
 namespace Budget_Tracker
 {
-    /// <summary>
-    /// Interaction logic for SignUpWindow.xaml
-    /// </summary>
     public partial class SignUpWindow : Window
     {
         public SignUpWindow()
@@ -12,72 +13,80 @@ namespace Budget_Tracker
             InitializeComponent();
         }
 
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
+
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            // Retrieve input from fields
-            string username = UsernameTextBox.Text.Trim();
-            string email = EmailTextBox.Text.Trim();
+            string username = UsernameTextBox.Text;
+            string email = EmailTextBox.Text;
             string password = PasswordBox.Password;
             string confirmPassword = ConfirmPasswordBox.Password;
 
-            // Validate inputs
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
             {
-                ShowMessage("Username is required.");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(email) || !IsValidEmail(email))
-            {
-                ShowMessage("A valid email is required.");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(password))
-            {
-                ShowMessage("Password is required.");
+                MessageTextBlock.Text = "All fields are required.";
                 return;
             }
 
             if (password != confirmPassword)
             {
-                ShowMessage("Passwords do not match.");
+                MessageTextBlock.Text = "Passwords do not match.";
                 return;
             }
 
-            // Simulate saving user data (replace this with real database logic)
-            SaveUserData(username, email, password);
+            string connectionString = "Data Source=C:\\Users\\hp\\Documents\\Budget Tracker\\Budget_Tracker\\C# code\\Budget Tracker\\Budget.db;";
 
-            // Show success message
-            MessageBox.Show("Sign up successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            try
+            {
+                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                {
+                    connection.Open();
 
-            // Open the Login Window
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
+                    string query = "INSERT INTO Users (Username, Email, Password) VALUES (@Username, @Email, @Password)";
+                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Username", username);
+                        command.Parameters.AddWithValue("@Email", email);
+                        command.Parameters.AddWithValue("@Password", password);
 
-            // Close the Sign Up Window
-            this.Close();
-        }
+                        int result = command.ExecuteNonQuery();
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Registration successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
-        private void ShowMessage(string message)
-        {
-            MessageTextBlock.Text = message;
-        }
-
-        private bool IsValidEmail(string email)
-        {
-            // Use regex to validate email format
-            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            return System.Text.RegularExpressions.Regex.IsMatch(email, emailPattern);
-        }
-
-        private void SaveUserData(string username, string email, string password)
-        {
-            // Placeholder for saving user data
-            // Replace this logic with database insertion or file storage
-            Console.WriteLine($"Saving User: {username}, Email: {email}, Password: {password}");
-
-            // In a real-world scenario, hash the password before saving
+                            // Redirect to login
+                            LoginWindow loginWindow = new LoginWindow();
+                            loginWindow.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageTextBlock.Text = "Registration failed.";
+                        }
+                    }
+                }
+            }
+            catch (SqliteException sqlEx)
+            {
+                if (sqlEx.SqliteErrorCode == 19)
+                {
+                    MessageTextBlock.Text = "Email is already registered.";
+                }
+                else
+                {
+                    MessageBox.Show($"Database Error: {sqlEx.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Unexpected Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
+
