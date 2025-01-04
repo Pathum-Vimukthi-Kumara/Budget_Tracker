@@ -19,7 +19,6 @@ const TransactionsTable = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // Ensure amounts are numbers
         const formattedData = data.map((transaction) => ({
           ...transaction,
           amount: parseFloat(transaction.amount),
@@ -35,52 +34,60 @@ const TransactionsTable = () => {
   };
 
   return (
+    <div className="transactions-table"
+    style={{
+      backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  
+  }}>
     <div className="transactions-table">
       <h2>All Transactions</h2>
 
       {apiError && <p className="error">{apiError}</p>}
 
-      <table>
-        <thead>
-          <tr>
-            <th id="Id">ID</th>
-            <th>Title</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions.length > 0 ? (
-            transactions.map((transaction) => (
-              <tr key={transaction.id}>
-                <td>{transaction.id}</td>
-                <td>{transaction.title}</td>
-                <td
-                  className={
-                    transaction.type === "income" ? "type-income" : "type-expense"
-                  }
-                >
-                  {transaction.type.charAt(0).toUpperCase() +
-                    transaction.type.slice(1)}
-                </td>
-                <td>
-                  {typeof transaction.amount === "number"
-                   ? `Rs.${Number(transaction.amount).toFixed(2)}` 
-                    : "Invalid Amount"}
-                </td>
-                <td>{new Date(transaction.date).toLocaleDateString()}</td>
-              </tr>
-            ))
-          ) : (
+      <div className="table-container">
+        <table>
+          <thead>
             <tr>
-              <td colSpan="5" className="no-transactions">
-                No transactions available.
-              </td>
+              <th id="Id">ID</th>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Date</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {transactions.length > 0 ? (
+              transactions.map((transaction) => (
+                <tr key={transaction.id}>
+                  <td>{transaction.id}</td>
+                  <td>{transaction.title}</td>
+                  <td
+                    className={
+                      transaction.type === "income" ? "type-income" : "type-expense"
+                    }
+                  >
+                    {transaction.type.charAt(0).toUpperCase() +
+                      transaction.type.slice(1)}
+                  </td>
+                  <td>
+                    {typeof transaction.amount === "number"
+                      ? `Rs.${Number(transaction.amount).toFixed(2)}`
+                      : "Invalid Amount"}
+                  </td>
+                  <td>{new Date(transaction.date).toLocaleDateString()}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="no-transactions">
+                  No transactions available.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
     </div>
   );
 };

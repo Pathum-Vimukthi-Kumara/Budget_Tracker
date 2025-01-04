@@ -1,245 +1,393 @@
-/* Transactions.css */
+/* src/components/Transactions.css */
 
-/* General styling */
+/* 1. Main Container */
 .transactions {
+  padding: 1rem;
   max-width: 800px;
   margin: 0 auto;
-
-  padding: 40px 20px; /* Adjust padding for mobile */
-  font-family: Arial, sans-serif;
-  color: #faf7f7;
+  background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
-/* Summary Section */
+/* 2. Section Title */
+.transactions h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
 .summary {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-}
-
-.summary-box {
-  flex: 1 1 100%; /* Default full width for smaller screens */
-  background-color: #f9f9f9;
-  padding: 15px;
-  
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.summary-box h3 {
-  margin: 0;
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.summary-box p {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin: 0;
-}
-
-.summary-box.income {
-  border-top: 4px solid #068101;
-  background-color:#068101;
-}
-
-.summary-box.expense {
-  border-top: 4px solid #9b0000;
-  background-color: #9b0000;
-}
-
-.summary-box.balance {
- 
-  background-color: rgb(23, 24, 23);
-
-  box-shadow: #25f43a;
-}
-.summary-box.balance:hover {
-  background-color: #021504;
-}
-.summary-box.balance p{
-  color:white;
-}
-
-/* Search Bar */
-.search-bar {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap; /* Wrap input and icon for smaller screens */
-}
-
-.search-bar input {
-  flex: 1 1 100%; /* Full width on small screens */
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #33db4a;
-  box-shadow: 0 2px 4px rgba(14, 224, 7, 0.1);
-  border-radius: 4px;
-  margin-left: 0; /* Remove margin for mobile */
-  margin-top: 10px; /* Add margin for spacing below the icon */
-}
-
-.search-bar .search-icon {
-  color: #068101;
-  font-size: 1.5em;
-  flex-shrink: 0; /* Ensure the icon doesn't shrink */
-}
-
-/* Transaction Form */
-.transaction-form {
-  display: flex;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 0.5rem;
 }
 
-.transaction-form input,
-.transaction-form select {
-  flex: 1 1 100%; /* Full width on small screens */
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.transaction-form button {
-  flex: 1 1 100%; /* Full width for buttons on mobile */
-  padding: 10px 20px;
-  font-size: 1em;
-  color: #fff;
-  background-color: #068101;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.transaction-form button:hover {
-  background-color:#037a11;
-}
-
-/* Error Message */
+/* 3. Error Message */
 .error {
-  color: #e41b14;
-  font-size: 0.9em;
-  margin-bottom: 10px;
+  color: red;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
 }
 
-/* Transaction List */
-.transaction-list {
-  margin-top: 40px; /* Adjust margin for smaller screens */
-  position: relative;
- 
+/* 4. Summary Section */
+/* Summary Box Styling - Smaller Width */
+.summary-box {
+  background-color: white;
+  padding: 0.8rem;
+  border-radius: 8px;
+  width: 25%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.transaction-item {
+.summary-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Income Box Styling */
+.summary-box.income {
+  background-color: #4CAF50;
+  color: white;
+}
+.summary-box.income p {
+  color: white;
+}
+
+/* Expense Box Styling */
+.summary-box.expense {
+  background-color: #E74C3C;
+  color: white;
+}
+.summary-box.expense p {
+  color: white;
+}
+
+/* Balance Box Styling */
+.summary-box.balance {
+  background-color: #3498DB;
+  color: white;
+}
+.summary-box.balance p {
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* General Text Styling for Summary Box */
+.summary-box p {
+  font-size: 1rem;
+  font-weight: bold;
+}
+/* Flexbox Layout for Arranging Boxes With Reduced Horizontal Gap */
+
+
+/* 5. Controls Section */
+.controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
- 
-  padding: 15px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 0.4rem 0.8rem;
   border-radius: 8px;
-  border: 1px solid #33db4a;
-  box-shadow: 0 2px 4px rgba(14, 224, 7, 0.1);
-  margin-bottom: 10px;
-  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1 1 200px; /* Allow flexibility */
+  max-width: 300px;
+  margin-bottom: 0.5rem; /* Space below on wrap */
 }
 
-.transaction-item.income {
-  border-left: 4px solid #068101;
-  background-color: #068101;
+.search-icon {
+  margin-right: 0.5rem;
+  color: #888;
 }
 
-.transaction-item.expense {
-  border-left: 4px solid #9b0000;
- background-color: #9b0000;
+.search-bar input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
 }
 
-.transaction-item.income:hover {
-  background-color: #037a11;
+.add-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1 1 200px; /* Allow flexibility */
+  max-width: 300px;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem; /* Space below on wrap */
 }
 
-.transaction-details {
+.add-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.add-buttons .add-income {
+  background-color: #4caf50; /* Green */
+}
+
+.add-buttons .add-income:hover {
+  background-color: #45a049;
+}
+
+.add-buttons .add-expense {
+  background-color: #DC143C; /* Red */
+}
+
+.add-buttons .add-expense:hover {
+  background-color: #9b0000;
+}
+
+/* 6. Transaction List */
+.transaction-list {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: 60vh;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-list .transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.transaction-list .transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-list .transaction-details {
   display: flex;
   flex-direction: column;
-  flex: 1 1 100%; /* Full width for details on mobile */
+  flex: 1 1 200px; /* Allow flexibility */
 }
 
-.transaction-title {
-  font-size: 1.1em;
+.transaction-list .transaction-title {
   font-weight: bold;
-  
+  color: #333;
+  font-size: 1rem;
 }
 
-.transaction-date {
-  font-size: 0.9em;
-  color: #f7f2f2;
+.transaction-list .transaction-date {
+  font-size: 0.9rem;
+  color: #777;
 }
 
-.transaction-amount {
-  font-size: 1em;
+.transaction-list .transaction-amount {
   font-weight: bold;
+  color: #333;
+  font-size: 1rem;
+}
+
+.transaction-list .transaction-item.income .transaction-amount {
+  color: green;
+  border-left: 1px solid green;
+}
+
+.transaction-list .transaction-item.expense .transaction-amount {
+  color: red;
+  border-left: 1px solid red;
 }
 
 .transaction-actions {
   display: flex;
-  gap: 10px;
-  
-  margin-top: 10px; /* Add spacing between actions and details */
+  gap: 0.5rem;
+  flex: 0 0 auto; /* Prevent shrinking */
+  margin-top: 0.5rem; /* Space above on wrap */
 }
 
 .transaction-actions button {
-  background-color: #050b05;
+  background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.2em;
-  color: #f9f7f7;
-  transition: color 0.2s ease;
+  color: #555;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+
 }
 
 .transaction-actions button:hover {
-  color: #fafafa;
+  color: #000;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: gray;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* 7. Modal Styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure modal is on top */
+}
+
+.modal {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 8. Responsive Design for Mobile Phones */
+
+/* Mobile Phones (max-width: 600px) */
+@media (max-width: 600px) {
+  /* Adjust Main Container Padding */
+  .transactions {
+    padding: 0.8rem;
+    margin: 0.5rem;
+  }
+
+  /* Adjust Section Title */
+  .transactions h2 {
+    font-size: 1.9rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Adjust Summary Section */
+  .summary {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .summary-box {
-      flex: 1 1 100%; /* Stack summary boxes vertically */
+    width: 80%;
+    max-width: 400px;
   }
 
-  .transaction-form button {
-      flex: 1 1 100%; /* Full-width buttons */
+  .summary-box h3 {
+    font-size: 1rem;
   }
 
-  .transaction-item {
-      flex-direction: column; /* Stack details and actions */
-      align-items: flex-start;
+  .summary-box p {
+    font-size: 1rem;
   }
 
-  .transaction-details {
-      margin-bottom: 10px; /* Add spacing between details and actions */
+  /* Adjust Controls Section */
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .search-bar {
-      flex-direction: column; /* Stack icon and input */
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
   }
 
   .search-bar input {
-      margin-top: 10px; /* Add spacing between input and icon */
+    width: 100%;
+    font-size: 0.9rem;
   }
-  .transaction-type{
-    flex: 1 1 100%; /* Full width on small screens */
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: aquamarine;
+
+  .add-buttons {
+    flex: 1 1 100%;
+    max-width: 100%;
+    justify-content: center;
   }
-  
+
+  .add-buttons button {
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  /* Adjust Transaction List */
+  .transaction-list {
+    max-height: 50vh;
+  }
+
+  .transaction-list .transaction-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-list .transaction-details {
+    flex: 1 1 100%;
+    margin-bottom: 0.8rem;
+  }
+
+  .transaction-list .transaction-title {
+    font-size: 1rem;
+  }
+
+  .transaction-list .transaction-date,
+  .transaction-list .transaction-amount {
+    font-size: 0.9rem;
+  }
+
+  /* Adjust Transaction Actions */
+  .transaction-actions {
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .transaction-actions button {
+    font-size: 1.5rem;
+  }
+
+  /* Adjust Modal for Mobile */
+  .modal {
+    padding: 1rem;
+  }
+}
+
+/* Tablet Devices (max-width: 992px) */
+@media (max-width: 992px) and (min-width: 601px) {
+  /* Adjust Summary Boxes to have smaller widths */
+  .summary-box {
+    width: 45%;
+  }
+
+  /* Adjust Controls Section */
+  .controls {
+    flex-wrap: wrap;
+  }
+
+  .add-buttons {
+    justify-content: flex-start;
+  }
+
+  /* Adjust Transaction List */
+  .transaction-list {
+    max-height: 55vh;
+  }
+
+  /* Adjust Transaction Actions */
+  .transaction-actions button {
+    font-size: 1.2rem;
+  }
 }

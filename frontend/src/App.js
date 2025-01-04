@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -7,12 +7,16 @@ import Dashboard from "./Dashboard";
 import Onboard from "./Onboard";
 import Header from "./Header";
 import TransactionsTable from "./TransactionsTable";
-import Calendar from "./Calendar";  // <-- Import your new Calendar component
+import Calendar from "./Calendar";
+
+import ChartSection from "./Components/ChartSection";  
+import Footer from "./Footer";
 
 import "./Dashboard.css";
 import "./Header.css";
 import "./TransactionsTable.css";
-// import "./Calendar.css"; // If you created a separate CSS for the calendar, import it here
+import "./Calendar.css";
+
 
 const App = () => {
   return (
@@ -25,11 +29,15 @@ const App = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Dashboard />} />
             <Route path="/transactions" element={<TransactionsTable />} />
-            <Route path="/calendar" element={<Calendar />} />  {/* New route */}
+            <Route path="/calendar" element={<Calendar />} />
+            
+            <Route path="/charts" element={<ChartSection />} />  
             <Route path="/" element={<Onboard />} />
           </Routes>
         </main>
+     
       </Router>
+      <Footer />
     </div>
   );
 };

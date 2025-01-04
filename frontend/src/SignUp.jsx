@@ -53,6 +53,21 @@ const SignUp = () => {
   };
 
   return (
+    <div className="onboard"
+    style={{
+      width: '100vw',
+      height: '100vh',
+      backgroundImage: `url(${process.env.PUBLIC_URL + '/back3.webp'})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed', // ✅ Prevents background scrolling
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: '0',
+      padding: '0'
+  }}
+>
     <div className="signup-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
@@ -100,6 +115,7 @@ const SignUp = () => {
       <div className="login-link">
         <p>Already have an account? <a href="/login">Login</a></p>
       </div>
+    </div>
     </div>
   );
 };

@@ -49,6 +49,22 @@ const Login = () => {
   };
 
   return (
+    <div className="onborad"
+    style={{
+      width: '100vw',
+      height: '100vh',
+      backgroundImage: `url(${process.env.PUBLIC_URL + '/back3.webp'})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed', // ✅ Prevents background scrolling
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: '0',
+      padding: '0'
+  
+  }}
+>
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
@@ -88,6 +104,7 @@ const Login = () => {
       <div className="signup-link">
         <p>Don't have an account? <a href="/signup">Sign Up</a></p>
       </div>
+    </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Transaction from "./Components/Transactions";
 import ChartSection from "./Components/ChartSection";
 import "./Dashboard.css";
 
+
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
 

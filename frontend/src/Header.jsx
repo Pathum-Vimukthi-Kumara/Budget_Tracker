@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import MessageBox from "./MessageBox";
-import "./Header.css"; // Update/replace with your own sidebar CSS
+import "./Header.css";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,7 +10,6 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check login status based on token in localStorage
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
   }, []);
@@ -20,7 +19,6 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    // Clear token and redirect to login
     localStorage.removeItem("token");
     setMessage("You have been logged out.");
     setIsLoggedIn(false);
@@ -28,109 +26,77 @@ const Header = () => {
     navigate("/login");
   };
 
+  const handleNavigation = (path) => {
+    if (!isLoggedIn) {
+      setMessage("You need to log in first.");
+      navigate("/login");
+    } else {
+      navigate(path);
+    }
+    setMenuOpen(false);
+  };
+
   return (
     <>
-      {/* Header Bar with Logo + Hamburger (optional) */}
+      {/* Fixed Header Bar */}
       <header className="header-bar">
-      <div className="header-left">
-    {/* Put the menu button first */}
-    <button className="hamburger" onClick={toggleMenu}>
-      ☰
-    </button>
-
-    <img
-      src={`${process.env.PUBLIC_URL}/onboard.png`}
-      alt="logo"
-      className="logo-image"
-    />
-    <h1 className="app-title">Budget Tracker</h1>
-  </div>
+        <div className="header-left">
+          <button className="hamburger" onClick={toggleMenu}>☰</button>
+          <img
+            src={`${process.env.PUBLIC_URL}/onboard.png`}
+            alt="logo"
+            className="logo-image"
+          />
+          <h1 className="app-title">Budget Tracker</h1>
+        </div>
       </header>
 
-      {/* Sidebar / Drawer */}
+      {/* Sidebar for Navigation */}
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
         <nav className="sidebar-nav">
           <ul>
+            {/* Replaced buttons with Links for better routing */}
             <li>
-              <Link to="/overview" onClick={() => setMenuOpen(false)}>
-                Overview
+              <Link
+                to="/profile"
+                onClick={() => handleNavigation("/profile")}
+                className="nav-link"
+              >
+                Dashboard
               </Link>
             </li>
             <li>
-              <Link to="/transactions" onClick={() => setMenuOpen(false)}>
+              <Link
+                to="/transactions"
+                onClick={() => handleNavigation("/transactions")}
+                className="nav-link"
+              >
                 Transactions
               </Link>
             </li>
             <li>
-              <Link to="/scheduled-transactions" onClick={() => setMenuOpen(false)}>
-                Scheduled Transactions
-              </Link>
-            </li>
-            <li>
-              <Link to="/accounts" onClick={() => setMenuOpen(false)}>
-                Accounts
-              </Link>
-            </li>
-            <li>
-              <Link to="/credit-cards" onClick={() => setMenuOpen(false)}>
-                Credit Cards
-              </Link>
-            </li>
-            <li>
-              <Link to="/budgets" onClick={() => setMenuOpen(false)}>
-                Budgets
-              </Link>
-            </li>
-            <li>
-              <Link to="/debts" onClick={() => setMenuOpen(false)}>
-                Debts
-              </Link>
-            </li>
-            <li>
-              <Link to="/charts" onClick={() => setMenuOpen(false)}>
+              <Link
+                to="/charts"
+                onClick={() => handleNavigation("/charts")}
+                className="nav-link"
+              >
                 Charts
               </Link>
             </li>
             <li>
-              <Link to="/categories" onClick={() => setMenuOpen(false)}>
-                Categories
-              </Link>
-            </li>
-            <li>
-              <Link to="/time" onClick={() => setMenuOpen(false)}>
-                Time
-              </Link>
-            </li>
-            <li>
-              <Link to="/time-future" onClick={() => setMenuOpen(false)}>
-                Time (Future)
-              </Link>
-            </li>
-            <li>
-              <Link to="/forecasts" onClick={() => setMenuOpen(false)}>
-                Forecasts
-              </Link>
-            </li>
-            <li>
-              <Link to="/calendar" onClick={() => setMenuOpen(false)}>
+              <Link
+                to="/calendar"
+                onClick={() => handleNavigation("/calendar")}
+                className="nav-link"
+              >
                 Calendar
               </Link>
             </li>
-            <li>
-              <Link to="/import-export" onClick={() => setMenuOpen(false)}>
-                Import/Export
-              </Link>
-            </li>
-            <li>
-              <Link to="/preferences" onClick={() => setMenuOpen(false)}>
-                Preferences
-              </Link>
-            </li>
-            {/* Only show the logout link if logged in */}
             {isLoggedIn && (
               <li>
                 <Link
                   to="/login"
+                  className="logout-button"
                   onClick={(e) => {
                     e.preventDefault();
                     handleLogout();
@@ -144,15 +110,10 @@ const Header = () => {
         </nav>
       </aside>
 
-      {/* Optional main content area, if needed */}
-      <main className="main-content">
-        {/* Your main page content goes here */}
-      </main>
-
-      {/* Message Box */}
+      {/* Message Box Component */}
       <MessageBox message={message} onClose={() => setMessage("")} />
     </>
   );
 };
 
-export default Header;
+export default Header;  

@@ -1,17 +1,23 @@
+// src/Components/Transactions.jsx
+
 import React, { useState, useEffect, useCallback } from "react";
 import "./Transactions.css";
-import { FaTrash, FaSearch, FaEdit } from "react-icons/fa";
+import { FaTrash, FaSearch, FaEdit, FaPlus } from "react-icons/fa";
+import Modal from "react-modal";
+import TransactionForm from "./TransactionForm"; // Ensure correct path
+
+Modal.setAppElement("#root"); // Important for accessibility
 
 const Transactions = () => {
-  const [formData, setFormData] = useState({ title: "", amount: "", type: "income", date: "" });
-  const [editFormData, setEditFormData] = useState(null);
-  const [error, setError] = useState("");
-  const [apiError, setApiError] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
   const [balance, setBalance] = useState(0);
+  const [apiError, setApiError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState("income"); // 'income' or 'expense'
+  const [editFormData, setEditFormData] = useState(null);
 
   useEffect(() => {
     fetchTransactions();
@@ -20,10 +26,10 @@ const Transactions = () => {
   const calculateTotals = useCallback(() => {
     const income = transactions
       .filter((t) => t.type === "income")
-      .reduce((acc, t) => acc + parseFloat(t.amount), 0);
+      .reduce((acc, t) => acc + (typeof t.amount === "number" ? t.amount : 0), 0);
     const expense = transactions
       .filter((t) => t.type === "expense")
-      .reduce((acc, t) => acc + parseFloat(t.amount), 0);
+      .reduce((acc, t) => acc + (typeof t.amount === "number" ? t.amount : 0), 0);
 
     setTotalIncome(income);
     setTotalExpense(expense);
@@ -44,8 +50,15 @@ const Transactions = () => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log("Fetched Transactions:", data); // For debugging
+
         if (Array.isArray(data)) {
-          setTransactions(data);
+          // Ensure amount is a number
+          const parsedData = data.map((t) => ({
+            ...t,
+            amount: parseFloat(t.amount) || 0,
+          }));
+          setTransactions(parsedData);
         } else {
           console.error("Expected an array but got:", data);
           setTransactions([]);
@@ -73,6 +86,7 @@ const Transactions = () => {
 
       if (response.ok) {
         await fetchTransactions();
+        closeModal();
       } else {
         const error = await response.json();
         setApiError(error.message || "Failed to add transaction");
@@ -125,28 +139,23 @@ const Transactions = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!formData.title || !formData.amount || parseFloat(formData.amount) <= 0 || !formData.date) {
-      setError("Please provide a valid title, amount, and date.");
-      return;
-    }
-
-    addTransaction({ ...formData, amount: parseFloat(formData.amount) });
-    setFormData({ title: "", amount: "", type: "income", date: "" });
-    setError("");
+  const openModal = (type) => {
+    setModalType(type);
+    setIsModalOpen(true);
+    setEditFormData(null); // Ensure edit form is closed
   };
 
-  const handleEditSubmit = (e) => {
-    e.preventDefault();
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalType("income");
+  };
 
-    if (!editFormData.title || !editFormData.amount || parseFloat(editFormData.amount) <= 0 || !editFormData.date) {
-      setError("Please provide a valid title, amount, and date.");
-      return;
-    }
+  const handleAddSubmit = (transaction) => {
+    addTransaction(transaction);
+  };
 
-    updateTransaction(editFormData.id, { ...editFormData, amount: parseFloat(editFormData.amount) });
+  const handleEditSubmit = (transaction) => {
+    updateTransaction(editFormData.id, transaction);
   };
 
   const filteredTransactions = Array.isArray(transactions)
@@ -162,90 +171,69 @@ const Transactions = () => {
       <div className="summary">
         <div className="summary-box income">
           <h3>Total Income</h3>
-          <p>Rs.{totalIncome.toFixed(2)}</p>
+          <p>Rs.{isNaN(totalIncome) ? "0.00" : totalIncome.toFixed(2)}</p>
         </div>
         <div className="summary-box expense">
           <h3>Total Expense</h3>
-          <p>Rs.{totalExpense.toFixed(2)}</p>
+          <p>Rs.{isNaN(totalExpense) ? "0.00" : totalExpense.toFixed(2)}</p>
         </div>
         <div className="summary-box balance">
           <h3>Balance</h3>
-          <p>Rs.{balance.toFixed(2)}</p>
+          <p>Rs.{isNaN(balance) ? "0.00" : balance.toFixed(2)}</p>
         </div>
       </div>
 
-      <div className="search-bar">
-        <FaSearch className="search-icon" />
-        <input
-          type="text"
-          placeholder="Search by title"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      <div className="controls">
+        <div className="search-bar">
+          <FaSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search by title"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="add-buttons">
+          <button onClick={() => openModal("income")} className="add-income">
+            <FaPlus /> Add Income
+          </button>
+          <button onClick={() => openModal("expense")} className="add-expense">
+            <FaPlus /> Add Expense
+          </button>
+        </div>
       </div>
 
-      {editFormData ? (
-        <form onSubmit={handleEditSubmit} className="transaction-form">
-          <input
-            type="text"
-            placeholder="Title"
-            value={editFormData.title}
-            onChange={(e) => setEditFormData({ ...editFormData, title: e.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="Amount"
-            value={editFormData.amount}
-            onChange={(e) => setEditFormData({ ...editFormData, amount: e.target.value })}
-          />
-          <input
-            type="date"
-            value={editFormData.date}
-            onChange={(e) => setEditFormData({ ...editFormData, date: e.target.value })}
-          />
-          <div className="transaction-type">
-          <select
-            value={editFormData.type}
-            onChange={(e) => setEditFormData({ ...editFormData, type: e.target.value })}
-          >
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-          </select>
-          </div>
-          <button type="submit">Update Transaction</button>
-          <button onClick={() => setEditFormData(null)}>Cancel</button>
-        </form>
-      ) : (
-        <form onSubmit={handleSubmit} className="transaction-form">
-          <input
-            type="text"
-            placeholder="Title"
-            value={formData.title}
-            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="Amount"
-            value={formData.amount}
-            onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-          />
-          <input
-            type="date"
-            value={formData.date}
-            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-          />
-          <select
-            value={formData.type}
-            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-          >
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-          </select>
-          <button type="submit">Add Transaction</button>
-        </form>
-      )}
+      {/* Add Transaction Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Add Transaction"
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <TransactionForm
+          initialData={{ type: modalType }}
+          onSubmit={handleAddSubmit}
+          onClose={closeModal}
+        />
+      </Modal>
 
-      {error && <p className="error">{error}</p>}
+      {/* Edit Transaction Modal */}
+      {editFormData && (
+        <Modal
+          isOpen={!!editFormData}
+          onRequestClose={() => setEditFormData(null)}
+          contentLabel="Edit Transaction"
+          className="modal"
+          overlayClassName="overlay"
+        >
+          <TransactionForm
+            initialData={editFormData}
+            onSubmit={handleEditSubmit}
+            onClose={() => setEditFormData(null)}
+          />
+        </Modal>
+      )}
 
       <div className="transaction-list">
         {filteredTransactions.map((t) => (
@@ -253,13 +241,15 @@ const Transactions = () => {
             <div className="transaction-details">
               <span className="transaction-title">{t.title}</span>
               <span className="transaction-date">{t.date}</span>
-              <span className="transaction-amount">Rs.{t.amount}</span>
+              <span className="transaction-amount">
+                Rs.{typeof t.amount === "number" ? t.amount.toFixed(2) : "0.00"}
+              </span>
             </div>
             <div className="transaction-actions">
-              <button onClick={() => deleteTransaction(t.id)}>
+              <button onClick={() => deleteTransaction(t.id)} title="Delete">
                 <FaTrash />
               </button>
-              <button onClick={() => setEditFormData(t)}>
+              <button onClick={() => setEditFormData(t)} title="Edit">
                 <FaEdit />
               </button>
             </div>

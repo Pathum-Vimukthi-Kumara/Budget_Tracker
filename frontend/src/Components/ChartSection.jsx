@@ -20,7 +20,7 @@ const ChartSection = () => {
     datasets: [
       {
         data: [0, 0], // Initial data
-        backgroundColor: ["#4caf50", "#f44336"],
+        backgroundColor: ["white", "white"],
       },
     ],
   });
@@ -30,7 +30,7 @@ const ChartSection = () => {
       {
         label: "Daily Expenses",
         data: [], // Initial data
-        backgroundColor: "#22c703",
+        backgroundColor: "#DC143C",
       },
     ],
   });
@@ -43,7 +43,7 @@ const ChartSection = () => {
         backgroundColor: "#22c703",
       },
     ],
-  })
+  });
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -69,7 +69,6 @@ const ChartSection = () => {
   }, []);
 
   useEffect(() => {
-    // Calculate overall income and expenses
     const income = transactions
       .filter((t) => t.type === "income")
       .reduce((sum, t) => sum + parseFloat(t.amount), 0);
@@ -77,27 +76,24 @@ const ChartSection = () => {
       .filter((t) => t.type === "expense")
       .reduce((sum, t) => sum + parseFloat(t.amount), 0);
 
-    // Update pie chart data
     setOverallChartData({
       labels: ["Income", "Expenses"],
       datasets: [
         {
           data: [income, expenses],
-          backgroundColor: ["#068101", "#9b0000"],
+          backgroundColor: ["#4CAF50", "#DC143C"],
         },
       ],
     });
 
-    // Calculate daily expenses
     const dailyExpenses = transactions
       .filter((t) => t.type === "expense")
       .reduce((acc, t) => {
-        const date = new Date(t.date).toLocaleDateString(); // Format the date
+        const date = new Date(t.date).toLocaleDateString();
         acc[date] = (acc[date] || 0) + parseFloat(t.amount);
         return acc;
       }, {});
 
-    // Prepare data for daily expense bar chart
     const dailyExpenseLabels = Object.keys(dailyExpenses).sort();
     const dailyExpenseData = dailyExpenseLabels.map((date) => dailyExpenses[date]);
 
@@ -107,21 +103,19 @@ const ChartSection = () => {
         {
           label: "Daily Expenses",
           data: dailyExpenseData,
-          backgroundColor: "#9b0000",
+          backgroundColor: "#DC143C",
         },
       ],
     });
 
-    // Calculate daily income
     const dailyIncome = transactions
       .filter((t) => t.type === "income")
       .reduce((acc, t) => {
-        const date = new Date(t.date).toLocaleDateString(); // Format the date
+        const date = new Date(t.date).toLocaleDateString();
         acc[date] = (acc[date] || 0) + parseFloat(t.amount);
         return acc;
       }, {});
 
-    // Prepare data for daily income bar chart
     const dailyIncomeLabels = Object.keys(dailyIncome).sort();
     const dailyIncomeData = dailyIncomeLabels.map((date) => dailyIncome[date]);
 
@@ -131,44 +125,26 @@ const ChartSection = () => {
         {
           label: "Daily Income",
           data: dailyIncomeData,
-          backgroundColor: "#068101",
+          backgroundColor: "#4CAF50",
         },
       ],
     });
-  }, [transactions]); // Dependency array ensures updates when `transactions` changes
+  }, [transactions]);
 
   return (
     <div className="chart-section">
-      <h2>Budget Analysis</h2>
+      <h2 style={{ color: "black" }}>Budget Analysis</h2>
 
       <div className="chart-container">
         <div className="pie_chart">
-          <h3>Overall Budget Breakdown</h3>
-          <Pie data={overallChartData} />
-        </div>
-
-        <div className="bar_chart">
-          <h3>Daily Expenses</h3>
-          <Bar
-            data={dailyExpenseChartData}
+          <h3 style={{ color: "black" }}>Overall Budget Breakdown</h3>
+          <Pie
+            data={overallChartData}
             options={{
-              responsive: true,
-              plugins: { legend: { display: true } },
-              scales: {
-                x: {
-                  ticks: {
-                    color: "white", // Set X-axis label color
-                  },
-                  grid: {
-                    color: "rgba(255, 255, 255, 0.2)", // Set X-axis grid line color
-                  },
-                },
-                y: {
-                  ticks: {
-                    color: "white", // Set Y-axis label color
-                  },
-                  grid: {
-                    color: "rgba(255, 255, 255, 0.2)", // Set Y-axis grid line color
+              plugins: {
+                legend: {
+                  labels: {
+                    color: "black", // Legend text color
                   },
                 },
               },
@@ -177,28 +153,45 @@ const ChartSection = () => {
         </div>
 
         <div className="bar_chart">
-          <h3>Daily Income</h3>
+          <h3 style={{ color: "black" }}>Daily Expenses</h3>
+          <Bar
+            data={dailyExpenseChartData}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: { labels: { color: "black" } }, // Legend text color
+              },
+              scales: {
+                x: {
+                  ticks: { color: "black" },
+                  grid: { color: "black" },
+                },
+                y: {
+                  ticks: { color: "black" },
+                  grid: { color: "black" },
+                },
+              },
+            }}
+          />
+        </div>
+
+        <div className="bar_chart">
+          <h3 style={{ color: "black" }}>Daily Income</h3>
           <Bar
             data={dailyIncomeChartData}
             options={{
               responsive: true,
-              plugins: { legend: { display: true } },
+              plugins: {
+                legend: { labels: { color: "black" } }, // Legend text color
+              },
               scales: {
                 x: {
-                  ticks: {
-                    color: "white", // Set X-axis label color
-                  },
-                  grid: {
-                    color: "rgba(255, 255, 255, 0.2)", // Set X-axis grid line color
-                  },
+                  ticks: { color: "black" },
+                  grid: { color: "black" },
                 },
                 y: {
-                  ticks: {
-                    color: "white", // Set Y-axis label color
-                  },
-                  grid: {
-                    color: "rgba(255, 255, 255, 0.2)", // Set Y-axis grid line color
-                  },
+                  ticks: { color: "black" },
+                  grid: { color: "black" },
                 },
               },
             }}
