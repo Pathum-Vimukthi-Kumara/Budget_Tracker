@@ -90,7 +90,7 @@ const Calendar = () => {
   }
 
   return (
-    <div style={{ overflowY: "auto", maxHeight: "80vh", backgroundColor: "#EBF5FB", padding: "1rem" }}>
+    <div style={{ overflowY: "auto", maxHeight: "100vh", backgroundColor: "#EBF5FB", padding: "1rem" }}>
       <div className="calendar-container">
         <div className="calendar-nav">
           <button onClick={handlePrevMonth}>{"<"}</button>
