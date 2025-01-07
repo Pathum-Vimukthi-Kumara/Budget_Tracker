@@ -1,13 +1,5 @@
 /* Global Reset to Remove Spacing and Prevent Scrolling */
-html, body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; /* ✅ Prevent scrolling completely */
-  position: relative;
-}
+
 
 /* Onboard Page Styling with Proper Centering and No Scrolling */
 .onboard-page {
@@ -33,7 +25,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* ✅ Semi-transparent overlay for better contrast */
+  background: #EBF5FB;  /* ✅ Semi-transparent overlay for better contrast */
   z-index: 0;
   pointer-events: none; /* Prevent interaction with the overlay */
 }
@@ -41,13 +33,13 @@ html, body {
 /* Glassmorphism Effect for the Container */
 .onboard-container {
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow:black;
   position: relative;
   text-align: center;
   padding: 2rem;
   max-width: 800px;
   width: 90%;
-  color: whitesmoke;
+  color: #1565c0;
   backdrop-filter: blur(10px);
 
   z-index: 1;
@@ -55,8 +47,8 @@ html, body {
   overflow: hidden; /* ✅ Prevents content overflow */
 }
 .demo {
-  color: #44de15;
-  font-size: 1.5rem;
+  color:  #000042;
+  font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
@@ -64,8 +56,8 @@ html, body {
 .budget {
   width: 200px;
   height: 200px;
- background-color: teal;
-  border-color: 2px #3cbf12;
+ background-color:#1565c0;
+  border-color: 2px #1565c0;
   object-fit: cover;
   border-radius: 50px;
   display: block;
@@ -81,21 +73,36 @@ html, body {
 
 /* Button Styling */
 .onboard-container button {
-  width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 30px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    background: #44de15;
-    color: white;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
+  width: 30%;
+  padding: 12px;
+  border: 2px solid black; /* Corrected border property */
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: whitesmoke;
+  color: #1565c0;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Added subtle shadow */
+  outline: none; /* Remove focus outline for cleaner look */
 }
+
 .onboard-container button:hover {
-    background: #3cbf12;
-  
+  background: #1565c0;
+  color: whitesmoke;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Enhanced hover shadow effect */
+  transform: translateY(-2px); /* Slight lift effect on hover */
 }
+
+.onboard-container button:active {
+  transform: translateY(1px); /* Button press effect */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.para{
+  font-size: 1.3rem;
+}
+
 
 
 /* ✅ Media Query for Smaller Screens (Mobile Optimization) */

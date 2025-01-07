@@ -17,7 +17,7 @@
 .transaction-form h2 {
   text-align: center;
   margin-bottom: 1.2rem;
-  color: teal;
+  color: #000042;
   font-size: 1.8rem;
   font-weight: 700;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -43,7 +43,7 @@
 .transaction-form input[type="text"]:focus,
 .transaction-form input[type="number"]:focus,
 .transaction-form input[type="date"]:focus {
-  border-color: #4caf50;
+  border-color: darkblue;
   outline: none;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .transaction-type label:hover {
-  color: #4caf50;
+  color: darkblue;
 }
 
 /* 5. Form Actions (Buttons) */
@@ -95,12 +95,12 @@
 }
 
 .form-actions button[type="submit"] {
-  background-color: #4caf50;
+  background-color: #000042;
   color: #ffffff;
 }
 
 .form-actions button[type="submit"]:hover {
-  background-color: green;
+  background-color: darkblue;
   transform: translateY(-2px);
 }
 
@@ -201,7 +201,7 @@
 /* 8. Dark Mode Support (Optional) */
 @media (prefers-color-scheme: dark) {
   .transaction-form {
-    background-color: teal;
+    background-color:  #2196F3 ;
     box-shadow: 0 6px 14px rgba(255, 255, 255, 0.1);
   }
 
@@ -222,7 +222,7 @@
   }
 
   .transaction-type label:hover {
-    color: #4caf50;
+    color: darkblue;
   }
 
   .form-actions button[type="submit"],

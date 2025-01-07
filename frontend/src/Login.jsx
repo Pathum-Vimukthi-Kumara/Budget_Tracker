@@ -28,7 +28,7 @@ const Login = () => {
         if (data.message === 'Login successful') {
           localStorage.setItem('token', data.token);
           setMessage('Login successful!');
-          navigate('/profile');
+          navigate('/dashboard');
         } else {
           setErrors({ general: data.message });
         }
@@ -53,7 +53,7 @@ const Login = () => {
     style={{
       width: '100vw',
       height: '100vh',
-      backgroundImage: `url(${process.env.PUBLIC_URL + '/back3.webp'})`,
+      backgroundColor:'#EBF5FB',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed', // ✅ Prevents background scrolling

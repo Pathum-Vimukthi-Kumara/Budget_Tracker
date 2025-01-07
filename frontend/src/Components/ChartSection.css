@@ -8,7 +8,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
   color:black;
   max-width: 1200px;
-  margin-top:60px;
+   margin-top: 30px;
   margin-left:10%;
   font-family: aril;
   
@@ -35,6 +35,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 2rem;
+ 
 }
 
 /* 4. Individual Chart Styles */

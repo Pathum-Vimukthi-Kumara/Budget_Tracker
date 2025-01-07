@@ -2,9 +2,10 @@
 .dashboard {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   margin-top: 10vh; /* Changed to viewport units for better responsiveness */
   min-height: 100vh; /* Ensures the dashboard covers the full viewport height */
-  background-color: whitesmoke;
+  background-color: #EBF5FB;
   color: #fff; /* Ensure high contrast */
   overflow: hidden; /* Prevent overall page scroll if not needed */
 }
@@ -29,6 +30,7 @@
   padding: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: #fff;
+  margin-top: -60px;
   overflow-y: auto; /* Enable scrolling for individual sections */
   max-height: 100%; /* Ensure sections stay within the parent container */
   transition: all 0.3s ease; /* Smooth transitions */

@@ -5,6 +5,17 @@ const MessageBox = ({ message, onClose }) => {
   if (!message) return null; // Do not render if no message
 
   return (
+    <div className="onborad"
+    style={{
+      width: '100vw',
+      height: '100vh',
+      backgroundColor:'#EBF5FB',
+      backgroundSize: 'cover',
+     
+    }}
+      >
+  
+ 
     <div className="message-box">
       <div className="message-box-content">
         <p>{message}</p>
@@ -12,6 +23,7 @@ const MessageBox = ({ message, onClose }) => {
           Close
         </button>
       </div>
+    </div>
     </div>
   );
 };

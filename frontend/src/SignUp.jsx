@@ -57,7 +57,7 @@ const SignUp = () => {
     style={{
       width: '100vw',
       height: '100vh',
-      backgroundImage: `url(${process.env.PUBLIC_URL + '/back3.webp'})`,
+      backgroundColor:'#EBF5FB',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed', // ✅ Prevents background scrolling

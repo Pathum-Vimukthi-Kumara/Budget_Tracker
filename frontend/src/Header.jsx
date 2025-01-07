@@ -49,6 +49,9 @@ const Header = () => {
           />
           <h1 className="app-title">Budget Tracker</h1>
         </div>
+        <div className="header-right">
+          <Link to="/profile" className="profile-icon">👤</Link>
+        </div>
       </header>
 
       {/* Sidebar for Navigation */}
@@ -58,8 +61,8 @@ const Header = () => {
             {/* Replaced buttons with Links for better routing */}
             <li>
               <Link
-                to="/profile"
-                onClick={() => handleNavigation("/profile")}
+                to="/dashboard"
+                onClick={() => handleNavigation("/dashboard")}
                 className="nav-link"
               >
                 Dashboard
@@ -116,4 +119,4 @@ const Header = () => {
   );
 };
 
-export default Header;  
+export default Header;

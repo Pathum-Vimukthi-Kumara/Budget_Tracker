@@ -1,0 +1,101 @@
+/* ProfilePage.css */
+
+.profile-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #EBF5FB;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 12px;
+    background-color: #000042;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+/* Profile Icon Styling */
+.header-right {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.profile-icon {
+    font-size: 24px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.profile-icon:hover {
+    color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-container {
+        margin: 50px auto;
+        width: 95%;
+    }
+
+    input, button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        position: relative;
+        top:100px;
+        margin: 30px auto;
+        width: 95%;
+        align-items: center;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    input, button {
+        padding: 8px;
+        font-size: 12px;
+    }
+}

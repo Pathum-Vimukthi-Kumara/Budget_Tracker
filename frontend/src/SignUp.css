@@ -27,7 +27,7 @@
 /* Header Styling */
 h2 {
   text-align: center;
-  color: #44de15;
+  color:darkblue;
   font-size: 2rem;
   font-weight: bold;
   letter-spacing: 1.2px;
@@ -65,8 +65,8 @@ input::placeholder {
 
 input:focus {
   outline: none;
-  border: 1px solid #44de15;
-  box-shadow: 0 0 12px rgba(68, 222, 21, 0.7);
+  border: 1px solid #000042;
+  box-shadow: #000042;
 }
 
 /* Button Styling */
@@ -74,11 +74,12 @@ input:focus {
   width: 100%;
   padding: 12px;
   border: none;
-  border-radius: 30px;
+  border-radius: 10px;
+  
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  background: #44de15;
+  background:#000042;
   color: white;
   transition: background 0.3s ease, box-shadow 0.3s ease;
  
@@ -87,27 +88,27 @@ input:focus {
 
 
 .signup-container button:hover{
-  background: #3fcc0c;
-    box-shadow: 0 0 12px rgba(68, 222, 21, 0.7);
+  background:  darkblue;
+    
 }
 
 /* Login Link Styling */
 .login-link {
   margin-top: 20px;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   text-align: center;
 }
 
 .login-link a {
-  color: whitesmoke;
+  color: #000042;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 .login-link a:hover {
-  color: #00c300;
+  color:  darkblue;
 }
 
 /* Animation for Fade-In Effect */

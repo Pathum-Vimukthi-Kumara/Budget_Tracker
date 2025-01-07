@@ -16,6 +16,7 @@ import "./Dashboard.css";
 import "./Header.css";
 import "./TransactionsTable.css";
 import "./Calendar.css";
+import ProfilePage from "./ProfilePage";
 
 
 const App = () => {
@@ -27,12 +28,13 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/profile" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/transactions" element={<TransactionsTable />} />
             <Route path="/calendar" element={<Calendar />} />
             
             <Route path="/charts" element={<ChartSection />} />  
             <Route path="/" element={<Onboard />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </main>
      

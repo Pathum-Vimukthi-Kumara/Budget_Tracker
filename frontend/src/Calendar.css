@@ -6,9 +6,10 @@
   max-height: 700px;
   margin-top: 60px;
   color:white;
+  background-color: #EBF5FB;
   padding: 1rem;
   border-radius: 10px;
-  border: 2px solid teal;
+  border: 2px solid #1565c0;
   font-family: Arial, sans-serif;
   box-sizing: border-box;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -35,14 +36,14 @@
 }
 
 .calendar-nav button:hover {
-  color: teal;
+  color:#1565c0;
   transform: scale(1.05);
 }
 
 .calendar-nav h2 {
   font-size: 1.2rem;
  
-  color: teal;
+  color: #1565c0;
   font-weight: bold;
   text-align: center;
   margin: 0;
@@ -54,7 +55,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 1px;
-  border: 2px solid teal;
+  border: 2px solid #1565c0;
 }
 
 .calendar-header div {
@@ -62,8 +63,8 @@
   text-align: center;
   padding: 0.5rem;
   font-weight: bold;
-  color: teal;
-  border-bottom: 2px solid teal;
+  color: #1565c0;
+  border-bottom: 2px solid #1565c0;
 }
 
 /* Calendar Body Styling */
@@ -78,7 +79,7 @@
   box-sizing: border-box;
   padding: 0.4rem; /* Reduced padding */
   text-align: left;
-  border: 2px solid teal;
+  border: 2px solid #1565c0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -121,7 +122,7 @@
   font-size: 0.9rem;
   font-weight: bold;
   margin-bottom: 8px;
-  color: teal;
+  color: #1565c0;
 }
 
 /* Transaction Popup Styling */
@@ -131,7 +132,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #008080; /* Teal */
+  background-color: #2196F3; /* Teal */
   border: none;
   border-radius: 12px;
   padding: 2rem;

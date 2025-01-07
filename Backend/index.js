@@ -134,6 +134,32 @@ const authenticateJWT = (req, res, next) => {
     next();
   });
 };
+// Update Profile API
+app.put('/update-profile', authenticateJWT, (req, res) => {
+  const { name, email, password } = req.body;
+  const userId = req.user.id;
+
+  let query = 'UPDATE users SET name = ?, email = ?';
+  const params = [name, email];
+
+  if (password) {
+    const hashedPassword = bcrypt.hashSync(password, 8);
+    query += ', password = ?';
+    params.push(hashedPassword);
+  }
+
+  query += ' WHERE id = ?';
+  params.push(userId);
+
+  db.query(query, params, (err, result) => {
+    if (err) {
+      console.error('Error updating profile:', err);
+      return res.status(500).json({ message: 'Error updating profile.' });
+    }
+    res.json({ message: 'Profile updated successfully!' });
+  });
+});
+
 
 app.get("/api/v1/transactions", authenticateJWT, (req, res) => {
   const userId = req.user.id;
