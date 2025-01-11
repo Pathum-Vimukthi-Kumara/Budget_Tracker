@@ -1,280 +1,306 @@
-/* General Calendar Container Styling - Smaller for Web */
-.calendar-container {
-  background-color: #fff;
-  max-width: 600px; /* Smaller calendar size for web */
-  margin: 2rem auto;
-  max-height: 100vh;
-  margin-top: 60px;
-  color:white;
-  background-color: #EBF5FB;
+/* Full calendar page container */
+.calendar-page {
+  background-color: #ebf5fb;
   padding: 1rem;
-  border-radius: 10px;
-  border: 2px solid #1565c0;
-  font-family: Arial, sans-serif;
-  box-sizing: border-box;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-height: 100vh; /* Ensure full-height background */
+  overflow-y: auto;
+  font-family: "Roboto", sans-serif;
 }
 
-/* Navigation Bar Styling */
+/* Main calendar container */
+.calendar-container {
+  width: 90%;
+  max-width: 700px;
+  margin: 80px auto; /* Centered with some top margin */
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+/* Navigation bar for month & year */
 .calendar-nav {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
-  flex-wrap: wrap;
 }
 
 .calendar-nav button {
-  background-color: transparent;
+  background: #0f4c75; /* teal shade */
+  color: #fff;
   border: none;
-  font-size: 1rem;
-  color: #555;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  padding: 0;
-  transition: all 0.2s ease-in-out;
-  border-radius: 5px;
 }
 
 .calendar-nav button:hover {
-  color:#1565c0;
-  transform: scale(1.05);
+  background: #0c3b5d;
 }
 
 .calendar-nav h2 {
   font-size: 1.2rem;
- 
-  color: #1565c0;
-  font-weight: bold;
-  text-align: center;
+  font-weight: 600;
   margin: 0;
-  flex-grow: 1;
+  color: #333;
 }
 
-/* Calendar Grid Styling */
+/* Grid for days of the week + calendar dates */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 1px;
-  border: 2px solid #1565c0;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
+/* Header row for Sunday-Saturday labels */
 .calendar-header div {
-  background-color: #f9f9f9;
+  background: #f2f2f2;
   text-align: center;
-  padding: 0.5rem;
-  font-weight: bold;
-  color: #1565c0;
-  border-bottom: 2px solid #1565c0;
+  padding: 0.5rem 0;
+  font-weight: 600;
+  color: #555;
 }
 
-/* Calendar Body Styling */
+/* Body rows for date cells */
 .calendar-body {
-  background-color: #fff;
+  min-height: 200px;
 }
 
-/* Calendar Cell - Smaller for Desktop */
+/* Each cell in the calendar */
 .calendar-cell {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  box-sizing: border-box;
-  padding: 0.4rem; /* Reduced padding */
-  text-align: left;
-  border: 2px solid #1565c0;
+  background: #fff;
+  border-radius: 4px;
+  height: 80px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  overflow: hidden;
-  transition: background-color 0.2s, transform 0.2s;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 0.8rem; /* Smaller font size */
+  transition: background-color 0.2s;
+  position: relative;
 }
 
-.calendar-cell:hover {
-  background-color: #f0f8ff;
-  transform: scale(1.05);
+.calendar-cell.blank {
+  background: #f9f9f9; /* Just a subtle difference for blanks */
+  cursor: default;
 }
 
-/* Dots for Income and Expense */
+/* Hover effect for clickable date cells */
+.calendar-cell.date-cell:hover {
+  background-color: #eaf6ff;
+}
+
+/* "Today" highlight with a subtle border or background */
+.calendar-cell.today {
+  border: 2px solid #0f4c75;
+}
+
+/* Day number in top-left corner */
+.day-number {
+  font-size: 0.9rem;
+  padding: 0.3rem;
+  color: #333;
+}
+
+/* Colored dots indicating income/expense */
 .dots {
   display: flex;
-  gap: 4px;
-  margin-bottom: 18px;
+  gap: 3px;
+  margin-top: auto; /* push to the bottom */
+  padding: 0.3rem;
 }
 
 .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  display: inline-block;
 }
 
 .dot-red {
-  background-color: red;
+  background-color: #dc143c;
 }
 
 .dot-green {
-  background-color: green;
+  background-color: #4caf50;
 }
 
-/* Day Number Styling */
-.day-number {
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #1565c0;
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 999;
 }
 
-/* Transaction Popup Styling */
-/* Updated Transaction Popup Styling for a Modern Look */
+/* Transaction popup content */
+/* Overlay to dim the background behind the popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
+  z-index: 999; /* Below the popup */
+}
+
+/* Transaction popup container */
 .transaction-popup {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #2196F3; /* Teal */
-  border: none;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  max-width: 300px;
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-}
-
-.transaction-popup ul {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-}
-
-.transaction-popup ul li {
-  padding: 0.5rem;
-  font-size: 1rem;
-  color: white;
-}
-
-.transaction-popup button {
-  margin-top: 1rem;
-  padding: 0.75rem 1.5rem;
-  border: none;
+  transform: translate(-50%, -50%); /* Center the popup */
+  
+  background: #fff;  /* White background for the popup */
+  width: 90%;
+  max-width: 400px;
+  padding: 1.5rem;
   border-radius: 8px;
-  background-color: crimson;
-  color: white;
-  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 1000; /* Above the overlay */
+  animation: fadeIn 0.3s ease;
+}
+
+/* Fade-in animation for smooth appearance */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Title styling inside the popup */
+.transaction-popup h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Red close button positioned at top-right corner of the popup */
+.popup-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background-color: #dc143c; /* Bright red background */
+  color: #fff;              /* White 'X' text */
+  border: none;
   font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;        /* Vertically center the 'X' */
+  transition: background-color 0.3s ease;
 }
 
-.transaction-popup button:hover {
-  background-color: red;
-  transform: translateY(-3px);
-}
-
-/* Adding a subtle border for the popup container */
-
-/* Modernizing the font and spacing */
-.transaction-popup p {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: white;
-}
-
-.transaction-popup button:focus {
-  outline: none;
+/* Darker red on hover for the close button */
+.popup-close:hover {
+  background-color: #c00;
 }
 
 
-/* ✅ Responsive Design */
+/* Fade-in animation for the popup */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
 
-/* Tablets and Small Laptops */
+/* Close button in top-right corner */
+.popup-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #888;
+}
+
+/* Fade-in animation for the popup */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ----- Responsive for smaller screens ----- */
 @media (max-width: 768px) {
+  /* Reduce top margin and remove fixed height to fit smaller screens */
   .calendar-container {
-      max-width: 90%;
-      padding: 1rem;
-      margin-top:140px;
-}
-
+    margin-top: 200px;
+    
+    width: 95%;
+  }
 
   .calendar-cell {
-      padding: 0.7rem;
-      font-size: 0.9rem;
-  }
-  .dots {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 12px;
-  }
-
-  .calendar-nav button {
-      font-size: 0.9rem;
-      padding: 0.2rem;
-  }
-}
-
-/* Mobile Phones */
-@media (max-width: 480px) {
-  .calendar-container {
-      max-width: 100%;
-      padding: 0.5rem;
-      border: 1px solid teal;
-      margin-top:135px;
-  }
-  .dots {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 12px;
-  }y
- 
-
-  .calendar-grid {
-      gap: 2px;
+    height: 60px;
   }
 
   .calendar-nav h2 {
-      font-size: 1rem;
+    font-size: 1rem;
   }
 
-  .calendar-cell {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      padding: 0.8rem;
-      font-size: 0.8rem;
+  .calendar-nav button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .calendar-header div {
+    font-size: 0.8rem;
   }
 
   .day-number {
-      font-size: 0.8rem;
-  }
-
-  .calendar-nav button {
-      font-size: 0.9rem;
-      padding: 0.2rem;
+    font-size: 0.75rem;
   }
 }
 
-/* Ultra Small Screens */
-@media (max-width: 320px) {
-  .calendar-cell {
-      padding: 0.4rem;
-      font-size: 0.7rem;
-  }
-  .dots {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 12px;
-  }
-
+@media (max-width: 480px) {
+  /* Even more adjustments for really small phones */
   .calendar-container {
-      padding: 0.5rem;
+    margin-top: 100px;
+    width: 95%;
+    padding: 0.75rem;
   }
 
   .calendar-nav h2 {
-      font-size: 0.8rem;
+    font-size: 0.9rem;
   }
-}
 
-html, body {
-  background-color: #fff;
-  overflow: auto;
+  .calendar-nav button {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .calendar-header div {
+    font-size: 0.75rem;
+    padding: 0.4rem 0;
+  }
+
+  .calendar-cell {
+    height: 50px;
+  }
+
+  .day-number {
+    font-size: 0.7rem;
+  }
+
+  .dots {
+    gap: 2px;
+  }
 }

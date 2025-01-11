@@ -19,27 +19,31 @@ const Transactions = () => {
   const [modalType, setModalType] = useState("income"); // 'income' or 'expense'
   const [editFormData, setEditFormData] = useState(null);
 
+  // Fetch all transactions on component mount
   useEffect(() => {
     fetchTransactions();
   }, []);
 
+  // Calculate totals whenever the transactions array changes
   const calculateTotals = useCallback(() => {
-    const income = transactions
+    const incomeSum = transactions
       .filter((t) => t.type === "income")
       .reduce((acc, t) => acc + (typeof t.amount === "number" ? t.amount : 0), 0);
-    const expense = transactions
+
+    const expenseSum = transactions
       .filter((t) => t.type === "expense")
       .reduce((acc, t) => acc + (typeof t.amount === "number" ? t.amount : 0), 0);
 
-    setTotalIncome(income);
-    setTotalExpense(expense);
-    setBalance(income - expense);
+    setTotalIncome(incomeSum);
+    setTotalExpense(expenseSum);
+    setBalance(incomeSum - expenseSum);
   }, [transactions]);
 
   useEffect(() => {
     calculateTotals();
   }, [transactions, calculateTotals]);
 
+  // Fetch transactions from API
   const fetchTransactions = async () => {
     try {
       const response = await fetch("http://localhost:3011/api/v1/transactions", {
@@ -50,10 +54,8 @@ const Transactions = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Fetched Transactions:", data); // For debugging
-
         if (Array.isArray(data)) {
-          // Ensure amount is a number
+          // Ensure amounts are numeric
           const parsedData = data.map((t) => ({
             ...t,
             amount: parseFloat(t.amount) || 0,
@@ -73,6 +75,7 @@ const Transactions = () => {
     }
   };
 
+  // Create a transaction (income or expense)
   const addTransaction = async (transaction) => {
     try {
       const response = await fetch("http://localhost:3011/api/v1/transactions", {
@@ -96,14 +99,18 @@ const Transactions = () => {
     }
   };
 
+  // Delete a transaction
   const deleteTransaction = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3011/api/v1/transactions/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await fetch(
+        `http://localhost:3011/api/v1/transactions/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       if (response.ok) {
         await fetchTransactions();
@@ -116,16 +123,20 @@ const Transactions = () => {
     }
   };
 
+  // Update an existing transaction
   const updateTransaction = async (id, updatedTransaction) => {
     try {
-      const response = await fetch(`http://localhost:3011/api/v1/transactions/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(updatedTransaction),
-      });
+      const response = await fetch(
+        `http://localhost:3011/api/v1/transactions/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(updatedTransaction),
+        }
+      );
 
       if (response.ok) {
         await fetchTransactions();
@@ -139,27 +150,34 @@ const Transactions = () => {
     }
   };
 
+  // Open the modal for adding an income or expense
   const openModal = (type) => {
     setModalType(type);
     setIsModalOpen(true);
-    setEditFormData(null); // Ensure edit form is closed
+    setEditFormData(null);
   };
 
+  // Close the modal
   const closeModal = () => {
     setIsModalOpen(false);
     setModalType("income");
   };
 
+  // Handle submission from "add" form
   const handleAddSubmit = (transaction) => {
     addTransaction(transaction);
   };
 
+  // Handle submission from "edit" form
   const handleEditSubmit = (transaction) => {
     updateTransaction(editFormData.id, transaction);
   };
 
+  // Filter transactions by search term
   const filteredTransactions = Array.isArray(transactions)
-    ? transactions.filter((t) => t.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+    ? transactions.filter((t) =>
+        t.title?.toLowerCase().includes(searchTerm.toLowerCase())
+      )
     : [];
 
   return (
@@ -168,6 +186,7 @@ const Transactions = () => {
 
       {apiError && <p className="error">{apiError}</p>}
 
+      {/* Summary row: Income / Expense / Balance */}
       <div className="summary">
         <div className="summary-box income">
           <h3>Total Income</h3>
@@ -183,6 +202,7 @@ const Transactions = () => {
         </div>
       </div>
 
+      {/* Search bar & Add buttons */}
       <div className="controls">
         <div className="search-bar">
           <FaSearch className="search-icon" />
@@ -235,26 +255,33 @@ const Transactions = () => {
         </Modal>
       )}
 
+      {/* Transaction list */}
       <div className="transaction-list">
-        {filteredTransactions.map((t) => (
-          <div key={t.id} className={`transaction-item ${t.type}`}>
-            <div className="transaction-details">
-              <span className="transaction-title">{t.title}</span>
-              <span className="transaction-date">{t.date}</span>
-              <span className="transaction-amount">
-                Rs.{typeof t.amount === "number" ? t.amount.toFixed(2) : "0.00"}
-              </span>
+        {filteredTransactions.length === 0 ? (
+          <p style={{ textAlign: "center", color: "#777" }}>
+            No transactions found.
+          </p>
+        ) : (
+          filteredTransactions.map((t) => (
+            <div key={t.id} className={`transaction-item ${t.type}`}>
+              <div className="transaction-details">
+                <span className="transaction-title">{t.title}</span>
+                <span className="transaction-date">{t.date}</span>
+                <span className="transaction-amount">
+                  Rs.{typeof t.amount === "number" ? t.amount.toFixed(2) : "0.00"}
+                </span>
+              </div>
+              <div className="transaction-actions">
+                <button onClick={() => deleteTransaction(t.id)} title="Delete">
+                  <FaTrash />
+                </button>
+                <button onClick={() => setEditFormData(t)} title="Edit">
+                  <FaEdit />
+                </button>
+              </div>
             </div>
-            <div className="transaction-actions">
-              <button onClick={() => deleteTransaction(t.id)} title="Delete">
-                <FaTrash />
-              </button>
-              <button onClick={() => setEditFormData(t)} title="Edit">
-                <FaEdit />
-              </button>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

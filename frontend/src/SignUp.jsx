@@ -53,19 +53,19 @@ const SignUp = () => {
   };
 
   return (
-    <div className="onboard"
+    <div className="SignUp"
     style={{
       width: '100vw',
       height: '100vh',
       backgroundColor:'#EBF5FB',
+      backgroundImage: `url(${process.env.PUBLIC_URL + '/bg.png'})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed', // ✅ Prevents background scrolling
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      margin: '0',
-      padding: '0'
+    
   }}
 >
     <div className="signup-container">

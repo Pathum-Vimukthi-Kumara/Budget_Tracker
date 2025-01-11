@@ -1,393 +1,280 @@
-/* src/components/Transactions.css */
-
-/* 1. Main Container */
+/* ----- Container for all transactions content ----- */
 .transactions {
-  padding: 1rem;
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  padding: 1rem 2rem;
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  /* Ensure content is visible by providing top padding/margin if there's a fixed header */
+  margin-top: 4rem; /* Increase if your header is taller */
 }
 
-/* 2. Section Title */
+/* Title */
 .transactions h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #0f4c75; /* Teal accent */
 }
+
+/* Error messages */
+.error {
+  background-color: #fce4e4;
+  color: #d9534f;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* ----- Summary row with Income, Expense, Balance cards ----- */
 .summary {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-/* 3. Error Message */
-.error {
-  color: red;
-  text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
-
-/* 4. Summary Section */
-/* Summary Box Styling - Smaller Width */
+/* Summary boxes styled as cards */
 .summary-box {
-  background-color: white;
-  padding: 0.8rem;
+  flex: 1;
+  min-width: 200px;
+  background: #fff;
   border-radius: 8px;
-  width: 25%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.summary-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-/* Income Box Styling */
-.summary-box.income {
-  background-color: #4CAF50;
-  color: white;
-}
-.summary-box.income p {
-  color: white;
-}
-
-/* Expense Box Styling */
-.summary-box.expense {
-  background-color: #E74C3C;
-  color: white;
-}
-.summary-box.expense p {
-  color: white;
-}
-
-/* Balance Box Styling */
-.summary-box.balance {
-  background-color: #000042;
-  color: white;
-}
-.summary-box.balance p {
-  color: white;
-  font-size: 1.2rem;
-}
-
-/* General Text Styling for Summary Box */
-.summary-box p {
+.summary-box h3 {
   font-size: 1rem;
-  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #666;
 }
-/* Flexbox Layout for Arranging Boxes With Reduced Horizontal Gap */
 
+.summary-box p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+}
 
-/* 5. Controls Section */
+/* Different color accents for each box */
+.summary-box.income {
+  border-left: 4px solid #2ecc71; /* Green accent */
+}
+.add-income{
+  background-color: #2ecc71;
+
+}
+.add-income:hover{
+  background-color: #34c759;
+}
+.add-expense{
+  background-color: #e74c3c;
+}
+.add-expense:hover{
+  background-color: red;
+}
+.summary-box.expense {
+  border-left: 4px solid #e74c3c; /* Red accent */
+}
+
+.summary-box.balance {
+  border-left: 4px solid #3498db; /* Blue accent */
+}
+
+/* ----- Controls row: Search + Add Buttons ----- */
 .controls {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-bottom: 1rem;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  align-items: center;
 }
 
+/* Search bar container */
 .search-bar {
   display: flex;
   align-items: center;
-  background-color: #fff;
-  padding: 0.4rem 0.8rem;
+  background: #fff;
+  padding: 0.5rem 0.75rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  flex: 1 1 200px; /* Allow flexibility */
-  max-width: 300px;
-  margin-bottom: 0.5rem; /* Space below on wrap */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  flex: 1;
+  min-width: 220px;
 }
 
 .search-icon {
+  font-size: 1rem;
   margin-right: 0.5rem;
-  color: #888;
+  color: #ccc;
 }
 
-.search-bar input {
+.search-bar input[type="text"] {
   border: none;
   outline: none;
   width: 100%;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  color: #333;
 }
 
+/* Add button group */
 .add-buttons {
   display: flex;
   gap: 0.5rem;
-  flex: 1 1 200px; /* Allow flexibility */
-  max-width: 300px;
-  justify-content: flex-end;
-  margin-bottom: 0.5rem; /* Space below on wrap */
 }
 
-.add-buttons button {
+/* Income/Expense buttons */
+.add-income,
+.add-expense {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.5rem 1rem;
+ 
+  color: #fff;
   border: none;
+  padding: 0.5rem 0.75rem;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.9rem;
-  color: white;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
 }
 
-.add-buttons .add-income {
-  background-color: #4caf50; /* Green */
+
+.add-income svg,
+.add-expense svg {
+  margin-right: 0.25rem;
 }
 
-.add-buttons .add-income:hover {
-  background-color: #45a049;
-}
-
-.add-buttons .add-expense {
-  background-color: #DC143C; /* Red */
-}
-
-.add-buttons .add-expense:hover {
-  background-color: #9b0000;
-}
-
-/* 6. Transaction List */
-.transaction-list {
-  background-color: #fff;
+/* ----- Modal overrides ----- */
+.modal {
+  background: #fff;
+  position: absolute;      
+  top: 50%;               
+  left: 50%;              
+  transform: translate(-50%, -50%);
   padding: 1rem;
   border-radius: 8px;
-  overflow-y: auto;
-  max-height: 60vh;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 90%;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-.transaction-list .transaction-item {
+/* Overlay to cover the entire viewport */
+.overlay {
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ----- Transaction list styles ----- */
+.transaction-list {
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1rem;
+}
+
+/* Each transaction item is a row-like card */
+.transaction-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 0;
-  border-bottom: 1px solid #eee;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  border-left: 4px solid transparent;
+  padding: 0.75rem 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
 }
 
-.transaction-list .transaction-item:last-child {
-  border-bottom: none;
+/* Color-coded by type */
+.transaction-item.income {
+  border-left-color: #2ecc71; /* Green accent */
+}
+.transaction-item.expense {
+  border-left-color: #e74c3c; /* Red accent */
+}
+.transaction-item:hover {
+  background-color: #f9f9f9;
 }
 
-.transaction-list .transaction-details {
+/* Transaction details displayed in one row */
+.transaction-details {
   display: flex;
   flex-direction: column;
-  flex: 1 1 200px; /* Allow flexibility */
+  gap: 0.25rem;
 }
-
-.transaction-list .transaction-title {
-  font-weight: bold;
-  color: #333;
+.transaction-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.transaction-date {
+  font-size: 0.85rem;
+  color: #666;
+}
+.transaction-amount {
+  font-weight: 600;
   font-size: 1rem;
 }
 
-.transaction-list .transaction-date {
-  font-size: 0.9rem;
-  color: #777;
-}
-
-.transaction-list .transaction-amount {
-  font-weight: bold;
-  color: #333;
-  font-size: 1rem;
-}
-
-.transaction-list .transaction-item.income .transaction-amount {
-  color: green;
-  border-left: 1px solid green;
-}
-
-.transaction-list .transaction-item.expense .transaction-amount {
-  color: red;
-  border-left: 1px solid red;
-}
-
+/* Transaction actions: Edit / Delete buttons */
 .transaction-actions {
   display: flex;
   gap: 0.5rem;
-  flex: 0 0 auto; /* Prevent shrinking */
-  margin-top: 0.5rem; /* Space above on wrap */
 }
-
 .transaction-actions button {
   background: none;
   border: none;
   cursor: pointer;
-  color: #555;
-  font-size: 1.2rem;
-  transition: color 0.3s ease;
-
+  color: #888;
+  font-size: 1rem;
+  transition: color 0.2s;
 }
-
 .transaction-actions button:hover {
-  color: #000;
-  padding: 8px;
-  border-radius: 5px;
-  background-color: gray;
+  color: #333;
 }
 
-/* 7. Modal Styles */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Ensure modal is on top */
-}
-
-.modal {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 8. Responsive Design for Mobile Phones */
-
-/* Mobile Phones (max-width: 600px) */
-@media (max-width: 600px) {
-  /* Adjust Main Container Padding */
+/* ----- Responsive (fix header overlap, smaller spacing) ----- */
+@media (max-width: 768px) {
+  /* Adjust top margin further for small screens if needed */
   .transactions {
-    padding: 0.8rem;
-    margin: 0.5rem;
-  }
-
-  /* Adjust Section Title */
-  .transactions h2 {
-    font-size: 1.9rem;
-    margin-bottom: 1rem;
-  }
-
-  /* Adjust Summary Section */
-  .summary {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .summary-box {
-    width: 80%;
-    max-width: 400px;
-  }
-
-  .summary-box h3 {
-    font-size: 1rem;
-  }
-
-  .summary-box p {
-    font-size: 1rem;
-  }
-
-  /* Adjust Controls Section */
-  .controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .search-bar {
-    flex: 1 1 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .search-bar input {
-    width: 100%;
-    font-size: 0.9rem;
-  }
-
-  .add-buttons {
-    flex: 1 1 100%;
-    max-width: 100%;
-    justify-content: center;
-  }
-
-  .add-buttons button {
-    width: 100%;
-    justify-content: center;
-    font-size: 1rem;
-    padding: 0.6rem 1.2rem;
-  }
-
-  /* Adjust Transaction List */
-  .transaction-list {
-    max-height: 50vh;
-  }
-
-  .transaction-list .transaction-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .transaction-list .transaction-details {
-    flex: 1 1 100%;
-    margin-bottom: 0.8rem;
-  }
-
-  .transaction-list .transaction-title {
-    font-size: 1rem;
-  }
-
-  .transaction-list .transaction-date,
-  .transaction-list .transaction-amount {
-    font-size: 0.9rem;
-  }
-
-  /* Adjust Transaction Actions */
-  .transaction-actions {
-    justify-content: flex-end;
-    width: 100%;
-  }
-
-  .transaction-actions button {
-    font-size: 1.5rem;
-  }
-
-  /* Adjust Modal for Mobile */
-  .modal {
+    margin-top: 5rem;
     padding: 1rem;
   }
-}
 
-/* Tablet Devices (max-width: 992px) */
-@media (max-width: 992px) and (min-width: 601px) {
-  /* Adjust Summary Boxes to have smaller widths */
-  .summary-box {
-    width: 45%;
+  .summary {
+    flex-direction: column;
   }
 
-  /* Adjust Controls Section */
   .controls {
-    flex-wrap: wrap;
+    flex-direction: column;
   }
 
   .add-buttons {
     justify-content: flex-start;
   }
 
-  /* Adjust Transaction List */
-  .transaction-list {
-    max-height: 55vh;
+  .transaction-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .transactions {
+    margin-top: 5rem;
+    padding: 0.5rem;
   }
 
-  /* Adjust Transaction Actions */
-  .transaction-actions button {
-    font-size: 1.2rem;
+  .transaction-details {
+    gap: 0.15rem;
+  }
+
+  .transaction-item {
+    padding: 0.5rem 0.25rem;
   }
 }

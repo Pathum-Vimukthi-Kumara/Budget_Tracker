@@ -1,9 +1,10 @@
-// src/Components/TransactionForm.jsx
-
 import React, { useState } from "react";
 import "./TransactionForm.css";
 
 const TransactionForm = ({ initialData = null, onSubmit, onClose }) => {
+  // If initialData is present, we are editing; otherwise, we’re adding
+  const isEditing = !!initialData;
+
   const [formData, setFormData] = useState(
     initialData || { title: "", amount: "", type: "income", date: "" }
   );
@@ -37,14 +38,17 @@ const TransactionForm = ({ initialData = null, onSubmit, onClose }) => {
 
   return (
     <form onSubmit={handleSubmit} className="transaction-form">
-      <h2>{initialData ? "Add Transaction": "Edit Transaction"}</h2>
+      <h2>{isEditing ? "Edit Transaction" : "Add Transaction"}</h2>
+
       <input
         type="text"
         name="title"
         placeholder="Title"
         value={formData.title}
         onChange={handleChange}
+        className="form-input"
       />
+
       <input
         type="number"
         name="amount"
@@ -52,13 +56,17 @@ const TransactionForm = ({ initialData = null, onSubmit, onClose }) => {
         value={formData.amount}
         onChange={handleChange}
         step="0.01"
+        className="form-input"
       />
+
       <input
         type="date"
         name="date"
         value={formData.date}
         onChange={handleChange}
+        className="form-input"
       />
+
       <div className="transaction-type">
         <label>
           <input
@@ -81,9 +89,13 @@ const TransactionForm = ({ initialData = null, onSubmit, onClose }) => {
           Expense
         </label>
       </div>
+
       {error && <p className="error">{error}</p>}
+
       <div className="form-actions">
-        <button type="submit">{initialData ?  "Add":"Update"}</button>
+        <button type="submit" className="submit-button">
+          {isEditing ? "Add":"Update"  }
+        </button>
         <button type="button" onClick={onClose} className="cancel-button">
           Cancel
         </button>

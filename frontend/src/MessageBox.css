@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   z-index: 1050;
-  background-color: #2196F3 ; /* Slightly darkened background overlay */
+  background-color: #023e8a ; /* Slightly darkened background overlay */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,14 +20,14 @@
   text-align: center;
   max-width: 90%;
   border: 2px solid  #2196F3 ;
-  animation: fadeIn 0.3s ease-in-out;
+
 }
 
 /* Message Text Styling */
 .message-box-content p {
   font-size: 1.2rem;
   font-weight: 600;
-  color:  #2196F3 ;
+  color:  #023e8a ;
   margin-bottom: 1.5rem;
 }
 
@@ -51,16 +51,6 @@
 }
 
 /* Animation for Message Box Appearance */
-@keyframes fadeIn {
-  from {
-      opacity: 0;
-      transform: translateY(-20px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
 
 /* Responsive Styling */
 @media (max-width: 480px) {

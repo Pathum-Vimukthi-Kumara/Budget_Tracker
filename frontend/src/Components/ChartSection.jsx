@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pie, Bar } from "react-chartjs-2";
+import { Pie, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -7,11 +7,20 @@ import {
   Legend,
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
 } from "chart.js";
 import "./ChartSection.css";
 
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement
+);
 
 const ChartSection = () => {
   const [transactions, setTransactions] = useState([]);
@@ -19,32 +28,39 @@ const ChartSection = () => {
     labels: ["Income", "Expenses"],
     datasets: [
       {
-        data: [0, 0], // Initial data
-        backgroundColor: ["white", "white"],
+        data: [0, 0],
+        backgroundColor: ["#ffffff", "#ffffff"],
       },
     ],
   });
   const [dailyExpenseChartData, setDailyExpenseChartData] = useState({
-    labels: [], // Daily dates
+    labels: [],
     datasets: [
       {
         label: "Daily Expenses",
-        data: [], // Initial data
-        backgroundColor: "#DC143C",
+        data: [],
+        borderColor: "#DC143C",
+        backgroundColor: "rgba(220, 20, 60, 0.2)", // fill color
+        tension: 0.3,
+        fill: true,
       },
     ],
   });
   const [dailyIncomeChartData, setDailyIncomeChartData] = useState({
-    labels: [], // Daily dates
+    labels: [],
     datasets: [
       {
         label: "Daily Income",
-        data: [], // Initial data
-        backgroundColor: "#22c703",
+        data: [],
+        borderColor: "#4CAF50",
+        backgroundColor: "rgba(76, 175, 80, 0.2)", // fill color
+        tension: 0.3,
+        fill: true,
       },
     ],
   });
 
+  // Fetch transactions
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
@@ -53,7 +69,6 @@ const ChartSection = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-
         if (response.ok) {
           const data = await response.json();
           setTransactions(data);
@@ -68,7 +83,9 @@ const ChartSection = () => {
     fetchTransactions();
   }, []);
 
+  // Process transactions for charts
   useEffect(() => {
+    // Calculate total income/expenses
     const income = transactions
       .filter((t) => t.type === "income")
       .reduce((sum, t) => sum + parseFloat(t.amount), 0);
@@ -76,26 +93,27 @@ const ChartSection = () => {
       .filter((t) => t.type === "expense")
       .reduce((sum, t) => sum + parseFloat(t.amount), 0);
 
+    // Update Pie chart
     setOverallChartData({
       labels: ["Income", "Expenses"],
       datasets: [
         {
           data: [income, expenses],
-          backgroundColor: ["#4CAF50", "#DC143C"],
+          backgroundColor: ["#22c703", "#DC143C"],
         },
       ],
     });
 
-    const dailyExpenses = transactions
+    // Daily Expenses
+    const dailyExpensesMap = transactions
       .filter((t) => t.type === "expense")
       .reduce((acc, t) => {
         const date = new Date(t.date).toLocaleDateString();
         acc[date] = (acc[date] || 0) + parseFloat(t.amount);
         return acc;
       }, {});
-
-    const dailyExpenseLabels = Object.keys(dailyExpenses).sort();
-    const dailyExpenseData = dailyExpenseLabels.map((date) => dailyExpenses[date]);
+    const dailyExpenseLabels = Object.keys(dailyExpensesMap).sort();
+    const dailyExpenseData = dailyExpenseLabels.map((date) => dailyExpensesMap[date]);
 
     setDailyExpenseChartData({
       labels: dailyExpenseLabels,
@@ -103,21 +121,24 @@ const ChartSection = () => {
         {
           label: "Daily Expenses",
           data: dailyExpenseData,
-          backgroundColor: "#DC143C",
+          borderColor: "#DC143C",
+          backgroundColor: "rgba(220, 20, 60, 0.2)",
+          tension: 0.3,
+          fill: true,
         },
       ],
     });
 
-    const dailyIncome = transactions
+    // Daily Income
+    const dailyIncomeMap = transactions
       .filter((t) => t.type === "income")
       .reduce((acc, t) => {
         const date = new Date(t.date).toLocaleDateString();
         acc[date] = (acc[date] || 0) + parseFloat(t.amount);
         return acc;
       }, {});
-
-    const dailyIncomeLabels = Object.keys(dailyIncome).sort();
-    const dailyIncomeData = dailyIncomeLabels.map((date) => dailyIncome[date]);
+    const dailyIncomeLabels = Object.keys(dailyIncomeMap).sort();
+    const dailyIncomeData = dailyIncomeLabels.map((date) => dailyIncomeMap[date]);
 
     setDailyIncomeChartData({
       labels: dailyIncomeLabels,
@@ -125,26 +146,52 @@ const ChartSection = () => {
         {
           label: "Daily Income",
           data: dailyIncomeData,
-          backgroundColor: "#4CAF50",
+          borderColor: "#4CAF50",
+          backgroundColor: "rgba(76, 175, 80, 0.2)",
+          tension: 0.3,
+          fill: true,
         },
       ],
     });
   }, [transactions]);
 
+  // Common line chart options
+  const commonLineOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: "black",
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: { color: "black" },
+        grid: { color: "rgba(0,0,0,0.1)" },
+      },
+      y: {
+        ticks: { color: "black" },
+        grid: { color: "rgba(0,0,0,0.1)" },
+      },
+    },
+  };
+
   return (
     <div className="chart-section">
-      <h2 style={{ color: "black" }}>Budget Analysis</h2>
+      <h2>Budget Analysis</h2>
 
       <div className="chart-container">
-        <div className="pie_chart">
-          <h3 style={{ color: "black" }}>Overall Budget Breakdown</h3>
+        {/* Pie Chart Card */}
+        <div className="chart-card">
+          <h3>Overall Budget Breakdown</h3>
           <Pie
             data={overallChartData}
             options={{
               plugins: {
                 legend: {
                   labels: {
-                    color: "black", // Legend text color
+                    color: "black",
                   },
                 },
               },
@@ -152,50 +199,16 @@ const ChartSection = () => {
           />
         </div>
 
-        <div className="bar_chart">
-          <h3 style={{ color: "black" }}>Daily Expenses</h3>
-          <Bar
-            data={dailyExpenseChartData}
-            options={{
-              responsive: true,
-              plugins: {
-                legend: { labels: { color: "black" } }, // Legend text color
-              },
-              scales: {
-                x: {
-                  ticks: { color: "black" },
-                  grid: { color: "black" },
-                },
-                y: {
-                  ticks: { color: "black" },
-                  grid: { color: "black" },
-                },
-              },
-            }}
-          />
+        {/* Expenses Line Chart Card */}
+        <div className="chart-card">
+          <h3>Daily Expenses</h3>
+          <Line data={dailyExpenseChartData} options={commonLineOptions} />
         </div>
 
-        <div className="bar_chart">
-          <h3 style={{ color: "black" }}>Daily Income</h3>
-          <Bar
-            data={dailyIncomeChartData}
-            options={{
-              responsive: true,
-              plugins: {
-                legend: { labels: { color: "black" } }, // Legend text color
-              },
-              scales: {
-                x: {
-                  ticks: { color: "black" },
-                  grid: { color: "black" },
-                },
-                y: {
-                  ticks: { color: "black" },
-                  grid: { color: "black" },
-                },
-              },
-            }}
-          />
+        {/* Income Line Chart Card */}
+        <div className="chart-card">
+          <h3>Daily Income</h3>
+          <Line data={dailyIncomeChartData} options={commonLineOptions} />
         </div>
       </div>
     </div>

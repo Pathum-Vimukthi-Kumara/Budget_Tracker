@@ -3,9 +3,20 @@ import { useNavigate, Link } from "react-router-dom";
 import MessageBox from "./MessageBox";
 import "./Header.css";
 
+// Example icons from react-icons/fa. 
+// You can replace them with icons from other libraries if you like.
+import {
+  FaBars,
+  FaTachometerAlt,
+  FaExchangeAlt,
+  FaChartPie,
+  FaCalendarAlt,
+  FaSignOutAlt,
+} from "react-icons/fa";
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [message, setMessage] = useState(""); 
+  const [message, setMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
@@ -41,7 +52,9 @@ const Header = () => {
       {/* Fixed Header Bar */}
       <header className="header-bar">
         <div className="header-left">
-          <button className="hamburger" onClick={toggleMenu}>☰</button>
+          <button className="hamburger" onClick={toggleMenu}>
+            <FaBars className="icon-hamburger" />
+          </button>
           <img
             src={`${process.env.PUBLIC_URL}/onboard.png`}
             alt="logo"
@@ -49,8 +62,14 @@ const Header = () => {
           />
           <h1 className="app-title">Budget Tracker</h1>
         </div>
+
+        {/* Only show the profile icon if logged in */}
         <div className="header-right">
-          <Link to="/profile" className="profile-icon">👤</Link>
+          {isLoggedIn && (
+            <Link to="/profile" className="profile-icon">
+              👤
+            </Link>
+          )}
         </div>
       </header>
 
@@ -58,14 +77,14 @@ const Header = () => {
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
         <nav className="sidebar-nav">
           <ul>
-            {/* Replaced buttons with Links for better routing */}
             <li>
               <Link
                 to="/dashboard"
                 onClick={() => handleNavigation("/dashboard")}
                 className="nav-link"
               >
-                Dashboard
+                <FaTachometerAlt className="nav-icon" />
+                <span>Dashboard</span>
               </Link>
             </li>
             <li>
@@ -74,7 +93,8 @@ const Header = () => {
                 onClick={() => handleNavigation("/transactions")}
                 className="nav-link"
               >
-                Transactions
+                <FaExchangeAlt className="nav-icon" />
+                <span>Transactions</span>
               </Link>
             </li>
             <li>
@@ -83,7 +103,8 @@ const Header = () => {
                 onClick={() => handleNavigation("/charts")}
                 className="nav-link"
               >
-                Charts
+                <FaChartPie className="nav-icon" />
+                <span>Charts</span>
               </Link>
             </li>
             <li>
@@ -92,7 +113,8 @@ const Header = () => {
                 onClick={() => handleNavigation("/calendar")}
                 className="nav-link"
               >
-                Calendar
+                <FaCalendarAlt className="nav-icon" />
+                <span>Calendar</span>
               </Link>
             </li>
             {isLoggedIn && (
@@ -105,7 +127,8 @@ const Header = () => {
                     handleLogout();
                   }}
                 >
-                  Logout
+                  <FaSignOutAlt className="nav-icon" />
+                  <span>Logout</span>
                 </Link>
               </li>
             )}

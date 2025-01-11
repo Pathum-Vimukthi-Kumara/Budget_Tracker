@@ -1,124 +1,115 @@
-/* Global Reset to Remove Spacing and Prevent Scrolling */
-
-
-/* Onboard Page Styling with Proper Centering and No Scrolling */
-.onboard-page {
+.onboard {
   width: 100vw;
   height: 100vh;
+  /* Consider removing fixed negative margins for responsiveness */
+  margin-left: -90px;
   display: flex;
   justify-content: center;
-  align-items: center;  
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;  /* ✅ Prevents background from scrolling */
-  position: relative;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;  /* ✅ Prevents internal content overflow */
+  align-items: center;
 }
 
-/* Dark Overlay Effect (No Scrolling) */
-.onboard-page::before {
-  content: '';
-  position: absolute;
-  top: 0;  
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #EBF5FB;  /* ✅ Semi-transparent overlay for better contrast */
-  z-index: 0;
-  pointer-events: none; /* Prevent interaction with the overlay */
-}
-
-/* Glassmorphism Effect for the Container */
-.onboard-container {
-  border-radius: 16px;
-  box-shadow:black;
-  position: relative;
-  text-align: center;
-  padding: 2rem;
-  max-width: 800px;
+.onboard-page {
+  display: flex;
+  flex-direction: row;
   width: 90%;
-  color: #1565c0;
-  backdrop-filter: blur(10px);
-
-  z-index: 1;
-  margin: auto;
-  overflow: hidden; /* ✅ Prevents content overflow */
-}
-.demo {
-  color:  #000042;
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-/* Image Styling */
-.budget {
-  width: 200px;
-  height: 200px;
- background-color:#1565c0;
-  border-color: 2px #1565c0;
-  object-fit: cover;
-  border-radius: 50px;
-  display: block;
-  margin: auto;
+  max-width: 1200px;
 }
 
-/* Button Container Styling */
-.button-container {
+/* Content-side styling */
+.content-side {
+  flex: 1;
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  align-items: center;
 }
 
-/* Button Styling */
-.onboard-container button {
-  width: 30%;
-  padding: 12px;
-  border: 2px solid black; /* Corrected border property */
+/* Glass overlay styling */
+.glass-overlay {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
   border-radius: 10px;
-  font-size: 1rem;
+  padding: 2rem;
+  max-width: 600px;
+  text-align: left;
+}
+
+.para {
+  font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.welcome {
+  font-size: 3.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: darkblue;
   font-weight: bold;
+  letter-spacing: 1.2px;
+  margin-bottom: 20px;
+}
+
+.glass-overlay h1,
+.glass-overlay p {
+  /* Removed space in font-size value for proper interpretation */
+ 
+  margin: 0 0 1rem 0;
+}
+
+.get-started-button {
+  background-color: black;
+  color: white;
+  padding: 15px 50px;
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
-  background: whitesmoke;
-  color: #1565c0;
-  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Added subtle shadow */
-  outline: none; /* Remove focus outline for cleaner look */
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.onboard-container button:hover {
-  background: #1565c0;
-  color: whitesmoke;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Enhanced hover shadow effect */
-  transform: translateY(-2px); /* Slight lift effect on hover */
+.get-started-button:hover {
+  background-color: darkblue;
+  color: white;
 }
 
-.onboard-container button:active {
-  transform: translateY(1px); /* Button press effect */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.para{
-  font-size: 1.3rem;
-}
-
-
-
-/* ✅ Media Query for Smaller Screens (Mobile Optimization) */
+/* Responsive adjustments for tablets and phones */
 @media (max-width: 768px) {
-  .onboard-container {
-      padding: 1rem;
-      width: 95%;
+  .onboard-page {
+    flex-direction: column;
+    width: 100%;
+    /* Remove or adjust margin for mobile */
+    margin-left: 60px;
   }
 
-  .budget {
-      width: 100px;
-      height: 100px;
+  .glass-overlay {
+    max-width: 90%;
+    margin: 1rem auto;
+    padding: 1.5rem;
   }
 
-  button {
-      padding: 8px 16px;
-      font-size: 0.9rem;
+  .glass-overlay h1 {
+    font-size: 2.5rem;
+  }
+
+  .glass-overlay p {
+    font-size: 1.2rem;
+  }
+
+  .get-started-button {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-overlay h1 {
+    font-size: 2rem;
+  }
+
+  .glass-overlay p {
+    font-size: 1rem;
+  }
+
+  .get-started-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }

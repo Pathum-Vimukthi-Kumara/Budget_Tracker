@@ -10,7 +10,6 @@
   align-items: center; 
   max-width: 500px;
   padding: 50px;
- 
   z-index:1;
   background: rgba(255, 255, 255, 0.15); /* Transparent glass effect */
   border-radius: 20px;
@@ -19,7 +18,7 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   text-align: center;
   color: black;
-  animation: fadeIn 1.2s ease-out;
+  
   box-sizing: border-box;
   width: 100%;
 }
@@ -71,7 +70,7 @@ input:focus {
 
 /* Button Styling */
 .signup-container button {
-  width: 100%;
+  width: 109%;
   padding: 12px;
   border: none;
   border-radius: 10px;
@@ -81,7 +80,7 @@ input:focus {
   cursor: pointer;
   background:#000042;
   color: white;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+
  
 }
 
@@ -112,16 +111,8 @@ input:focus {
 }
 
 /* Animation for Fade-In Effect */
-@keyframes fadeIn {
-  from {
-      opacity: 0;
-      transform: translateY(-20px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
+
+
 .error {
   border: 1px solid red;
 }
@@ -138,6 +129,20 @@ input:focus {
       padding: 30px;
       max-width: 90%; /* Adjust width for smaller screens */
   }
+  .signup-container button {
+  
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background:#000042;
+    color: white;
+  
+   
+  }
 
   h2 {
       font-size: 1.6rem;
@@ -152,6 +157,20 @@ input:focus {
   .signup-container {
       padding: 20px;
       max-width: 95%;
+  }
+  .signup-container button {
+   width: 103%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background:#000042;
+    color: white;
+  
+   
   }
 
   h2 {

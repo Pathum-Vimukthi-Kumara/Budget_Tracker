@@ -1,73 +1,64 @@
 /* Global Reset to Remove Spacing and Prevent Scrolling */
+/* (Add any global reset styles here if needed) */
 
 /* Centering Login Box (Glassmorphism Effect) */
 .login-container {
     display: flex;
-
     flex-direction: column;
-    justify-content: center;  /* ✅ Center content vertically */
-    align-items: center;      /* ✅ Center content horizontally */
+    justify-content: center;  /* Center content vertically */
+    align-items: center;      /* Center content horizontally */
     background: rgba(255, 255, 255, 0.15); /* Transparent Glass Effect */
     border: 1px solid rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(20px); 
-    -webkit-backdrop-filter: blur(20px); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 20px;
-    padding: 40px;
+    padding: 30px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     max-width: 400px;
-    width: 90%;  /* ✅ Adjusted for responsiveness */
+    width: 90%;  /* Adjusted for responsiveness */
     text-align: center;
     color: black;
     z-index: 1;
     position: relative;
-}
-
-/* Header Styling */
-h2 {
+  }
+  
+  /* Header Styling */
+  h2 {
     font-size: 2rem;
     color: #000;
     font-weight: bold;
     margin-bottom: 20px;
-}
-
-/* Form Group Styling */
-.form-group {
+  }
+  
+  /* Input Field Styling */
+  .login-container input {
     width: 100%;
-    margin-bottom: 20px;
-    text-align: left;
-}
 
-label {
-    font-size: 1rem;
-    color: whitesmoke;
-    font-weight: 500;
-}
-
-/* Input Field Styling */
-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    
+    
     border-radius: 8px;
-    background: rgba(0, 0, 0, 0.2);
-    color: white;
+    background: rgba(255, 255, 255, 0.8); /* Slightly opaque background for contrast */
+    color: black;
     font-size: 1rem;
-    transition: box-shadow 0.3s ease;
-}
-
-input::placeholder {
-    color: #ddd;
-}
-
-input:focus {
+   
+  }
+  
+  .login-container input::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .login-container input:focus {
     outline: none;
-    border: 1px solid #000042;
-}
-
-/* Button Styling */
-.login-container button {
-    width: 100%;
+    border-color: #000042;
+    box-shadow: 0 0 5px rgba(15, 76, 117, 0.3);
+    background: #fff;
+  }
+  
+  /* Button Styling */
+  .login-container button {
+    width: 109%;
     padding: 12px;
+    margin-top: 1rem; /* Space above the button */
     border: none;
     border-radius: 10px;
     font-size: 1rem;
@@ -76,55 +67,67 @@ input:focus {
     background: #000042;
     color: white;
     transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.login-container button:hover {
+  }
+  
+  .login-container button:hover {
     background: darkblue;
-    
-
-   
-}
-
-button:active {
+  }
+  
+  button:active {
     transform: scale(0.98);
-}
-
-/* Signup Link Styling */
-.signup-link {
+  }
+  
+  /* Signup Link Styling */
+  .signup-link {
     margin-top: 20px;
     font-size: 1.2rem;
-}
-
-.signup-link a {
-    color:#000042;
+  }
+  
+  .signup-link a {
+    color: #000042;
     text-decoration: none;
     font-weight: bold;
-}
-
-.signup-link a:hover {
-    color:  darkblue;
-}
-
-/* ✅ Responsive Design (Centered on All Devices) */
-@media (max-width: 768px) {
+  }
+  
+  .signup-link a:hover {
+    color: darkblue;
+  }
+  
+  /* Responsive Design (Centered on All Devices) */
+  @media (max-width: 768px) {
     .login-container {
-        padding: 20px;
-        width: 90%;  /* Adjust container size for tablets */
+      padding: 20px;
+      width: 90%;
     }
-
+    
     h2 {
-        font-size: 1.6rem;
+      font-size: 1.6rem;
     }
-}
-
-@media (max-width: 480px) {
+    .login-container button {
+        width: 104%;
+        padding: 12px;
+      
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        background: #000042;
+        color: white;
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+  }
+  
+  @media (max-width: 480px) {
     .login-container {
-        padding: 15px;
-        border-radius: 15px;
-        width: 95%;
+      padding: 15px;
+      border-radius: 15px;
+      width: 95%;
     }
-
+    
     h2 {
-        font-size: 1.4rem;
+      font-size: 1.4rem;
     }
-}
+  }
+  

@@ -49,19 +49,19 @@ const Login = () => {
   };
 
   return (
-    <div className="onborad"
+    <div className="Login"
     style={{
       width: '100vw',
       height: '100vh',
-      backgroundColor:'#EBF5FB',
+      backgroundColor:'#fefefe',
       backgroundSize: 'cover',
+      backgroundImage: `url(${process.env.PUBLIC_URL + '/bg.png'})`,
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed', // ✅ Prevents background scrolling
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      margin: '0',
-      padding: '0'
+   
   
   }}
 >
