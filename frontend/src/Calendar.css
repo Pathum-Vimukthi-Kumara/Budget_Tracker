@@ -1,6 +1,6 @@
 /* Full calendar page container */
 .calendar-page {
-  background-color: #ebf5fb;
+  background-color: #fff;
   padding: 1rem;
   min-height: 100vh; /* Ensure full-height background */
   overflow-y: auto;
@@ -184,8 +184,8 @@
   position: absolute;
   top: 0.5rem;
   right: 0.75rem;
-  background-color: #dc143c; /* Bright red background */
-  color: #fff;              /* White 'X' text */
+  background-color: #dc143c; /* Initial bright red background */
+  color: #fff;
   border: none;
   font-size: 1rem;
   cursor: pointer;
@@ -193,14 +193,14 @@
   height: 32px;
   border-radius: 50%;
   text-align: center;
-  line-height: 32px;        /* Vertically center the 'X' */
+  line-height: 32px;
   transition: background-color 0.3s ease;
 }
 
-/* Darker red on hover for the close button */
 .popup-close:hover {
-  background-color: #c00;
+  background-color: #c00; /* Slightly darker red on hover */
 }
+
 
 
 /* Fade-in animation for the popup */
@@ -220,13 +220,18 @@
   position: absolute;
   top: 0.5rem;
   right: 0.75rem;
-  background: none;
+  background: #dc143c; /* Red background */
+  color: #fff;
   border: none;
-  font-size: 1.25rem;
+  font-size: 1rem;
   cursor: pointer;
-  color: #888;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  transition: background 0.3s ease;
 }
-
 /* Fade-in animation for the popup */
 @keyframes fadeIn {
   from {
