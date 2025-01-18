@@ -178,6 +178,7 @@ const ChartSection = () => {
   };
 
   return (
+    
     <div className="chart-section">
       <h2>Budget Analysis</h2>
 

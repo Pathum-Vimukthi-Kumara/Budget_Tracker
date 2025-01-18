@@ -50,7 +50,7 @@ const Login = () => {
 
   return (
     <div className="Login"
-    style={{
+      style={{
       width: '100vw',
       height: '100vh',
       backgroundColor:'#fefefe',

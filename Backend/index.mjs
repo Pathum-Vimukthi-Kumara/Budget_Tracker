@@ -1,11 +1,18 @@
-const express = require("express");
-const mysql = require("mysql2");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const cors = require("cors");
-const helmet = require("helmet");
-const Joi = require("joi"); // Validation library
-require("dotenv").config();
+import cors from 'cors';
+import express from 'express';
+import helmet from 'helmet';
+import Joi from 'joi';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+import mysql from 'mysql2';
+// const mysql = require("mysql2");
+// const bcrypt = require("bcryptjs");
+// const jwt = require("jsonwebtoken");
+// const cors = require("cors");
+// const helmet = require("helmet");
+// const Joi = require("joi"); // Validation library
+// require("dotenv").config();
 
 // Create Express app
 const app = express();
@@ -20,6 +27,10 @@ app.use(helmet());
 //   password: "",
 //   database: "test",
 // });
+
+
+
+
 const db = mysql.createConnection({
   host: "bboai925bg2h7iyfqvwh-mysql.services.clever-cloud.com",
   user: "u5pcka2rnhj9wq1h",
