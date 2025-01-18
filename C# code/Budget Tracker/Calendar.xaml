@@ -1,0 +1,84 @@
+﻿<Window x:Class="Budget_Tracker.CalendarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Budget_Tracker"
+        Background="#023e8a"
+
+        Title="Transaction Calendar" Height="512" Width="700"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+
+    </Window.Resources>
+
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header Title -->
+        <TextBlock Text="Transaction Calendar"
+                   FontSize="24"
+                   Foreground="white"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,10"
+                   Grid.Row="0" />
+
+        <!-- Calendar Section -->
+        <Calendar x:Name="TransactionCalendar"
+                  DisplayDateChanged="TransactionCalendar_DisplayDateChanged"
+                  SelectedDatesChanged="TransactionCalendar_SelectedDatesChanged"
+                  VerticalAlignment="Top"
+                  Grid.Row="1" Height="168" Grid.RowSpan="2">
+            <Calendar.Resources>
+                <!-- Custom Day Button Style -->
+                <Style TargetType="CalendarDayButton">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="CalendarDayButton">
+                                <Grid>
+                                    <!-- Day Number -->
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                                    <!-- Marker -->
+                                    <Ellipse Width="10" Height="10"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Bottom"
+                                             Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}"
+                                             Fill="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource TransactionColorConverter}}" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Calendar.Resources>
+        </Calendar>
+
+        <!-- Transactions for Selected Date -->
+        <StackPanel Grid.Row="2" Margin="0,10,0,30">
+            <TextBlock Text="Transactions on Selected Date:"
+                       FontSize="16"
+                       Foreground="White"
+                       FontWeight="Bold"
+                       Margin="0,10,0,5" />
+
+            <!-- DataGrid to Display Transactions -->
+            <DataGrid x:Name="TransactionGrid"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      Height="185"
+                      HorizontalAlignment="Stretch">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50" />
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="150" />
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="100" />
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="100" />
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=d}" Width="150" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,40 +1,17 @@
-﻿using System;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
 
 namespace Budget_Tracker
 {
-    public class DatabaseHelper
+    public class TransactionDbContext : DbContext
     {
-        private static string connectionString = "Data Source=C:\\Users\\hp\\Documents\\Budget Tracker\\Budget_Tracker\\C# code\\Budget Tracker\\Budget.db;";
+        public DbSet<Transaction> Transactions { get; set; }
 
-        public static void CreateTransactionsTable()
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string createTransactionsTable = @"
-                CREATE TABLE IF NOT EXISTS Transactions (
-                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Title TEXT NOT NULL,
-                    Amount REAL NOT NULL,
-                    Date TEXT NOT NULL,
-                    Type TEXT NOT NULL
-                );";
-
-            try
-            {
-                using (SqliteConnection connection = new SqliteConnection(connectionString))
-                {
-                    connection.Open();
-
-                    using (SqliteCommand command = new SqliteCommand(createTransactionsTable, connection))
-                    {
-                        command.ExecuteNonQuery();
-                        Console.WriteLine("Transactions table created successfully.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error creating Transactions table: {ex.Message}");
-            }
+            base.OnConfiguring(optionsBuilder);
+            // Use the path/name of your .db file
+            optionsBuilder.UseSqlite(@"Data Source=C:\Users\hp\Documents\new BudgetTracker\Budget Tracker\Transactions_Add.db");
         }
     }
 }

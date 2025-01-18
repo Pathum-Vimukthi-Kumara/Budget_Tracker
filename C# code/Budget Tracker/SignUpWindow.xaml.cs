@@ -12,7 +12,12 @@ namespace Budget_Tracker
         {
             InitializeComponent();
         }
-
+        private void LoginHyperlink_Click(object sender, EventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow loginWindow = new LoginWindow();

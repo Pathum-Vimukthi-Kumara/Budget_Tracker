@@ -7,27 +7,48 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Calendar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="DashboardWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Graph.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="OnboardingWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="SignUpWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TransactionAdd.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Calendar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="DashboardWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Graph.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Login.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="OnboardingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="SignUpWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TransactionAdd.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

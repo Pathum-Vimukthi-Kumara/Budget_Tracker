@@ -12,6 +12,12 @@ namespace Budget_Tracker
         {
             InitializeComponent();
         }
+        private void SignUpHyperlink_Click(object sender, EventArgs e)
+        {
+            SignUpWindow signUp = new SignUpWindow();
+            signUp.Show();
+            this.Close();
+        }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
