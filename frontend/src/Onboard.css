@@ -1,8 +1,11 @@
+
+
+
 .onboard {
   width: 100vw;
   height: 100vh;
   /* Consider removing fixed negative margins for responsiveness */
-  margin-left: -90px;
+  margin-left: -190px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,7 +43,7 @@
 .welcome {
   font-size: 3.5rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: darkblue;
+  color: rgba(5, 90, 202, 0.7);
   font-weight: bold;
   letter-spacing: 1.2px;
   margin-bottom: 20px;
@@ -54,7 +57,7 @@
 }
 
 .get-started-button {
-  background-color: black;
+  background-color: rgba(5, 90, 202, 0.7);
   color: white;
   padding: 15px 50px;
   border-radius: 5px;

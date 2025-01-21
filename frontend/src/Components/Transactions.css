@@ -3,17 +3,18 @@
   padding: 1rem 2rem;
   
   font-family: "Roboto", sans-serif;
-  color: #333;
+  color: whitesmoke;
   /* Ensure content is visible by providing top padding/margin if there's a fixed header */
   margin-top: 4rem; /* Increase if your header is taller */
 }
 
 /* Title */
 .transactions h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #0f4c75; /* Teal accent */
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0077b6; /* Modern blue accent color */
+  margin-bottom: 3rem;
+  text-align: center; /* Center-align title for balance */
 }
 
 /* Error messages */
@@ -34,22 +35,29 @@
 }
 
 /* Summary boxes styled as cards */
-.summary-box {
-  flex: 1;
-  min-width: 200px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
+  .summary-box {
+    flex: 1;
+    min-width: 200px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* General animation for all boxes */
+  
+}
+.summary-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .summary-box h3 {
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: #666;
+  color: black;
 }
 
 .summary-box p {
@@ -60,14 +68,16 @@
 
 /* Different color accents for each box */
 .summary-box.income {
-  border-left: 4px solid #2ecc71; /* Green accent */
+ 
+  background-color:  #22c703; /* Green accent */
 }
+
 .add-income{
-  background-color: #2ecc71;
+  background-color: #22c703;
 
 }
 .add-income:hover{
-  background-color: #34c759;
+  background-color: #22c703;
 }
 .add-expense{
   background-color: #e74c3c;
@@ -76,11 +86,11 @@
   background-color: red;
 }
 .summary-box.expense {
-  border-left: 4px solid #e74c3c; /* Red accent */
+  background-color: #DC143C; /* Red accent */
 }
 
 .summary-box.balance {
-  border-left: 4px solid #3498db; /* Blue accent */
+  background-color:  #0a7fcd; /* Blue accent */
 }
 
 /* ----- Controls row: Search + Add Buttons ----- */
@@ -183,6 +193,7 @@
 /* Each transaction item is a row-like card */
 .transaction-item {
   display: flex;
+  color:black;
   justify-content: space-between;
   align-items: center;
   border-left: 4px solid transparent;
@@ -194,7 +205,7 @@
 
 /* Color-coded by type */
 .transaction-item.income {
-  border-left-color: #2ecc71; /* Green accent */
+  border-left-color: #22c703; /* Green accent */
 }
 .transaction-item.expense {
   border-left-color: #e74c3c; /* Red accent */
@@ -215,7 +226,7 @@
 }
 .transaction-date {
   font-size: 0.85rem;
-  color: #666;
+  color: black;
 }
 .transaction-amount {
   font-weight: 600;

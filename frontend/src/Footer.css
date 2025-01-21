@@ -1,20 +1,22 @@
 /* Footer base styling */
 .footer {
-    background:#023e8a;
-    backdrop-filter: blur(10px); /* Frosted glass effect */
-    
-    padding: 20px;
-    color: white;
-    
-    z-index: 1000;
-    text-align: center;
-   
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-    width: 100vw; /* Full viewport width */
-    box-sizing: border-box; /* Includes padding and border in the total width */
-    position: fixed; /* Sticks footer to the bottom */
-    bottom: 0;
-    left: 0;
+    background: rgba(5, 90, 202, 0.7);/* Blue with transparency */
+backdrop-filter: blur(10px); /* Frosted glass effect */
+-webkit-backdrop-filter: blur(10px); /* Safari support */
+
+padding: 20px;
+color: white;
+
+z-index: 1000;
+text-align: center;
+
+box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+width: 100vw; /* Full viewport width */
+box-sizing: border-box; /* Includes padding and border in the total width */
+position: fixed; /* Sticks footer to the bottom */
+bottom: 0;
+left: 0;
+
     /* Optional rounded corners for a smooth look */
 }
 .foot{

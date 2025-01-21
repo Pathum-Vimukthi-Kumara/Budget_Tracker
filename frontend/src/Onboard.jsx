@@ -6,11 +6,12 @@ const Onboard = () => {
   const navigate = useNavigate();
 
   return (
-    <div
-   
+    <div className='onboard-bg'
+
     style={{
       width: '100vw',
       height: '100vh',
+      marginTop: '50px',
       backgroundColor: '#fefefe',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -19,7 +20,15 @@ const Onboard = () => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      position: 'fixed',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%) scale(1)', // Default scale
+      transition: 'transform 0.5s ease', // Smooth transition
     }}
+  
+    
+  
   >
 
   

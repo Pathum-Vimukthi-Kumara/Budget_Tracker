@@ -1,13 +1,5 @@
 /* Main container styling for proper layout */
-html, body {
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-  background-color:  #fff;
-}
+
 h2 {
   color:#0f4c75;
   font-size: 1.5rem;
@@ -24,6 +16,7 @@ h2 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 1200px;
   margin: 2rem auto;
+  margin-top:30px;
   transition: all 0.3s ease-in-out;
   font-family: aril;
   color: #333333;

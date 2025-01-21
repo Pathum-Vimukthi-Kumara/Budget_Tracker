@@ -27,7 +27,7 @@
 }
 
 .calendar-nav button {
-  background: #0f4c75; /* teal shade */
+  background: rgba(5, 90, 202, 0.7); /* teal shade */
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;

@@ -5,8 +5,8 @@
   left: 0;
   width: 100%;
   height: 60px;
-  /* Animated gradient background */
-  background: #023e8a;
+  /* Transparent blue-tinted animated gradient background */
+  background: rgba(5, 90, 202, 0.7); /* Blue color with 40% opacity */
   background-size: 800% 800%;
   animation: headerGradient 15s ease infinite;
   display: flex;
@@ -14,9 +14,28 @@
   justify-content: space-between;
   z-index: 1000; /* Keep on top of everything */
   padding: 0 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
+  box-shadow: 0 2px 8px rgba(79, 7, 188, 0.15);
+  
+  /* Ensure a glass-like effect */
+  backdrop-filter: blur(10px); /* Blurs the content behind the header */
+  -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+  
+  /* Optional for gradient animation */
+  
+  }
+  
 
+@keyframes headerGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 /* Keyframes for header gradient animation */
 @keyframes headerGradient {
   0% {
@@ -78,6 +97,7 @@
 .profile-icon {
   font-size: 1.4rem;
   color: #fff;
+  margin-left:-60px;
   padding:5px;
   border-radius: 30px;
   background-color:white;

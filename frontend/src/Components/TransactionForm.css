@@ -13,14 +13,16 @@
 .transaction-form h2 {
   margin-bottom: 1rem;
   text-align: center;
+  font-weight:bold;
   color: #333;
 }
 
 .form-input {
-  width: 100%;
+  width: 95%;
   padding: 0.5rem 0.75rem;
   margin-bottom: 0.75rem;
   border: 1px solid #ccc;
+  color:black;
   border-radius: 4px;
   font-size: 1rem;
   outline: none;
@@ -76,7 +78,7 @@
 
 /* Primary action button */
 .submit-button {
-  background-color: #0f4c75; /* Teal shade */
+  background-color:rgba(5, 90, 202, 0.7); /* Teal shade */
   color: #fff;
 }
 
@@ -86,10 +88,10 @@
 
 /* Secondary action button */
 .cancel-button {
-  background-color: #ccc;
-  color: #333;
+  background-color:#e74c3c;
+  color: #fff;
 }
 
 .cancel-button:hover {
-  background-color: #aaa;
+  background-color: darkred;
 }

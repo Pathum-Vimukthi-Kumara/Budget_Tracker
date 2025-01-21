@@ -3,8 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import MessageBox from "./MessageBox";
 import "./Header.css";
 
-// Example icons from react-icons/fa. 
-// You can replace them with icons from other libraries if you like.
 import {
   FaBars,
   FaTachometerAlt,
@@ -12,18 +10,20 @@ import {
   FaChartPie,
   FaCalendarAlt,
   FaSignOutAlt,
+  FaSignInAlt,
 } from "react-icons/fa";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token")); // Initialize based on localStorage
   const navigate = useNavigate();
 
-  useEffect(() => {
+  // Function to check login status
+  const checkLoginStatus = () => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
-  }, []);
+  };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -46,6 +46,19 @@ const Header = () => {
     }
     setMenuOpen(false);
   };
+
+  // Listen for changes in localStorage
+  useEffect(() => {
+    const handleStorageChange = () => {
+      checkLoginStatus();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   return (
     <>
@@ -117,7 +130,7 @@ const Header = () => {
                 <span>Calendar</span>
               </Link>
             </li>
-            {isLoggedIn && (
+            {isLoggedIn ? (
               <li>
                 <Link
                   to="/login"
@@ -129,6 +142,19 @@ const Header = () => {
                 >
                   <FaSignOutAlt className="nav-icon" />
                   <span>Logout</span>
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link
+                  to="/login"
+                  className="login-button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                  }}
+                >
+                  <FaSignInAlt className="nav-icon" />
+                  <span>Login</span>
                 </Link>
               </li>
             )}
