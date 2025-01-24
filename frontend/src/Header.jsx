@@ -69,7 +69,7 @@ const Header = () => {
             <FaBars className="icon-hamburger" />
           </button>
           <img
-            src={`${process.env.PUBLIC_URL}/onboard.png`}
+            src={`${process.env.PUBLIC_URL}/budget.png`}
             alt="logo"
             className="logo-image"
           />

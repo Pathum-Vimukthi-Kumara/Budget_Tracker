@@ -100,7 +100,7 @@ namespace Budget_Tracker {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Budget Tracker;V1.0.0.0;component/signupwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Budget Tracker;component/signupwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\SignUpWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

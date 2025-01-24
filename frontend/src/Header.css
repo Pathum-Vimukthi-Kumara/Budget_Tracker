@@ -76,6 +76,7 @@
 .logo-image {
   width: 40px;
   height: 40px;
+  background-color: white;
   object-fit: contain;
   border-radius: 50%;
   border: 2px solid #fff;
@@ -113,7 +114,7 @@
   width: 200px;
   font-weight: bold;
   height: calc(100vh - 60px);
-  background: #6CB4EE;
+  background: #fafafa;
   background-size: 400% 400%;
   animation: sidebarGradient 20s ease infinite;
   transition: transform 0.3s ease-in-out;

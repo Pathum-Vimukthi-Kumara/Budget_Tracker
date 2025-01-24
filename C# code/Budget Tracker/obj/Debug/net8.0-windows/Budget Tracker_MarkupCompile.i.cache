@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\hp\Documents\C# code\Budget Tracker\obj\Debug\net8.0-windows\
+C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\
 Budget_Tracker
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\hp\Documents\C# code\Budget Tracker\App.xaml
+C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\App.xaml
 7740650779
 2-765406074
 21-1764051036
 244-1951814799
 Calendar.xaml;DashboardWindow.xaml;Graph.xaml;Login.xaml;OnboardingWindow.xaml;SignUpWindow.xaml;TransactionAdd.xaml;
 
-True
+False
 

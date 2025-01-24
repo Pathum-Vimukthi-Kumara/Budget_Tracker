@@ -5,7 +5,7 @@
   margin-top: 20px;
   margin-top: 10vh; /* Changed to viewport units for better responsiveness */
   min-height: 100vh; /* Ensures the dashboard covers the full viewport height */
-  background-color: #EBF5FB;
+  background-color: #fff;
   color: #fff; /* Ensure high contrast */
   overflow: hidden; /* Prevent overall page scroll if not needed */
 }

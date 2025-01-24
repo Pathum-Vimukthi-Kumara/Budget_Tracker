@@ -41,6 +41,21 @@ const ProfilePage = () => {
   };
 
   return (
+    <div className="SignUp"
+    style={{
+      width: '100vw',
+      height: '100vh',
+      backgroundColor:'#EBF5FB',
+      backgroundImage: `url(${process.env.PUBLIC_URL + '/bg.png'})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed', // ✅ Prevents background scrolling
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    
+  }}
+>
     <div className="profile-page">
       <h2 className="profile-title">Profile</h2>
       <div className="profile-card">
@@ -95,6 +110,7 @@ const ProfilePage = () => {
 
       {/* MessageBox for success/error messages */}
       <MessageBox message={message} onClose={() => setMessage('')} />
+    </div>
     </div>
   );
 };
