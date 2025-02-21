@@ -112,15 +112,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
               "$type": "Document",
@@ -269,7 +265,8 @@
               "ToolTip": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\App.xaml",
               "RelativeToolTip": "App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-01-14T12:51:14.4Z"
+              "WhenOpened": "2025-01-14T12:51:14.4Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

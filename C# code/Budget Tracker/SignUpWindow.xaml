@@ -64,6 +64,7 @@
                            Margin="0,5,0,0"/>
                 <PasswordBox Name="ConfirmPasswordBox"
                              Width="280"
+                            
                              Height="30"
                              Margin="0,5,0,20"/>
 

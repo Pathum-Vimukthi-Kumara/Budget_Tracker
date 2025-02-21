@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A4D6E261-EE95-4A9E-B868-46864813EE91}|Budget Tracker.csproj|c:\\users\\hp\\documents\\github\\budget_tracker\\c# code\\budget tracker\\login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A4D6E261-EE95-4A9E-B868-46864813EE91}|Budget Tracker.csproj|solutionrelative:login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A4D6E261-EE95-4A9E-B868-46864813EE91}|Budget Tracker.csproj|c:\\users\\hp\\documents\\github\\budget_tracker\\c# code\\budget tracker\\signupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{A4D6E261-EE95-4A9E-B868-46864813EE91}|Budget Tracker.csproj|solutionrelative:signupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A4D6E261-EE95-4A9E-B868-46864813EE91}|Budget Tracker.csproj|c:\\users\\hp\\documents\\github\\budget_tracker\\c# code\\budget tracker\\calendar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{A4D6E261-EE95-4A9E-B868-46864813EE91}|Budget Tracker.csproj|solutionrelative:calendar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A4D6E261-EE95-4A9E-B868-46864813EE91}|Budget Tracker.csproj|c:\\users\\hp\\documents\\github\\budget_tracker\\c# code\\budget tracker\\login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{A4D6E261-EE95-4A9E-B868-46864813EE91}|Budget Tracker.csproj|solutionrelative:login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A4D6E261-EE95-4A9E-B868-46864813EE91}|Budget Tracker.csproj|c:\\users\\hp\\documents\\github\\budget_tracker\\c# code\\budget tracker\\transactionadd.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -119,21 +119,6 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Graph.xaml",
-              "DocumentMoniker": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\Graph.xaml",
-              "RelativeDocumentMoniker": "Graph.xaml",
-              "ToolTip": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\Graph.xaml",
-              "RelativeToolTip": "Graph.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-01-16T03:33:51.088Z"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "TransactionAdd.xaml",
@@ -146,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Calendar.xaml",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\Calendar.xaml",
               "RelativeDocumentMoniker": "Calendar.xaml",
@@ -157,12 +142,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "SignUpWindow.xaml",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\SignUpWindow.xaml",
               "RelativeDocumentMoniker": "SignUpWindow.xaml",
-              "ToolTip": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\SignUpWindow.xaml*",
-              "RelativeToolTip": "SignUpWindow.xaml*",
+              "ToolTip": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\SignUpWindow.xaml",
+              "RelativeToolTip": "SignUpWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-01-17T19:34:16.57Z",
               "EditorCaption": ""
@@ -180,14 +165,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Login.xaml",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\Login.xaml",
               "RelativeDocumentMoniker": "Login.xaml",
               "ToolTip": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\Login.xaml",
               "RelativeToolTip": "Login.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-01-17T20:18:20.845Z"
+              "WhenOpened": "2025-01-17T20:18:20.845Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Graph.xaml",
+              "DocumentMoniker": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\Graph.xaml",
+              "RelativeDocumentMoniker": "Graph.xaml",
+              "ToolTip": "C:\\Users\\hp\\Documents\\GitHub\\Budget_Tracker\\C# code\\Budget Tracker\\Graph.xaml",
+              "RelativeToolTip": "Graph.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-16T03:33:51.088Z"
             },
             {
               "$type": "Document",
