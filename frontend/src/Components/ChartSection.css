@@ -1,37 +1,37 @@
-/* Container for the entire chart section */
+
 .chart-section {
-  margin: 1rem 2rem; /* Adjust if you have a sidebar or want more/less space */
+  margin: 1rem 2rem; 
   font-family: "Roboto", sans-serif;
   margin-top:140px;
   background-color: #fff;
   color: #333;
 }
 
-/* Section title styling */
+
 .chart-section h2 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #0077b6; /* Modern blue accent color */
+  color: #0077b6; 
   margin-bottom: 3rem;
-  text-align: center; /* Center-align title for balance */
+  text-align: center; 
 }
 
-/* Holds all chart cards in a responsive grid layout */
+
 .chart-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* 3 columns for your 3 charts */
+  grid-template-columns: 1fr 1fr 1fr; 
   gap: 1rem;
  
 }
 
-/* Stack all charts in a single column on smaller screens (e.g., <= 900px) */
+
 @media (max-width: 900px) {
   .chart-container {
     grid-template-columns: 1fr; 
   }
 }
 
-/* Each chart card has a white background, some shadow, and padding */
+
 .chart-card {
   background: #fff;
   border-radius: 8px;
@@ -56,11 +56,10 @@
   font-weight: 500;
 }
 
-/* Make charts fit nicely in the card */
+
 .chart-card canvas {
-  width: 100% !important;  /* Fill card width */
-  max-height: 300px;       /* Adjust if needed */
+  width: 100% !important;  
+  max-height: 300px;       
 }
 
-/* Optional: tweak the chart legends or tooltips via Chart.js options 
-   or override classes if you want further styling. */
+

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./TransactionForm.css";
 
 const TransactionForm = ({ initialData = null, onSubmit, onClose }) => {
-  // If initialData is present, we are editing; otherwise, we’re adding
+  
   const isEditing = !!initialData;
 
   const [formData, setFormData] = useState(

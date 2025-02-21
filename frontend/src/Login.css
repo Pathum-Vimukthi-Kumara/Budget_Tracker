@@ -1,7 +1,4 @@
-/* Global Reset to Remove Spacing and Prevent Scrolling */
-/* (Add any global reset styles here if needed) */
 
-/* Centering Login Box (Glassmorphism Effect) */
 .login-container {
     display: flex;
     flex-direction: column;
@@ -66,6 +63,7 @@
     cursor: pointer;
     background:rgba(5, 90, 202, 0.7);
     color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     transition: background 0.3s ease, box-shadow 0.3s ease;
   }
   

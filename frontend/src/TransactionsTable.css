@@ -1,4 +1,4 @@
-/* Main container styling for proper layout */
+
 
 h2 {
   color:#0f4c75;
@@ -8,7 +8,7 @@ h2 {
 }
 
 
-/* Ensures the table container adapts to zoom and screen size */
+
 .transactions-table {
   padding: 2rem;
   background-color: #ffffff;
@@ -24,13 +24,13 @@ h2 {
   box-sizing: border-box;
 }
 
-/* Making the table container scrollable when needed */
+
 .transactions-table .table-container {
   overflow-x: auto;
-  max-width: 100%;  /* Prevents content from overflowing */
+  max-width: 100%;  
 }
 
-/* Responsive table adjustments for better visibility */
+
 .transactions-table table {
   width: 100%;
   border-collapse: collapse;
@@ -57,7 +57,7 @@ h2 {
   background-color: #f1f1f1;
 }
 
-/* Income and Expense Badge Styling */
+
 .transactions-table .type-income {
   background-color: #4caf50;
   color: white;
@@ -78,16 +78,16 @@ h2 {
   color: #666;
 }
 
-/* Fixing content overflow when zooming */
+
 body {
   min-height: 100vh;
   overflow-y: auto;
-  overflow-x: auto; /* Allowing horizontal scrolling only when necessary */
+  overflow-x: auto; 
   max-width: 100vw;
   position: relative;
 }
 
-/* Responsive Design for Tablets and Smaller Screens */
+
 @media (max-width: 768px) {
   .transactions-table {
       padding: 1rem;
@@ -111,7 +111,7 @@ body {
   }
 }
 
-/* Responsive Design for Mobile Phones */
+
 @media (max-width: 480px) {
   .transactions-table {
       padding: 0.5rem;

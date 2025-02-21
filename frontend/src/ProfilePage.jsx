@@ -49,7 +49,7 @@ const ProfilePage = () => {
       backgroundImage: `url(${process.env.PUBLIC_URL + '/bg.png'})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundAttachment: 'fixed', // ✅ Prevents background scrolling
+      backgroundAttachment: 'fixed', 
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
