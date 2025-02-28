@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./Calendar.css";
 
-// Helper: get number of days in a given month and year
+
 function getDaysInMonth(year, monthIndex) {
   return new Date(year, monthIndex + 1, 0).getDate();
 }
 
-// Helper: find the day of the week the first day of a given month falls on (0=Sun, 1=Mon, etc.)
+
 function getFirstDayOfMonth(year, monthIndex) {
   return new Date(year, monthIndex, 1).getDay();
 }
 
-// Helper: check if a particular date is "today"
+
 function isToday(year, monthIndex, dayNumber) {
   const today = new Date();
   return (
@@ -32,7 +32,7 @@ const Calendar = () => {
     fetchTransactions();
   }, []);
 
-  // Fetch all transactions from the server
+
   const fetchTransactions = async () => {
     try {
       const response = await fetch("http://localhost:3011/api/v1/transactions", {
@@ -52,7 +52,7 @@ const Calendar = () => {
     }
   };
 
-  // Go to previous month
+
   const handlePrevMonth = () => {
     if (currentMonth === 0) {
       setCurrentYear((prev) => prev - 1);
@@ -62,7 +62,7 @@ const Calendar = () => {
     }
   };
 
-  // Go to next month
+
   const handleNextMonth = () => {
     if (currentMonth === 11) {
       setCurrentYear((prev) => prev + 1);
@@ -72,13 +72,13 @@ const Calendar = () => {
     }
   };
 
-  // Show transactions in popup for the clicked date
+
   const handleDateClick = (dayTransactions) => {
     setSelectedTransactions(dayTransactions);
     setShowTransactionPopup(true);
   };
 
-  // Build array of all days for the current month
+  
   const daysInMonth = getDaysInMonth(currentYear, currentMonth);
   const firstDayOfWeek = getFirstDayOfMonth(currentYear, currentMonth);
 
@@ -88,7 +88,7 @@ const Calendar = () => {
       dayNumber
     ).padStart(2, "0")}`;
 
-    // Transactions for this specific date
+   
     const dayTransactions = transactions.filter((t) => t.date === dateStr);
 
     calendarDays.push({
@@ -97,16 +97,16 @@ const Calendar = () => {
     });
   }
 
-  // Blank cells before the first day (to align the calendar)
+ 
   const blanksBefore = [];
   for (let i = 0; i < firstDayOfWeek; i++) {
     blanksBefore.push({ blank: true });
   }
 
-  // Combine blank cells + days of this month
+
   const allCells = [...blanksBefore, ...calendarDays];
 
-  // Group cells into rows of 7 for each week
+
   const rows = [];
   for (let i = 0; i < allCells.length; i += 7) {
     rows.push(allCells.slice(i, i + 7));

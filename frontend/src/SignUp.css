@@ -1,6 +1,5 @@
 
 
-/* Sign Up Box Styling - Glassmorphism Effect */
 .signup-container {
   display: flex;
   flex-direction: column;
@@ -9,19 +8,18 @@
   max-width: 500px;
   padding: 50px;
   z-index:1;
-  background: rgba(255, 255, 255, 0.15); /* Transparent glass effect */
+  background: rgba(255, 255, 255, 0.15); 
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(20px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   text-align: center;
   color: black;
-  
   box-sizing: border-box;
   width: 100%;
 }
 
-/* Header Styling */
+
 h2 {
   text-align: center;
   color:rgba(5, 90, 202, 0.7);
@@ -31,7 +29,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* Form Group Styling */
+
 .form-group {
   margin-bottom: 20px;
   text-align: left;
@@ -44,7 +42,7 @@ label {
   font-weight: 600;
 }
 
-/* Input Styling */
+
 input {
   width: 100%;
   padding: 12px;
@@ -66,7 +64,7 @@ input:focus {
   box-shadow: #000042;
 }
 
-/* Button Styling */
+
 .signup-container button {
   width: 109%;
   padding: 12px;
@@ -89,7 +87,7 @@ input:focus {
     
 }
 
-/* Login Link Styling */
+
 .login-link {
   margin-top: 20px;
   font-size: 1.2rem;
@@ -108,8 +106,6 @@ input:focus {
   color:  darkblue;
 }
 
-/* Animation for Fade-In Effect */
-
 
 .error {
   border: 1px solid red;
@@ -121,11 +117,11 @@ input:focus {
 }
 
 
-/* ✅ Perfect Responsive Design Adjustments */
+
 @media (max-width: 768px) {
   .signup-container {
       padding: 30px;
-      max-width: 90%; /* Adjust width for smaller screens */
+      max-width: 90%; 
   }
   .signup-container button {
   
@@ -180,7 +176,7 @@ input:focus {
   }
 }
 
-/* For Extra Small Devices */
+
 @media (max-width: 328px) {
   .signup-container {
       padding: 15px;

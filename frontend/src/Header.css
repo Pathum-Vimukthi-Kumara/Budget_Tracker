@@ -1,26 +1,22 @@
-/* 1) Animated gradient background for the header */
+
 .header-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 60px;
-  /* Transparent blue-tinted animated gradient background */
-  background: rgba(5, 90, 202, 0.7); /* Blue color with 40% opacity */
+  background: rgba(5, 90, 202, 0.7); 
   background-size: 800% 800%;
   animation: headerGradient 15s ease infinite;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 1000; /* Keep on top of everything */
+  z-index: 1000;
   padding: 0 1rem;
   box-shadow: 0 2px 8px rgba(79, 7, 188, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
   
-  /* Ensure a glass-like effect */
-  backdrop-filter: blur(10px); /* Blurs the content behind the header */
-  -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
-  
-  /* Optional for gradient animation */
   
   }
   
@@ -36,7 +32,7 @@
     background-position: 0% 50%;
   }
 }
-/* Keyframes for header gradient animation */
+
 @keyframes headerGradient {
   0% {
     background-position: 0% 50%;
@@ -49,7 +45,7 @@
   }
 }
 
-/* 2) Hamburger + Title styling */
+
 .header-left {
   display: flex;
   align-items: center;
@@ -90,7 +86,7 @@
   margin: 0;
 }
 
-/* 3) Header right side (profile icon, etc.) */
+
 .header-right {
   margin-right: 1rem;
 }
@@ -105,12 +101,12 @@
   text-decoration: none;
 }
 
-/* 4) Sidebar styling with an animated gradient as well */
+
 .sidebar {
   position: fixed;
-  top: 60px; /* below the header-bar */
+  top: 60px; 
   left: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Roboto", sans-serif;
   width: 200px;
   font-weight: bold;
   height: calc(100vh - 60px);
@@ -123,15 +119,15 @@
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Keyframes for sidebar gradient animation */
 
 
-/* When sidebar is open */
+
+
 .sidebar.open {
   transform: translateX(0);
 }
 
-/* 5) Sidebar nav styling */
+
 .sidebar-nav {
   margin: 1rem;
 }
@@ -163,13 +159,13 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Icon next to text */
+
 .nav-icon {
   margin-right: 0.5rem;
   font-size: 1.2rem;
 }
 
-/* 6) Logout button specific styling */
+
 .logout-button {
   color: #d9534f; 
 }

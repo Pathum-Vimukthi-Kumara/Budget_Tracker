@@ -108,7 +108,7 @@ const ProfilePage = () => {
         </form>
       </div>
 
-      {/* MessageBox for success/error messages */}
+     
       <MessageBox message={message} onClose={() => setMessage('')} />
     </div>
     </div>

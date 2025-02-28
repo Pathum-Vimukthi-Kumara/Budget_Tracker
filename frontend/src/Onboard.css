@@ -4,7 +4,7 @@
 .onboard {
   width: 100vw;
   height: 100vh;
-  /* Consider removing fixed negative margins for responsiveness */
+  
   margin-left: -190px;
   display: flex;
   justify-content: center;
@@ -18,14 +18,14 @@
   max-width: 1200px;
 }
 
-/* Content-side styling */
+
 .content-side {
   flex: 1;
   display: flex;
   align-items: center;
 }
 
-/* Glass overlay styling */
+
 .glass-overlay {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
@@ -51,7 +51,7 @@
 
 .glass-overlay h1,
 .glass-overlay p {
-  /* Removed space in font-size value for proper interpretation */
+ 
  
   margin: 0 0 1rem 0;
 }
@@ -73,12 +73,11 @@
   color: white;
 }
 
-/* Responsive adjustments for tablets and phones */
+
 @media (max-width: 768px) {
   .onboard-page {
     flex-direction: column;
     width: 100%;
-    /* Remove or adjust margin for mobile */
     margin-left: 60px;
   }
 

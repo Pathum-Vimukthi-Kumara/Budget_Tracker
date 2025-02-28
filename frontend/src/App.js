@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Dashboard from "./Dashboard";
@@ -8,10 +7,8 @@ import Onboard from "./Onboard";
 import Header from "./Header";
 import TransactionsTable from "./TransactionsTable";
 import Calendar from "./Calendar";
-
 import ChartSection from "./Components/ChartSection";  
 import Footer from "./Footer";
-
 import "./Dashboard.css";
 import "./Header.css";
 import "./TransactionsTable.css";

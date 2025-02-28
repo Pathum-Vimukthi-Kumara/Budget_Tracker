@@ -19,7 +19,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token")); // Initialize based on localStorage
   const navigate = useNavigate();
 
-  // Function to check login status
+  
   const checkLoginStatus = () => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
@@ -47,7 +47,7 @@ const Header = () => {
     setMenuOpen(false);
   };
 
-  // Listen for changes in localStorage
+  
   useEffect(() => {
     const handleStorageChange = () => {
       checkLoginStatus();
@@ -62,7 +62,7 @@ const Header = () => {
 
   return (
     <>
-      {/* Fixed Header Bar */}
+     
       <header className="header-bar">
         <div className="header-left">
           <button className="hamburger" onClick={toggleMenu}>
@@ -76,7 +76,7 @@ const Header = () => {
           <h1 className="app-title">Budget Tracker</h1>
         </div>
 
-        {/* Only show the profile icon if logged in */}
+        
         <div className="header-right">
           {isLoggedIn && (
             <Link to="/profile" className="profile-icon">
@@ -86,7 +86,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Sidebar for Navigation */}
+      
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
         <nav className="sidebar-nav">
           <ul>
@@ -162,7 +162,7 @@ const Header = () => {
         </nav>
       </aside>
 
-      {/* Message Box Component */}
+    
       <MessageBox message={message} onClose={() => setMessage("")} />
     </>
   );

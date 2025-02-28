@@ -40,7 +40,7 @@ const ChartSection = () => {
         label: "Daily Expenses",
         data: [],
         borderColor: "#DC143C",
-        backgroundColor: "rgba(220, 20, 60, 0.2)", // fill color
+        backgroundColor: "rgba(220, 20, 60, 0.2)", 
         tension: 0.3,
         fill: true,
       },
@@ -53,14 +53,14 @@ const ChartSection = () => {
         label: "Daily Income",
         data: [],
         borderColor: "#4CAF50",
-        backgroundColor: "rgba(76, 175, 80, 0.2)", // fill color
+        backgroundColor: "rgba(76, 175, 80, 0.2)", 
         tension: 0.3,
         fill: true,
       },
     ],
   });
 
-  // Fetch transactions
+
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
@@ -83,9 +83,9 @@ const ChartSection = () => {
     fetchTransactions();
   }, []);
 
-  // Process transactions for charts
+ 
   useEffect(() => {
-    // Calculate total income/expenses
+    
     const income = transactions
       .filter((t) => t.type === "income")
       .reduce((sum, t) => sum + parseFloat(t.amount), 0);
@@ -93,7 +93,7 @@ const ChartSection = () => {
       .filter((t) => t.type === "expense")
       .reduce((sum, t) => sum + parseFloat(t.amount), 0);
 
-    // Update Pie chart
+    
     setOverallChartData({
       labels: ["Income", "Expenses"],
       datasets: [
@@ -104,7 +104,7 @@ const ChartSection = () => {
       ],
     });
 
-    // Daily Expenses
+ 
     const dailyExpensesMap = transactions
       .filter((t) => t.type === "expense")
       .reduce((acc, t) => {
@@ -129,7 +129,7 @@ const ChartSection = () => {
       ],
     });
 
-    // Daily Income
+   
     const dailyIncomeMap = transactions
       .filter((t) => t.type === "income")
       .reduce((acc, t) => {
@@ -155,7 +155,7 @@ const ChartSection = () => {
     });
   }, [transactions]);
 
-  // Common line chart options
+
   const commonLineOptions = {
     responsive: true,
     plugins: {
@@ -183,7 +183,7 @@ const ChartSection = () => {
       <h2>Budget Analysis</h2>
 
       <div className="chart-container">
-        {/* Pie Chart Card */}
+      
         <div className="chart-card">
           <h3>Overall Budget Breakdown</h3>
           <Pie
@@ -200,13 +200,13 @@ const ChartSection = () => {
           />
         </div>
 
-        {/* Expenses Line Chart Card */}
+      
         <div className="chart-card">
           <h3>Daily Expenses</h3>
           <Line data={dailyExpenseChartData} options={commonLineOptions} />
         </div>
 
-        {/* Income Line Chart Card */}
+       
         <div className="chart-card">
           <h3>Daily Income</h3>
           <Line data={dailyIncomeChartData} options={commonLineOptions} />

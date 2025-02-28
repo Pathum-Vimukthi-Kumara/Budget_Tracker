@@ -2,7 +2,7 @@ import React from "react";
 import "./MessageBox.css";
 
 const MessageBox = ({ message, onClose }) => {
-  if (!message) return null; // Do not render if no message
+  if (!message) return null;
 
   return (
     <div className="onborad"

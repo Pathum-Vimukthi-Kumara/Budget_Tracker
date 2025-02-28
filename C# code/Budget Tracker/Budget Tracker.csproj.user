@@ -25,6 +25,9 @@
     <Compile Update="SignUpWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="test.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="TransactionAdd.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -46,6 +49,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="SignUpWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="test.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="TransactionAdd.xaml">

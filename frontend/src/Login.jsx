@@ -57,7 +57,7 @@ const Login = () => {
       backgroundSize: 'cover',
       backgroundImage: `url(${process.env.PUBLIC_URL + '/bg.png'})`,
       backgroundPosition: 'center',
-      backgroundAttachment: 'fixed', // ✅ Prevents background scrolling
+      backgroundAttachment: 'fixed', 
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

@@ -1,12 +1,12 @@
-// src/Components/Transactions.jsx
+
 
 import React, { useState, useEffect, useCallback } from "react";
 import "./Transactions.css";
 import { FaTrash, FaSearch, FaEdit, FaPlus } from "react-icons/fa";
 import Modal from "react-modal";
-import TransactionForm from "./TransactionForm"; // Ensure correct path
+import TransactionForm from "./TransactionForm"; 
 
-Modal.setAppElement("#root"); // Important for accessibility
+Modal.setAppElement("#root"); 
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -16,15 +16,15 @@ const Transactions = () => {
   const [balance, setBalance] = useState(0);
   const [apiError, setApiError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState("income"); // 'income' or 'expense'
+  const [modalType, setModalType] = useState("income"); 
   const [editFormData, setEditFormData] = useState(null);
 
-  // Fetch all transactions on component mount
+  
   useEffect(() => {
     fetchTransactions();
   }, []);
 
-  // Calculate totals whenever the transactions array changes
+  
   const calculateTotals = useCallback(() => {
     const incomeSum = transactions
       .filter((t) => t.type === "income")
@@ -43,7 +43,7 @@ const Transactions = () => {
     calculateTotals();
   }, [transactions, calculateTotals]);
 
-  // Fetch transactions from API
+ 
   const fetchTransactions = async () => {
     try {
       const response = await fetch("http://localhost:3011/api/v1/transactions", {
@@ -55,7 +55,7 @@ const Transactions = () => {
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
-          // Ensure amounts are numeric
+        
           const parsedData = data.map((t) => ({
             ...t,
             amount: parseFloat(t.amount) || 0,
@@ -75,7 +75,7 @@ const Transactions = () => {
     }
   };
 
-  // Create a transaction (income or expense)
+  
   const addTransaction = async (transaction) => {
     try {
       const response = await fetch("http://localhost:3011/api/v1/transactions", {
@@ -99,7 +99,7 @@ const Transactions = () => {
     }
   };
 
-  // Delete a transaction
+
   const deleteTransaction = async (id) => {
     try {
       const response = await fetch(
@@ -123,7 +123,7 @@ const Transactions = () => {
     }
   };
 
-  // Update an existing transaction
+
   const updateTransaction = async (id, updatedTransaction) => {
     try {
       const response = await fetch(
@@ -150,30 +150,30 @@ const Transactions = () => {
     }
   };
 
-  // Open the modal for adding an income or expense
+
   const openModal = (type) => {
     setModalType(type);
     setIsModalOpen(true);
     setEditFormData(null);
   };
 
-  // Close the modal
+ 
   const closeModal = () => {
     setIsModalOpen(false);
     setModalType("income");
   };
 
-  // Handle submission from "add" form
+
   const handleAddSubmit = (transaction) => {
     addTransaction(transaction);
   };
 
-  // Handle submission from "edit" form
+ 
   const handleEditSubmit = (transaction) => {
     updateTransaction(editFormData.id, transaction);
   };
 
-  // Filter transactions by search term
+  
   const filteredTransactions = Array.isArray(transactions)
     ? transactions.filter((t) =>
         t.title?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -186,7 +186,7 @@ const Transactions = () => {
 
       {apiError && <p className="error">{apiError}</p>}
 
-      {/* Summary row: Income / Expense / Balance */}
+      
       <div className="summary">
         <div className="summary-box income">
           <h3>Total Income</h3>
@@ -202,7 +202,7 @@ const Transactions = () => {
         </div>
       </div>
 
-      {/* Search bar & Add buttons */}
+      
       <div className="controls">
         <div className="search-bar">
           <FaSearch className="search-icon" />
@@ -223,7 +223,7 @@ const Transactions = () => {
         </div>
       </div>
 
-      {/* Add Transaction Modal */}
+     
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -238,12 +238,12 @@ const Transactions = () => {
         />
       </Modal>
 
-      {/* Edit Transaction Modal */}
+    
       {editFormData && (
         <Modal
           isOpen={!!editFormData}
           onRequestClose={() => setEditFormData(null)}
-          contentLabel="Edit Transaction"
+          contentLabel="Transaction"
           className="modal"
           overlayClassName="overlay"
         >
@@ -255,7 +255,7 @@ const Transactions = () => {
         </Modal>
       )}
 
-      {/* Transaction list */}
+      
       <div className="transaction-list">
         {filteredTransactions.length === 0 ? (
           <p style={{ textAlign: "center", color: "#777" }}>

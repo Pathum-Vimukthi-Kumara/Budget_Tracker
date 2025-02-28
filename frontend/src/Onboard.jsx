@@ -23,14 +23,10 @@ const Onboard = () => {
       position: 'fixed',
       top: '50%',
       left: '50%',
-      transform: 'translate(-50%, -50%) scale(1)', // Default scale
-      transition: 'transform 0.5s ease', // Smooth transition
+      transform: 'translate(-50%, -50%) scale(1)', 
+      transition: 'transform 0.5s ease', 
     }}
-  
-    
-  
   >
-
   
     <div className="onboard">
       <div className="onboard-page">
