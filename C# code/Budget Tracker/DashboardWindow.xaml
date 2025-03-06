@@ -7,13 +7,13 @@
         WindowStartupLocation="CenterScreen">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#023e8a" Offset="0.0" />
-            <GradientStop Color="#023e8a" Offset="1.0" />
+            <GradientStop Color="DarkBlue" Offset="0.0" />
+            <GradientStop Color="AliceBlue" Offset="1.0" />
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
         <Grid.Resources>
-            <!-- Button Style for Rounded Corners -->
+            
             <Style TargetType="Button">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -36,7 +36,7 @@
         </Grid.Resources>
 
         <StackPanel Margin="10">
-            <!-- Total Income, Expense, Balance Section -->
+           
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Center">
                 <Border BorderBrush="Green" BorderThickness="1" Margin="5" Padding="10" Background="#E5FBEF" CornerRadius="8">
                     <StackPanel>
@@ -58,7 +58,7 @@
                 </Border>
             </StackPanel>
 
-            <!-- DataGrid for Transactions -->
+            
             <TextBlock Text="Transaction List"
                        FontSize="16"
                        FontWeight="Bold"
@@ -66,48 +66,70 @@
                        Margin="0,0,0,10" />
 
             <DataGrid x:Name="TransactionGrid"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True"
-                      SelectionMode="Single"
-                      Margin="0,0,0,10"
-                      AlternatingRowBackground="#F5F5F5"
-                      RowBackground="White"
-                      GridLinesVisibility="Horizontal">
-                <DataGrid.Columns >
-                    <DataGridTextColumn  Header="ID" Binding="{Binding Id}" Width="50" />
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          SelectionMode="Single"
+          Margin="0,0,0,10"
+          AlternatingRowBackground="#F5F5F5"
+          RowBackground="White"
+          GridLinesVisibility="Horizontal"
+          SelectionUnit="FullRow"
+          BorderBrush="Black"
+          BorderThickness="1">
+
+                <!-- Header Styles -->
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="DarkBlue" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="FontSize" Value="16" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="Height" Value="40" />
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <!-- Empty column to create space at the start -->
+                    <DataGridTextColumn Width="10" IsReadOnly="True"/>
+
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50" />
                     <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="150" />
                     <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="100" />
                     <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=d}" Width="100" />
                     <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="100" />
                 </DataGrid.Columns>
+
+
             </DataGrid>
 
-            <!-- Buttons for Add, Edit, Delete Transaction -->
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button Content="Add Transaction"
                         Width="120"
                         Margin="0,0,10,0"
                         Click="AddTransaction_Click"
-                        Background="#81C784" />
+                        Background="Green" />
+                   <Button Content="Delete"
+                   Width="80"
+                            Margin="0,0,10,0"
+                  Click="DeleteTransaction_Click"
+                    Background="Red" />
                 <Button Content="Edit"
                         Width="80"
                         Margin="0,0,10,0"
                          Click="EditTransaction_Click"
-                        Background="#64B5F6" />
-                <Button Content="Delete"
-                        Width="80"
-                        Click="DeleteTransaction_Click"
-                        Background="#E57373" />
+                        Background="DarkBlue" />
+               
                 <Button Content="View Graph"
                         Width="100"
                         Click="ViewGraph_Click"
+                         Height="25"
                         Margin="10,0,0,0"
-                        Background="#FFD54F" />
+                        Background="DarkBlue" />
                 <Button Content="View Calendar"
                         Width="120"
                         Margin="10,0,0,0"
                         Click="ViewCalendar_Click"
-                        Background="#FFB74D" />
+                        Background="DarkBlue" />
             </StackPanel>
         </StackPanel>
     </Grid>

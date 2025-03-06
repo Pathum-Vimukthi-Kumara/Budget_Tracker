@@ -7,8 +7,8 @@ namespace Budget_Tracker
         public int Id { get; set; }
         public string Title { get; set; }
         public decimal Amount { get; set; }
-        public string Type { get; set; } // "Income" or "Expense"
-        public DateTime Date { get; set; } // Transaction date
+        public string Type { get; set; } 
+        public DateTime Date { get; set; } 
     }
 
 }

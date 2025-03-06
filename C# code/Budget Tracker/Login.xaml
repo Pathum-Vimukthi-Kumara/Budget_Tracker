@@ -6,7 +6,6 @@
         ResizeMode="NoResize"
         Background="#023e8a">
     <Grid>
-        <!-- Login Container -->
         <Border BorderBrush="#cccccc"
                 Background="White"
                 BorderThickness="1"
@@ -20,18 +19,14 @@
                   VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <!-- Spacer -->
                     <RowDefinition Height="20" />
                     <RowDefinition Height="Auto" />
-                    <!-- Spacer -->
                     <RowDefinition Height="20" />
                     <RowDefinition Height="Auto" />
-                    <!-- Spacer -->
                     <RowDefinition Height="20" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <!-- Title -->
                 <TextBlock Text="Login"
                            Foreground="Black"
                            FontSize="24"
@@ -40,37 +35,41 @@
                            Margin="0,10,0,20"
                            Grid.Row="0" />
 
-                <!-- Email -->
+
+
+
                 <TextBlock Text="Email:"
                            Foreground="Black"
                            FontSize="16"
                            HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
                            Grid.Row="2"
                            Margin="0,0,0,5" />
                 <TextBox Name="EmailTextBox"
                          Width="250"
                          Height="30"
+                         VerticalAlignment="Center"
                          HorizontalAlignment="Center"
                          Grid.Row="2"
                          Margin="0,25,0,0"
                          Grid.RowSpan="2" />
 
-                <!-- Password -->
                 <TextBlock Text="Password:"
                            Foreground="Black"
                            FontSize="16"
+                           VerticalAlignment="Center"
                            HorizontalAlignment="Left"
                            Grid.Row="4"
                            Margin="0,0,0,5" />
                 <PasswordBox Name="PasswordBox"
                              Width="250"
                              Height="30"
+                             VerticalAlignment="Center"
                              HorizontalAlignment="Center"
                              Grid.Row="4"
                              Margin="0,25,0,0"
                              Grid.RowSpan="2" />
 
-                <!-- Login Button -->
                 <Button Content="Login"
                         Background="#023e8a"
                         Width="120"
@@ -82,7 +81,6 @@
                         Click="LoginButton_Click"
                         Grid.Row="6" />
 
-                <!-- Sign Up Link -->
                 <TextBlock HorizontalAlignment="Left"
                            Grid.Row="6"
                            Foreground="Black"
@@ -96,7 +94,6 @@
                     </Hyperlink>
                 </TextBlock>
 
-                <!-- Message Text -->
                 <TextBlock Name="MessageTextBlock"
                            FontSize="14"
                            Foreground="Red"

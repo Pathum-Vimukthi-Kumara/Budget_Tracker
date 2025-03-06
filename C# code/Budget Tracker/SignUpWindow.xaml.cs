@@ -64,7 +64,7 @@ namespace Budget_Tracker
                         {
                             MessageBox.Show("Registration successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                            // Redirect to login
+                          
                             LoginWindow loginWindow = new LoginWindow();
                             loginWindow.Show();
                             this.Close();

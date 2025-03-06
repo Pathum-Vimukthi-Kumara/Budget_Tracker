@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media;
+using System.Collections.Generic;
 
 namespace Budget_Tracker
 {
@@ -13,6 +15,29 @@ namespace Budget_Tracker
         {
             InitializeComponent();
             LoadTransactionDates();
+        }
+
+        private static List<CalendarDayButton> FindChildren<CalendarDayButton>(DependencyObject parent) where CalendarDayButton : DependencyObject
+        {
+            List<CalendarDayButton> children = new List<CalendarDayButton>();
+
+            if (parent == null) return children;
+
+     
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is CalendarDayButton)
+                {
+                    children.Add((CalendarDayButton)child);
+                }
+
+             
+                children.AddRange(FindChildren<CalendarDayButton>(child));
+            }
+
+            return children;
         }
 
         private void LoadTransactionDates()
@@ -29,14 +54,19 @@ namespace Budget_Tracker
                         .Where(t => t.Date.Date >= startOfMonth && t.Date.Date <= endOfMonth)
                         .ToList();
 
+                 
+                    var dateButtons = FindChildren<CalendarDayButton>(TransactionCalendar);
+
+                
                     foreach (var transaction in transactions)
                     {
-                        var dateButton = TransactionCalendar.FindChildren<CalendarDayButton>()
-                            .FirstOrDefault(btn => btn.DataContext is DateTime date && date.Date == transaction.Date.Date);
-
-                        if (dateButton != null)
+                       
+                        foreach (var dateButton in dateButtons)
                         {
-                            dateButton.Tag = transaction.Type; // Use "Income" or "Expense"
+                            if (dateButton.DataContext is DateTime date && date.Date == transaction.Date.Date)
+                            {
+                                dateButton.Tag = transaction.Type; 
+                            }
                         }
                     }
                 }
@@ -49,7 +79,6 @@ namespace Budget_Tracker
             {
                 DateTime selectedDate = TransactionCalendar.SelectedDate.Value;
 
-                // Load transactions for the selected date
                 using (var _dbContext = new TransactionDbContext())
                 {
                     var transactions = _dbContext.Transactions
@@ -57,7 +86,6 @@ namespace Budget_Tracker
                         .Where(t => t.Date.Date == selectedDate.Date)
                         .ToList();
 
-                    // Bind transactions to DataGrid
                     TransactionGrid.ItemsSource = transactions;
                 }
             }
@@ -75,6 +103,5 @@ namespace Budget_Tracker
                 LoadTransactionDates();
             }
         }
-
     }
 }

@@ -6,7 +6,7 @@
         ResizeMode="NoResize"
         Background="#023e8a">
     <Grid>
-        <!-- Sign Up Container -->
+        
         <Border BorderBrush="#cccccc"
                 Background="White"
                 BorderThickness="1"
@@ -19,7 +19,7 @@
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Width="300">
-                <!-- Title -->
+               
                 <TextBlock Text="Sign Up"
                            Foreground="#023e8a"
                            FontSize="24"
@@ -27,56 +27,49 @@
                            HorizontalAlignment="Center"
                            Margin="0,10,0,20" RenderTransformOrigin="0.375,2.929"/>
 
-                <!-- Username -->
+               
                 <TextBlock Text="Username:"
                            Foreground="Black"
                            FontSize="16"
-                           Margin="0,5,0,0"/>
+                           Margin="0,5,0,0" Width="276"/>
                 <TextBox Name="UsernameTextBox"
                          Width="280"
                          Height="30"
                          Margin="0,5,0,10"/>
 
-                <!-- Email -->
+               
                 <TextBlock Text="Email:"
                            Foreground="Black"
                            FontSize="16"
-                           Margin="0,5,0,0"/>
+                           Margin="0,5,0,0" Width="276"/>
                 <TextBox Name="EmailTextBox"
                          Width="280"
                          Height="30"
                          Margin="0,5,0,10"/>
 
-                <!-- Password -->
+                
                 <TextBlock Text="Password:"
                            Foreground="Black"
                            FontSize="16"
-                           Margin="0,5,0,0"/>
+                           Margin="0,5,0,0" Width="277"/>
                 <PasswordBox Name="PasswordBox"
                              Width="280"
                              Height="30"
                              Margin="0,5,0,10"/>
-
-                <!-- Confirm Password -->
                 <TextBlock Text="Confirm Password:"
                            Foreground="Black"
-                           FontSize="16"
-                           Margin="0,5,0,0"/>
+                           FontSize="16" Width="279"
+                           />
                 <PasswordBox Name="ConfirmPasswordBox"
                              Width="280"
-                            
                              Height="30"
                              Margin="0,5,0,20"/>
-
-                <!-- Sign Up Button -->
                 <Button Content="Sign Up"
                         Width="120"
                         Height="40"
                         Background="#023e8a"
                         Foreground="White"
                         FontSize="16"
-                        HorizontalAlignment="Center"
-                        Margin="0,10,0,0"
                         Click="SignUpButton_Click"/>
                 <TextBlock
                            FontSize="14"
@@ -85,9 +78,9 @@
                                Foreground="Blue"
                                Click="LoginHyperlink_Click"><Run Text="Log In"/></Hyperlink></TextBlock>
 
-                <!-- "Already have an account? Log In" -->
+             
 
-                <!-- Message Text -->
+               
                 <TextBlock Name="MessageTextBlock"
                            FontSize="14"
                            Foreground="Red"

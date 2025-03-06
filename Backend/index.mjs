@@ -29,8 +29,6 @@ app.use(helmet());
 // });
 
 
-
-
 const db = mysql.createConnection({
   host: "bboai925bg2h7iyfqvwh-mysql.services.clever-cloud.com",
   user: "u5pcka2rnhj9wq1h",

@@ -14,14 +14,12 @@ using System.Windows.Shapes;
 
 namespace Budget_Tracker
 {
-    /// <summary>
-    /// Interaction logic for OnboardingWindow.xaml
-    /// </summary>
+  
     public partial class OnboardingWindow : Window
     {
         public OnboardingWindow()
         {
-            //InitializeComponent();
+           
         }
 
         private void GetStartedButton_Click(object sender, RoutedEventArgs e)

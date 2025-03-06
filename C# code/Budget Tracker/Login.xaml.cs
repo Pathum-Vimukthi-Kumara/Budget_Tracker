@@ -3,9 +3,7 @@ using System.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 namespace Budget_Tracker
 {
-    /// <summary>
-    /// Interaction logic for LoginWindow.xaml
-    /// </summary>
+    
     public partial class LoginWindow : Window
     {
         public LoginWindow()
@@ -30,7 +28,7 @@ namespace Budget_Tracker
                 return;
             }
 
-            // SQLite connection string
+           
             string connectionString = "Data Source=C:\\Users\\hp\\Documents\\Budget Tracker\\Budget_Tracker\\C# code\\Budget Tracker\\Budget.db;";
 
             try
@@ -49,7 +47,7 @@ namespace Budget_Tracker
 
                         if (userCount > 0)
                         {
-                            MessageBox.Show("Login successful!");
+                            
                             DashboardWindow dashboard = new DashboardWindow();
                             dashboard.Show();
                             this.Close();

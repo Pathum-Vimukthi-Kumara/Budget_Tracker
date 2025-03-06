@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="background.jpg" />
+    <Resource Include="Images\background.jpg" />
   </ItemGroup>
 
 </Project>

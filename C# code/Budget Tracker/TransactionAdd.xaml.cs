@@ -13,13 +13,12 @@ namespace Budget_Tracker
             InitializeComponent();
             Transaction = transaction;
 
-            // Initialize UI with existing values (if editing an existing item)
+           
             TitleTextBox.Text = Transaction.Title;
             AmountTextBox.Text = Transaction.Amount.ToString();
             DatePickerControl.SelectedDate = Transaction.Date == default ? DateTime.Now : Transaction.Date;
 
-            // Pre-select the combo box if Type is set
-            // e.g. if "Expense", find that ComboBoxItem
+          
             if (!string.IsNullOrEmpty(Transaction.Type))
             {
                 foreach (var item in TypeComboBox.Items)
@@ -37,10 +36,10 @@ namespace Budget_Tracker
         {
             try
             {
-                // Validate Title
+                
                 Transaction.Title = TitleTextBox.Text;
 
-                // Parse Amount
+               
                 if (decimal.TryParse(AmountTextBox.Text, out decimal result))
                 {
                     Transaction.Amount = result;
@@ -51,17 +50,17 @@ namespace Budget_Tracker
                     return;
                 }
 
-                // Date
+               
                 Transaction.Date = DatePickerControl.SelectedDate ?? DateTime.Now;
 
-                // Type (Income/Expense)
+                
                 if (TypeComboBox.SelectedItem is ComboBoxItem comboItem)
                 {
                     Transaction.Type = comboItem.Content.ToString();
                 }
                 else
                 {
-                    Transaction.Type = "Income"; // default
+                    Transaction.Type = "Income";
                 }
 
                 DialogResult = true;

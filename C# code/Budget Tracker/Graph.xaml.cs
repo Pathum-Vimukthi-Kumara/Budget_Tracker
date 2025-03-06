@@ -23,12 +23,12 @@ namespace Budget_Tracker
             {
                 var transactions = _dbContext.Transactions.AsNoTracking().ToList();
 
-                // Calculate totals
+                
                 decimal totalIncome = transactions.Where(t => t.Type == "Income").Sum(t => t.Amount);
                 decimal totalExpense = transactions.Where(t => t.Type == "Expense").Sum(t => t.Amount);
                 decimal balance = totalIncome - totalExpense;
 
-                // Update graph data
+                
                 SeriesCollection = new SeriesCollection
                 {
                     new ColumnSeries
@@ -40,8 +40,8 @@ namespace Budget_Tracker
 
                 Labels = new[] { "Total Income", "Total Expense", "Balance" };
 
-                // Refresh bindings
-                DataContext = this; // Ensure the DataContext is updated
+               
+                DataContext = this; 
             }
         }
     }

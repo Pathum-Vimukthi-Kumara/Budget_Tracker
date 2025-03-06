@@ -7,7 +7,7 @@ namespace Budget_Tracker
 {
     public partial class DashboardWindow : Window
     {
-        // Declare graphWindow as a class-level variable
+        
         private GraphWindow graphWindow;
 
         public DashboardWindow()
@@ -23,12 +23,11 @@ namespace Budget_Tracker
                 var transactions = _dbContext.Transactions.AsNoTracking().ToList();
                 TransactionGrid.ItemsSource = transactions;
 
-                // Calculate totals
                 decimal totalIncome = transactions.Where(t => t.Type == "Income").Sum(t => t.Amount);
                 decimal totalExpense = transactions.Where(t => t.Type == "Expense").Sum(t => t.Amount);
                 decimal balance = totalIncome - totalExpense;
 
-                // Update UI
+               
                 TotalIncomeText.Text = $"Rs.{totalIncome:0.00}";
                 TotalExpenseText.Text = $"Rs.{totalExpense:0.00}";
                 BalanceText.Text = $"Rs.{balance:0.00}";
@@ -47,7 +46,7 @@ namespace Budget_Tracker
                     _dbContext.SaveChanges();
                 }
                 LoadData();
-                RefreshGraphWindow(); // Refresh the graph after adding a transaction
+                RefreshGraphWindow(); 
             }
         }
 
@@ -69,7 +68,7 @@ namespace Budget_Tracker
                     }
                 }
                 LoadData();
-                RefreshGraphWindow(); // Refresh the graph after editing a transaction
+                RefreshGraphWindow(); 
             }
             else
             {
@@ -93,7 +92,7 @@ namespace Budget_Tracker
                         _dbContext.SaveChanges();
                     }
                     LoadData();
-                    RefreshGraphWindow(); // Refresh the graph after deleting a transaction
+                    RefreshGraphWindow(); 
                 }
             }
             else
@@ -106,12 +105,12 @@ namespace Budget_Tracker
         {
             if (graphWindow == null || !graphWindow.IsLoaded)
             {
-                graphWindow = new GraphWindow(); // Initialize graphWindow
+                graphWindow = new GraphWindow(); 
                 graphWindow.Show();
             }
             else
             {
-                graphWindow.Focus(); // Bring the graph window to the front
+                graphWindow.Focus(); 
             }
         }
         private void ViewCalendar_Click(object sender, RoutedEventArgs e)
@@ -124,7 +123,7 @@ namespace Budget_Tracker
         {
             if (graphWindow != null && graphWindow.IsLoaded)
             {
-                graphWindow.RefreshGraph(); // Call RefreshGraph on graphWindow
+                graphWindow.RefreshGraph();
             }
         }
     }
