@@ -684,14 +684,12 @@ C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\Login.g.cs
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\OnboardingWindow.g.cs
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\SignUpWindow.g.cs
-C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\test.g.cs
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\TransactionAdd.g.cs
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\App.g.cs
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\Budget Tracker_Content.g.cs
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\Budget Tracker_MarkupCompile.cache
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\Budget Tracker_MarkupCompile.lref
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\Calendar.baml
-C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\test.baml
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\Budget Tracker.g.resources
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\Budget Tracker.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\hp\Documents\GitHub\Budget_Tracker\C# code\Budget Tracker\obj\Debug\net8.0-windows\Budget Tracker.AssemblyInfoInputs.cache

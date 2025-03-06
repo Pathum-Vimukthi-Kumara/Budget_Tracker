@@ -77,7 +77,7 @@
           BorderBrush="Black"
           BorderThickness="1">
 
-                <!-- Header Styles -->
+               
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="DarkBlue" />
@@ -88,7 +88,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <!-- Empty column to create space at the start -->
+                  
                     <DataGridTextColumn Width="10" IsReadOnly="True"/>
 
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50" />

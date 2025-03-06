@@ -123,7 +123,7 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <!-- Empty column to create space at the start -->
+                    
                     <DataGridTextColumn Width="10" IsReadOnly="True"/>
 
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="100" />
