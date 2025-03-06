@@ -199,7 +199,6 @@ const ChartSection = () => {
             }}
           />
         </div>
-
       
         <div className="chart-card">
           <h3>Daily Expenses</h3>
